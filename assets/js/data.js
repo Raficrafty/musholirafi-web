@@ -25,9 +25,9 @@ window.SITE = {
   },
 
   contact: {
-    whatsapp: "",                      // GANTI: format 628xxxxxxxxxx, tanpa + dan tanpa spasi
-    email: "",                         // GANTI: misal halo@musholirafi.com
-    discordHandle: "",                 // GANTI: username Discord-mu
+    whatsapp: "6287822111250",                      // GANTI: format 628xxxxxxxxxx, tanpa + dan tanpa spasi
+    email: "musholirafinurtova@gmail.com",                         // GANTI: misal halo@musholirafi.com
+    discordHandle: "raficrafty_42387",                 // GANTI: username Discord-mu
     hours: "08.00-21.00 WIB"
   },
 
