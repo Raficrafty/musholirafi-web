@@ -27,6 +27,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 - Tidak ada build step.
 
 ## Cara mengubah isi (di `data.js`)
+- Produk `cat: "catatan"` (Catatan Semester 1) tidak tampil di toko utama. Mereka tampil di bagian "Khusus mahasiswa baru" (`#maba` di index.html), dikelompokkan per `subject` (nama mata kuliah). Diatur lewat `MABA_CAT` di main.js.
 - Tidak ada lagi label "contoh". Yang belum siap diberi `soon: true` (tampil "Coming soon", tombol Kabari aku, tidak bisa masuk keranjang).
 - `draft: true` hanya menampilkan bilah draf dan pemilih pratinjau edisi. `maintenance: true` mengarahkan semua pengunjung ke `maintenance.html` (pemilik tetap bisa melihat situs dengan menambahkan `?pratinjau` di alamat).
 - Proyek residensial: gambar di `residential.images` (`fit: "contain"` untuk gambar kerja, `"cover"` untuk render). Gambar berganti otomatis tiap 6 detik.
@@ -49,7 +50,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 - Nama dan NIM teman satu kelompok tidak ditampilkan tanpa izin mereka.
 - Warna tidak pernah solid: biru muda, kuning ke oranye, dan oranye selalu sebagai gradien. Warna dan font hanya lewat token CSS di `:root` (ada versi terang dan gelap).
 - Setiap bagian baru diberi animasi masuk (`data-reveal`, `data-stagger`). Gerak besar yang baru (geser, putar, berulang terus) wajib dimatikan di bawah kelas `.calm` di bagian "Gerak tenang" di `style.css`.
-- `.calm` dipasang di `<head>` kalau perangkat meminta gerak dikurangi, atau kalau pengunjung mematikan tombol "Animasi penuh" di footer (disimpan di `mr-motion`). Di mode ini fade, garis, grafik, dan angka tetap jalan. Di JS, cek variabel `reduce`.
+- Pemilik minta animasi SELALU penuh untuk semua pengunjung (November 2026). Tombol "Animasi penuh" di footer sudah dihapus, dan `main.js` membuang kelas `.calm` lalu memakai `const reduce = false`. Aturan `.calm` di CSS dibiarkan supaya gampang dinyalakan lagi. Jangan menambah tombol animasi lagi tanpa izin pemilik.
 - Script kecil di `<head>` harus sama di semua halaman (tema dan mode animasi).
 - Tampilan HP (lebar 360 sampai 420 px) harus tetap rapi tanpa scroll ke samping.
 
@@ -59,7 +60,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 - Jangan pernah menaruh API key, password, token, atau server key payment gateway di repo ini. Isi `index.html` bisa dilihat siapa saja lewat browser.
 
 ## Penyimpanan di browser
-`mr-theme`, `mr-motion`, `mr-cart`, `mr-cat`, `mr-last-order` (localStorage), `mr-season-preview`, `mr-draft-hidden` (sessionStorage). Kalau menambah kunci baru, perbarui juga tabel di `kebijakan-privasi.html`.
+`mr-theme`, `mr-cart`, `mr-cat`, `mr-last-order` (localStorage), `mr-season-preview`, `mr-draft-hidden` (sessionStorage). Kalau menambah kunci baru, perbarui juga tabel di `kebijakan-privasi.html`.
 
 ## Deploy
 - Alamat aktif sekarang: https://musholirafi.netlify.app (Netlify, terhubung ke repo GitHub `Raficrafty/musholirafi-web`). Domain musholirafi.com belum dibeli. Alamat `*.workers.dev` diblokir sebagian besar internet Indonesia, jadi jangan dipakai. Saat domain sendiri sudah dibeli, ganti semua `https://musholirafi.netlify.app` (canonical, og, JSON-LD, sitemap, robots, `domain` dan `url` di data.js) ke alamat baru.
@@ -71,7 +72,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 - Buka halaman di lebar 1280, 390, dan 360 px, mode terang dan gelap. Pastikan tidak ada error di console dan tidak ada scroll ke samping.
 - Uji alur: tambah produk, isi data, muncul nominal plus kode unik, tautan WhatsApp berisi pesan yang benar.
 - Uji `?edisi=hujan`, `?edisi=salju`, dan `?edisi=idulfitri`.
-- Uji juga dengan "reduce motion" menyala (harus tetap ada fade dan angka naik) dan tombol Animasi penuh di footer.
+- Animasi harus tetap penuh walaupun "reduce motion" di perangkat menyala.
 - Tulis ringkasan perubahan dengan bahasa sederhana untuk pemilik.
 
 ## Rencana berikutnya

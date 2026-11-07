@@ -716,6 +716,11 @@ ul,ol{margin:0;padding:0}
 .cover-modul .face{color:#FFF3DA}
 .cover-gratis .face,.cover-gratis .spine{background:linear-gradient(150deg,#A6E0FF,#FFE28C 55%,#FFAE7E)}
 .cover-catatan .face,.cover-catatan .spine{background:linear-gradient(150deg,#C9F2D8,#6FCF97)}
+.maba-group+.maba-group{margin-top:clamp(40px,6vw,64px)}
+.maba-group{scroll-margin-top:calc(var(--header-h,72px) + 16px)}
+a.chip{text-decoration:none}
+.maba-subject{display:flex;align-items:baseline;gap:12px;margin-bottom:22px;font-size:clamp(1.35rem,1.1rem + 1vw,1.8rem)}
+.maba-subject small{font-family:var(--font-mono);font-size:.72rem;font-weight:400;color:var(--muted)}
 .face .f-top{position:relative;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
 .face .f-top{gap:6px}
 .face .f-top span:first-child{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

@@ -33,8 +33,9 @@
     set(k, v) { try { if (v == null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch (e) { /* abaikan */ } }
   };
   const root = document.documentElement;
-  /* calm = gerak besar dimatikan, fade dan hitung angka tetap jalan. Diatur di <head> dan tombol di footer. */
-  let reduce = root.classList.contains("calm");
+  /* Animasi selalu penuh untuk semua pengunjung, juga kalau perangkat meminta gerak dikurangi. Kelas calm dari <head> dibuang. */
+  root.classList.remove("calm");
+  const reduce = false;
   const isDraft = !!S.draft;
   const nick = S.nickname || "Rafi";
   const greet = S.waGreeting || `Halo ${S.name || nick}`; // salam pembuka pesan WhatsApp
@@ -628,15 +629,17 @@
     el.innerHTML = `<span class="live"><i></i>Event gratis</span><p><b>${esc(ev.title)}</b> untuk ${esc((season.label || "edisi ini").toLowerCase())}. ${esc(ev.when)} di Discord, terbuka untuk siapa pun.</p>${discordBtn("btn sky small", "Gabung Discord")}`;
   }
 
-  /* Toko */
+  /* Toko. Produk kategori MABA_CAT tampil di bagian #maba (dikelompokkan per subject), bukan di toko utama. */
+  const MABA_CAT = "catatan";
+  const shopProducts = $("#maba-groups") ? products.filter((p) => p.cat !== MABA_CAT) : products;
   let activeCat = store.get("mr-cat", "semua");
-  if (activeCat !== "semua" && !(S.categories || {})[activeCat]) activeCat = "semua";
+  if (activeCat !== "semua" && (!(S.categories || {})[activeCat] || !shopProducts.some((p) => p.cat === activeCat))) activeCat = "semua";
   function renderFilters() {
     const box = $("#filters");
     if (!box) return;
     const counts = {};
-    products.forEach((p) => { counts[p.cat] = (counts[p.cat] || 0) + 1; });
-    const chips = [["semua", "Semua", products.length]].concat(Object.entries(S.categories || {}).filter(([k]) => counts[k]).map(([k, v]) => [k, v, counts[k]]));
+    shopProducts.forEach((p) => { counts[p.cat] = (counts[p.cat] || 0) + 1; });
+    const chips = [["semua", "Semua", shopProducts.length]].concat(Object.entries(S.categories || {}).filter(([k]) => counts[k]).map(([k, v]) => [k, v, counts[k]]));
     box.innerHTML = chips.map(([k, v, c]) => `<button type="button" class="chip" data-cat="${esc(k)}" aria-pressed="${k === activeCat}">${esc(v)}<small>${c}</small></button>`).join("");
   }
   function productCard(p, i) {
@@ -663,8 +666,19 @@
   function renderProducts() {
     const box = $("#products");
     if (!box) return;
-    const list = products.filter((p) => activeCat === "semua" || p.cat === activeCat).sort((a, b) => !!a.soon - !!b.soon);
+    const list = shopProducts.filter((p) => activeCat === "semua" || p.cat === activeCat).sort((a, b) => !!a.soon - !!b.soon);
     box.innerHTML = list.map(productCard).join("");
+    bindTilt(box);
+  }
+  function renderMaba() {
+    const box = $("#maba-groups");
+    if (!box) return;
+    const groups = {};
+    products.filter((p) => p.cat === MABA_CAT).forEach((p) => { const k = p.subject || "Lainnya"; (groups[k] = groups[k] || []).push(p); });
+    const slug = (t) => "maba-" + String(t).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    const entries = Object.entries(groups);
+    box.innerHTML = (entries.length > 1 ? `<nav class="filters" aria-label="Mata kuliah">${entries.map(([subject, list]) => `<a class="chip" href="#${slug(subject)}">${esc(subject)}<small>${list.length}</small></a>`).join("")}</nav>` : "")
+      + entries.map(([subject, list]) => `<div class="maba-group" id="${slug(subject)}"><h3 class="maba-subject">${esc(subject)}<small>${list.length} catatan</small></h3><div class="products">${list.map(productCard).join("")}</div></div>`).join("");
     bindTilt(box);
   }
   function setCat(c) { activeCat = c; store.set("mr-cat", c); renderFilters(); renderProducts(); }
@@ -1031,21 +1045,6 @@
     });
   }
 
-  /* Tombol animasi di footer */
-  const motionBtn = $("#motion-toggle");
-  if (motionBtn) {
-    motionBtn.setAttribute("aria-pressed", String(!reduce));
-    motionBtn.addEventListener("click", () => {
-      reduce = !reduce;
-      root.classList.toggle("calm", reduce);
-      root.setAttribute("data-motion", reduce ? "calm" : "full");
-      try { localStorage.setItem("mr-motion", reduce ? "calm" : "full"); } catch (e) { /* abaikan */ }
-      motionBtn.setAttribute("aria-pressed", String(!reduce));
-      toast(reduce ? "Animasi dibuat lebih tenang" : "Animasi penuh menyala");
-      runScroll();
-    });
-  }
-
   /* Cara pesan: struk mengikuti langkah */
   const receipt = $("#receipt"), osSteps = $$(".os-step"), osDots = $$("#os-dots i");
   if (receipt && osSteps.length) {
@@ -1246,7 +1245,7 @@
   function applySeason(key) {
     seasonKey = key;
     season = (S.seasons || {})[key] || {};
-    renderSeason(); renderPrograms(); renderEventStrip(); renderFilters(); renderProducts(); renderBookSpot(); renderDiscord();
+    renderSeason(); renderPrograms(); renderEventStrip(); renderFilters(); renderProducts(); renderMaba(); renderBookSpot(); renderDiscord();
     if (sheetEl && sheetEl.open) renderCart();
     particles.setKind(key);
   }

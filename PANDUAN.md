@@ -76,4 +76,4 @@ Jangan pernah mengirim password GitHub atau kunci rahasia di chat. Koneksinya le
 ## 10. Hal teknis kecil
 - Ganti gambar bagikan (yang muncul saat link dikirim di WhatsApp): `assets/img/og-image.png`, ukuran 1200 × 630.
 - Website menyimpan beberapa pengaturan kecil di browser pengunjung. Daftarnya ada di `kebijakan-privasi.html`. Kalau menambah fitur yang menyimpan data, perbarui halaman itu.
-- Kalau di laptop animasinya terasa sedikit, biasanya karena pengaturan "Animation effects" di Windows (Settings, Accessibility, Visual effects) atau "Reduce motion" di Mac sedang menyala. Website lalu memakai mode animasi tenang. Pengunjung bisa menyalakan animasi penuh lewat tombol "Animasi penuh" di footer.
+- Animasi selalu penuh untuk semua pengunjung, termasuk yang mematikan "Animation effects" di Windows atau menyalakan "Reduce motion" di Mac. Tombol animasi di footer sudah dihapus.
