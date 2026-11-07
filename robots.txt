@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://musholirafi.com/sitemap.xml
+Sitemap: https://musholirafi.netlify.app/sitemap.xml

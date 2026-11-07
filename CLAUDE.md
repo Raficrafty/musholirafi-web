@@ -62,6 +62,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 `mr-theme`, `mr-motion`, `mr-cart`, `mr-cat`, `mr-last-order` (localStorage), `mr-season-preview`, `mr-draft-hidden` (sessionStorage). Kalau menambah kunci baru, perbarui juga tabel di `kebijakan-privasi.html`.
 
 ## Deploy
+- Alamat aktif sekarang: https://musholirafi.netlify.app (Netlify, terhubung ke repo GitHub `Raficrafty/musholirafi-web`). Domain musholirafi.com belum dibeli. Alamat `*.workers.dev` diblokir sebagian besar internet Indonesia, jadi jangan dipakai. Saat domain sendiri sudah dibeli, ganti semua `https://musholirafi.netlify.app` (canonical, og, JSON-LD, sitemap, robots, `domain` dan `url` di data.js) ke alamat baru.
 - Situs statis. Bisa di Netlify, Cloudflare Pages, atau GitHub Pages. Setiap perubahan di branch `main` tayang otomatis.
 - Untuk perubahan besar, kerjakan di branch baru lalu buat pull request supaya pemilik bisa cek pratinjaunya dulu.
 - Halaman baru wajib masuk `sitemap.xml`.
