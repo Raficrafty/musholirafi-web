@@ -11,8 +11,8 @@ window.SITE = {
   name: "Musholi Rafi",
   fullName: "Musholi Rafi Nurtova",
   nickname: "Rafi",
-  domain: "musholirafi.com",
-  url: "https://musholirafi.com/",
+  domain: "musholirafi.netlify.app",
+  url: "https://musholirafi.netlify.app/",
   updated: "November 2026",
   photo: "",                           // opsional: misal "assets/img/foto.webp". Kosong = pakai maskot.
   newsletterName: "Catatan Rafi",      // CEK: nama newsletter Substack-mu
@@ -25,9 +25,9 @@ window.SITE = {
   },
 
   contact: {
-    whatsapp: "6287822111250",                      // GANTI: format 628xxxxxxxxxx, tanpa + dan tanpa spasi
-    email: "musholirafinurtova@gmail.com",                         // GANTI: misal halo@musholirafi.com
-    discordHandle: "raficrafty_42387",                 // GANTI: username Discord-mu
+    whatsapp: "6287822111250",         // GANTI: format 628xxxxxxxxxx, tanpa + dan tanpa spasi
+    email: "musholirafinurtova@gmail.com",   // GANTI: misal halo@musholirafi.com
+    discordHandle: "raficrafty_42387", // GANTI: username Discord-mu
     hours: "08.00-21.00 WIB"
   },
 
@@ -39,8 +39,8 @@ window.SITE = {
   },
 
   payment: {
-    qrisImage: "assets/img/qris.jpg",                     // GANTI: misal "assets/img/qris.png"
-    merchantName: "MUSHOLI RAFI NURTOVA",                  // GANTI: nama merchant yang tertera di QRIS
+    qrisImage: "assets/img/qris.jpg",   // GANTI: misal "assets/img/qris.png"
+    merchantName: "MUSHOLI RAFI NURTOVA",   // GANTI: nama merchant yang tertera di QRIS
     uniqueCode: true                   // tambah 1 sampai 199 rupiah supaya pembayaran gampang dicocokkan
   },
 
@@ -250,18 +250,19 @@ window.SITE = {
 
   /* Karya lain. thumb: chair | plan | board | book, atau image: "assets/img/nama-file.webp" */
   works: [
-    { type: "Buku pegangan", year: "2026", title: "Desain Mebel Berkelanjutan", desc: "Buku pegangan setebal 227 halaman. Dari masalah, proses, ergonomi, fisika, material, sambungan, ekonomi, sampai keberlanjutan.", thumb: "book", url: "https://lynk.id/catatankuliah.di", urlLabel: "Lihat di Lynk" },
+    { type: "Buku pegangan", year: "2026", title: "Desain Mebel Berkelanjutan", desc: "Buku pegangan setebal 227 halaman. Dari masalah, proses, ergonomi, fisika, material, sambungan, ekonomi, sampai keberlanjutan.", thumb: "book", url: "#toko", urlLabel: "Lihat di toko" },
     { type: "Desain mebel", year: "2026", title: "Tiga kursi living room dari rotan", desc: "Kursi Selonjor, Pinarak, dan Srawung. Kajian ergonomi, rotan, dan sentuhan Jepang modern, lengkap dengan gambar kerja dan model 3D.", thumb: "chair" },
-    { type: "Modul", year: "2026", title: "Sistem Bangunan untuk Desain Interior", desc: "Struktur, utilitas, dan aturan dasar bangunan yang perlu dipahami desainer interior, ditulis dengan bahasa sederhana.", thumb: "plan", url: "https://lynk.id/catatankuliah.di", urlLabel: "Lihat di Lynk" },
+    { type: "Buku pegangan", year: "2026", title: "Sistem Bangunan untuk Desain Interior", desc: "Struktur, utilitas, dan aturan dasar bangunan yang perlu dipahami desainer interior, ditulis dengan bahasa sederhana.", thumb: "plan", url: "#toko", urlLabel: "Lihat di toko" },
     { type: "Modul", year: "2026", title: "Dimensi Manusia dan Ruang Interior", desc: "Modul belajar lengkap tentang ukuran tubuh manusia dan cara memakainya untuk ruang dan mebel.", thumb: "board", url: "#toko", urlLabel: "Lihat di toko" }
   ],
 
   categories: {
     gratis: "Gratis",
+    catatan: "Catatan Semester 1",
+    buku: "Buku",
     modul: "Modul",
     template: "Template",
     kursus: "Kursus",
-    buku: "Buku",
     jurnal: "Jurnal"
   },
 
@@ -271,10 +272,34 @@ window.SITE = {
      lynk: tautan produk di lynk.id (opsional). Kalau diisi, muncul tombol "Atau beli di Lynk".
      Produk gratis (price: 0): free.via "wa" (minta lewat WhatsApp) atau "link" (isi free.url untuk unduh langsung). */
   products: [
+    /* Dari Lynk, November 2026. Harga sama dengan Lynk. lynk: tautan produk yang sama di Lynk. */
+    { id: "buku-sistem-bangunan", sku: "MR-BK-03", cat: "buku", art: "plan", title: "Sistem Bangunan untuk Desain Interior", desc: "Buku pegangan mata kuliah Sistem Bangunan. Struktur, air, listrik, udara, cahaya, sampai akustik dijelaskan dengan bahasa sederhana, lengkap dengan contoh gambar kerja renovasi rumah AURANDA. Setiap angka diberi tanda WAJIB, LAZIM, atau KEBIASAAN.", format: "E-book PDF, 29 bab dan lampiran A sampai G, sekitar 400 halaman", price: 21999, badge: "Terbaru", lynk: "https://lynk.id/catatankuliah.di/49o6j1kvjgwq" },
+    { id: "buku-mebel-berkelanjutan", sku: "MR-BK-04", cat: "buku", art: "chair", title: "Sustainable Design: Desain Mebel Berkelanjutan", desc: "Buku pegangan merancang kursi dari semester pertama sampai tugas akhir. Ekonomi, fisika, biologi, kimia, psikologi, sampai urusan sampah dirangkai jadi satu alur metodologi desain.", format: "E-book PDF, 227 halaman", price: 21000, lynk: "https://lynk.id/catatankuliah.di/r4o58l496jvv" },
+    { id: "buku-basic-desain-interior", sku: "MR-BK-05", cat: "buku", art: "book", title: "Basic Desain Interior", desc: "Rangkuman empat buku besar desain interior untuk pemula dan orang awam. Disusun dari buku Kilmer dan Kilmer, Mitton, Mitton dan Nystuen, serta Ronin.", format: "E-book PDF", price: 15999, badge: "Untuk pemula", lynk: "https://lynk.id/catatankuliah.di/3rdz7pgm0ww7" },
+    { id: "modul-dimensi-manusia", sku: "MR-MOD-01", cat: "modul", art: "ruler", title: "Dimensi Manusia dan Ruang Interior", desc: "Modul belajar ergonomi dan antropometri. Pendamping berbahasa Indonesia untuk buku Human Dimension and Interior Space karya Julius Panero dan Martin Zelnik (1979).", format: "Modul PDF, edisi lengkap bagian A, B, dan C", price: 15000, badge: "Mulai dari sini", lynk: "https://lynk.id/catatankuliah.di/my27vn4kl1vv" },
+    // DISEMBUNYIKAN DULU (hak cipta Neufert). Hapus tanda // di depan baris ini kalau sudah yakin aman ditampilkan.
+    // { id: "buku-arsitek-data-residensial", sku: "MR-BK-06", cat: "buku", art: "grid", title: "Arsitek Data-nya Residensial (Edisi 1)", desc: "Panduan membaca Architects' Data karya Ernst Neufert untuk rumah tinggal, dengan bahasa Indonesia dan konteks lokal.", format: "E-book PDF", price: 66753, lynk: "https://lynk.id/catatankuliah.di/ypz8g8l334ky" },
+
+    /* Catatan Semester 1. Semua tombol Lynk menuju halaman Semester 1 di Lynk. */
+    { id: "s1-paket-ujian", sku: "MR-SM1-01", cat: "catatan", art: "gift", title: "Paket Ujian: Paket Full Materi", desc: "Semua materi Sejarah Desain semester 1 dalam satu paket untuk persiapan ujian.", format: "Paket catatan PDF", price: 19999, badge: "Paket ujian", lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-paket-lengkap-1", sku: "MR-SM1-02", cat: "catatan", art: "book", title: "Paket Lengkap #1 Sejarah Desain", desc: "Paket belajar mandiri Sejarah Desain dari pertemuan pertama sampai pertengahan semester.", format: "Paket catatan PDF", price: 15999, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-sejarah-akhir-2", sku: "MR-SM1-03", cat: "catatan", art: "spark", title: "Catatan Sejarah Desain Akhir #2: Apa dan Mengapa Stapler Ingin Terbang?", desc: "Membongkar logika tersembunyi di balik desain modern. Materi akhir untuk ujian semester 1.", format: "Catatan PDF", price: 14999, badge: "Baru", lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-streamline-moderne", sku: "MR-SM1-04", cat: "catatan", art: "lines", title: "#1 Streamline Moderne: Memaknai Harapan di Tengah Krisis", desc: "Materi Sejarah Desain pertemuan akhir sebelum ujian akhir.", format: "Catatan PDF", price: 4000, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-art-deco", sku: "MR-SM1-05", cat: "catatan", art: "lines", title: "Catatan Sejarah Desain (11): Art Deco", desc: "Art Deco, dari mesin menuju kemewahan yang terukur.", format: "Catatan PDF", price: 2000, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-sejarah-10", sku: "MR-SM1-06", cat: "catatan", art: "lines", title: "Catatan Sejarah Desain ke-10", desc: "Catatan pertemuan ke-10 mata kuliah Sejarah Desain.", format: "Catatan PDF", price: 1999, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-latihan-soal-sejarah", sku: "MR-SM1-07", cat: "catatan", art: "chat", title: "Latihan Soal Sejarah Desain", desc: "Latihan soal untuk menguji pemahamanmu sebelum ujian Sejarah Desain.", format: "Soal latihan PDF", price: 499, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-soal-opsi-sejarah", sku: "MR-SM1-08", cat: "catatan", art: "chat", title: "Paket Belajar Sejarah Desain dengan Soal Opsi", desc: "Belajar Sejarah Desain lewat soal opsi. Harganya hampir gratis, cocok untuk mencoba dulu.", format: "Paket soal PDF", price: 100, badge: "Coba dulu", lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-pancasila-demokrasi", sku: "MR-SM1-09", cat: "catatan", art: "grid", title: "Pancasila dan Demokrasi", desc: "Panduan lengkap demokrasi, dari teori dasar sampai dinamikanya di Indonesia.", format: "Catatan PDF", price: 9999, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-pancasila-hukum", sku: "MR-SM1-10", cat: "catatan", art: "grid", title: "Pancasila dan Sistem Hukum", desc: "Restorasi hukum dan penyenyawaan nilai Pancasila.", format: "Catatan PDF", price: 4999, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-pancasila-ham", sku: "MR-SM1-11", cat: "catatan", art: "grid", title: "Pancasila dan Hak Asasi Manusia", desc: "Menelusuri akar sejarah dan perkembangan hak asasi manusia.", format: "Catatan PDF", price: 4999, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-kekerasan-anak-perempuan", sku: "MR-SM1-12", cat: "catatan", art: "grid", title: "Kekerasan pada Anak dan Perempuan", desc: "Mengembalikan janji kemerdekaan ke ruang privat.", format: "Catatan PDF", price: 4999, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-pancasila-karakter", sku: "MR-SM1-13", cat: "catatan", art: "grid", title: "Pancasila dan Pendidikan Karakter", desc: "Catatan Pancasila tentang pendidikan karakter.", format: "Catatan PDF", price: 4500, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+    { id: "s1-pancasila-korupsi", sku: "MR-SM1-14", cat: "catatan", art: "grid", title: "Pancasila dan Korupsi", desc: "Dari teori, modus operandi, sampai upaya pemberantasan.", format: "Catatan PDF", price: 3999, lynk: "https://lynk.id/catatankuliah.di/page/semester-1-di-isiyk2025" },
+
+    /* Produk lama dari versi awal website. Hapus barisnya kalau tidak dijual. */
     { id: "gratis-tujuan-3-bulan", sku: "MR-FREE-01", cat: "gratis", art: "grid", title: "Lembar Tujuan 3 Bulan", desc: "Satu halaman untuk menulis arah besarmu, tujuan 3 bulan, dan kebiasaan kecil minggu ini. Pikir besar, mulai kecil.", format: "PDF 1 halaman, siap cetak", price: 0, free: { via: "link", url: "assets/files/lembar-tujuan-3-bulan.pdf" } },
     { id: "gratis-checklist-asistensi", sku: "MR-FREE-02", cat: "gratis", art: "ruler", title: "Checklist Asistensi", desc: "Hal yang paling sering ditanyakan dosen saat asistensi, dari ukuran mebel, sirkulasi, cahaya, sampai suhu ruang, plus cara menjelaskannya.", format: "PDF 1 halaman", price: 0, free: { via: "wa" } },   // CEK: pastikan file-nya sudah siap
     { id: "template-notion", sku: "MR-TPL-01", cat: "template", art: "grid", title: "Template Notion Jadwal Kuliah", desc: "Database tugas, jadwal studio, dan jadwal ulang materi yang tersambung ke kalender.", format: "Template Notion", price: 2000, badge: "Harga perkenalan" },
-    { id: "modul-dimensi-manusia", sku: "MR-MOD-01", cat: "modul", art: "ruler", title: "Dimensi Manusia dan Ruang Interior", desc: "Modul lengkap tentang ukuran tubuh manusia dan cara memakainya untuk ukuran ruang dan mebel.", format: "Modul PDF", price: 45000, badge: "Mulai dari sini" },   // CEK harga
     { id: "modul-metodologi", sku: "MR-MOD-02", cat: "modul", art: "chat", title: "Metodologi Desain untuk Asistensi", desc: "Cara menyusun alasan desain dari masalah, data, sampai konsep, supaya pertanyaan kenapa dari dosen bisa kamu jawab.", format: "Modul PDF + lembar kerja", price: 45000 },   // CEK harga
     { id: "modul-sketchup", sku: "MR-MOD-03", cat: "modul", art: "cube", title: "Dari Denah ke Model 3D dengan SketchUp", desc: "Ubah denah 2D jadi model ruang 3D, susun komponen mebel, lalu buat scene presentasi.", format: "Modul PDF + file latihan", price: 45000, soon: true },
     { id: "modul-autocad-mebel", sku: "MR-MOD-04", cat: "modul", art: "ruler", title: "Gambar Kerja Mebel dengan AutoCAD", desc: "Tampak, potongan, detail sambungan, dan layout siap cetak untuk tugas mebel.", format: "Modul PDF + file latihan", price: 45000, soon: true },

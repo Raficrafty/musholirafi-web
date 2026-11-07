@@ -715,7 +715,10 @@ ul,ol{margin:0;padding:0}
 .cover-modul .face,.cover-modul .spine{background:linear-gradient(150deg,#2E2A48,#1C1A2B)}
 .cover-modul .face{color:#FFF3DA}
 .cover-gratis .face,.cover-gratis .spine{background:linear-gradient(150deg,#A6E0FF,#FFE28C 55%,#FFAE7E)}
+.cover-catatan .face,.cover-catatan .spine{background:linear-gradient(150deg,#C9F2D8,#6FCF97)}
 .face .f-top{position:relative;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.face .f-top{gap:6px}
+.face .f-top span:first-child{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .face .f-title{position:relative;font-family:var(--font-display);font-weight:800;font-size:clamp(.74rem,.56rem + .45vw,1rem);line-height:1.1}
 .face .f-art{position:relative;width:100%;height:auto;opacity:.9}
 .face .f-author{position:relative;font-size:.5rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.8}
