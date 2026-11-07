@@ -39,7 +39,7 @@ window.SITE = {
   },
 
   payment: {
-    qrisImage: "",                     // GANTI: misal "assets/img/qris.png"
+    qrisImage: "assets/img/qris.jpg",                     // GANTI: misal "assets/img/qris.png"
     merchantName: "MUSHOLI RAFI NURTOVA",                  // GANTI: nama merchant yang tertera di QRIS
     uniqueCode: true                   // tambah 1 sampai 199 rupiah supaya pembayaran gampang dicocokkan
   },
