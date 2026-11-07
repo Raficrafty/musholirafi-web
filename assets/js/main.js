@@ -538,12 +538,14 @@
       const slides = $$(".res-slide", resShow);
       if (dotsBox) dotsBox.innerHTML = imgs.map((m, i) => `<button type="button" aria-label="Gambar ${i + 1}: ${esc(m.caption || "")}"${i ? "" : ' aria-current="true"'}></button>`).join("");
       if (ctrl && imgs.length < 2) ctrl.hidden = true;
+      const slideMs = Math.max(2, Number((S.residential || {}).seconds) || 4) * 1000;
+      resShow.style.setProperty("--res-ms", slideMs + "ms");
       let cur = 0, timer = 0, hold = false, seen = false;
       const restart = () => {
         clearTimeout(timer); resShow.classList.remove("run");
         if (hold || !seen || slides.length < 2 || reduce) return;
         void resShow.offsetWidth; resShow.classList.add("run");
-        timer = setTimeout(() => go(cur + 1), 6000);
+        timer = setTimeout(() => go(cur + 1), slideMs);
       };
       function go(n) {
         cur = (n + slides.length) % slides.length;

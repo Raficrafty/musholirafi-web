@@ -199,12 +199,20 @@ window.SITE = {
   ],
 
   /* Proyek residensial di bagian Karya. Tambahkan render di sini, gambar berganti otomatis dengan animasi.
-     src: lokasi gambar (disarankan .webp, lebar 1400 px). fit: "contain" untuk gambar kerja, "cover" untuk render. */
+     src: lokasi gambar (disarankan .webp, lebar 1400 px). fit: "contain" untuk gambar kerja, "cover" untuk render.
+     seconds: lama tiap gambar tampil sebelum pindah (detik). Makin kecil makin cepat. */
   residential: {
+    seconds: 4,
     images: [
       { src: "assets/img/residensial-denah-2-lantai.webp", alt: "Gambar kerja denah lantai 1 dan lantai 2 rumah tinggal 6 x 11,9 meter, skala 1:50", caption: "Denah lantai 1 dan 2, rumah 6 × 11,9 m", fit: "contain" },
-      { src: "assets/img/residensial-denah-mebel.webp", alt: "Denah rumah satu lantai 11 x 15 meter lengkap dengan tata letak mebel, taman, dan carport", caption: "Denah rumah 11 × 15 m lengkap dengan tata letak mebel", fit: "contain" }
-      // GANTI: tambahkan render, misal { src: "assets/img/render-ruang-tamu.webp", alt: "Render ruang tamu", caption: "Render ruang tamu", fit: "cover" }
+      { src: "assets/img/residensial-denah-mebel.webp", alt: "Denah rumah satu lantai 11 x 15 meter lengkap dengan tata letak mebel, taman, dan carport", caption: "Denah rumah 11 × 15 m lengkap dengan tata letak mebel", fit: "contain" },
+      { src: "assets/img/auranda-zoning-aktivitas.webp", alt: "Sketsa analisis zona publik, zona keluarga, dan alur aktivitas di atas denah AutoCAD rumah AURANDA", caption: "AURANDA: analisis zona dan alur aktivitas di layout baru", fit: "contain" },
+      { src: "assets/img/auranda-layout-tahap-3.webp", alt: "Denah layout desain tahap 3 rumah AURANDA dengan mebel, tangga putar, dan carport", caption: "AURANDA: layout desain tahap 3", fit: "contain" },
+      { src: "assets/img/auranda-layout-furnitur-cad.webp", alt: "Denah layout furnitur rumah AURANDA di AutoCAD dengan layer berwarna", caption: "AURANDA: denah layout furnitur di AutoCAD", fit: "contain" },
+      { src: "assets/img/auranda-sketchup-atas.webp", alt: "Model SketchUp rumah AURANDA dilihat dari atas, lengkap dengan mebel dan taman", caption: "AURANDA: model SketchUp dilihat dari atas", fit: "contain" },
+      { src: "assets/img/auranda-sketchup-3d.webp", alt: "Model 3D SketchUp rumah AURANDA dengan atap limasan, pagar kayu, dan dak jemur", caption: "AURANDA: model 3D di SketchUp", fit: "contain" },
+      { src: "assets/img/auranda-visual-teras.webp", alt: "Teras kayu dengan pergola, kursi santai, dan taman di rumah AURANDA", caption: "AURANDA: suasana teras", fit: "cover" },
+      { src: "assets/img/auranda-visual-ruang-keluarga.webp", alt: "Ruang keluarga rumah AURANDA dengan sofa, partisi kayu, dan lampu hangat", caption: "AURANDA: suasana ruang keluarga", fit: "cover" }
     ]
   },
 
@@ -250,9 +258,10 @@ window.SITE = {
 
   /* Karya lain. thumb: chair | plan | board | book, atau image: "assets/img/nama-file.webp" */
   works: [
-    { type: "Buku pegangan", year: "2026", title: "Desain Mebel Berkelanjutan", desc: "Buku pegangan setebal 227 halaman. Dari masalah, proses, ergonomi, fisika, material, sambungan, ekonomi, sampai keberlanjutan.", thumb: "book", url: "#toko", urlLabel: "Lihat di toko" },
-    { type: "Desain mebel", year: "2026", title: "Tiga kursi living room dari rotan", desc: "Kursi Selonjor, Pinarak, dan Srawung. Kajian ergonomi, rotan, dan sentuhan Jepang modern, lengkap dengan gambar kerja dan model 3D.", thumb: "chair" },
-    { type: "Buku pegangan", year: "2026", title: "Sistem Bangunan untuk Desain Interior", desc: "Struktur, utilitas, dan aturan dasar bangunan yang perlu dipahami desainer interior, ditulis dengan bahasa sederhana.", thumb: "plan", url: "#toko", urlLabel: "Lihat di toko" },
+    { type: "Buku pegangan", year: "2026", title: "Desain Mebel Berkelanjutan", desc: "Buku pegangan setebal 227 halaman. Dari masalah, proses, ergonomi, fisika, material, sambungan, ekonomi, sampai keberlanjutan.", image: "assets/img/karya-cover-mebel-berkelanjutan.webp", url: "#toko", urlLabel: "Lihat di toko" },
+    { type: "Desain mebel", year: "2026", title: "Tiga kursi living room dari rotan", desc: "Kursi Selonjor, Pinarak, dan Srawung. Kajian ergonomi, rotan, dan sentuhan Jepang modern, lengkap dengan gambar kerja dan model 3D.", image: "assets/img/karya-sofa-rotan.webp" },
+    { type: "Buku pegangan", year: "2026", title: "Sistem Bangunan untuk Desain Interior", desc: "Struktur, utilitas, dan aturan dasar bangunan yang perlu dipahami desainer interior, ditulis dengan bahasa sederhana.", image: "assets/img/karya-cover-sistem-bangunan.webp", url: "#toko", urlLabel: "Lihat di toko" },
+    { type: "Desain mebel", year: "2026", title: "Kelir Chair", desc: "Tugas pertama Desain Mebel I. Kursi hasil analisis dengan sandaran bermotif truntum terawang, digambar tangan lengkap dengan ukurannya.", image: "assets/img/karya-kelir-chair.webp" },
     { type: "Modul", year: "2026", title: "Dimensi Manusia dan Ruang Interior", desc: "Modul belajar lengkap tentang ukuran tubuh manusia dan cara memakainya untuk ruang dan mebel.", thumb: "board", url: "#toko", urlLabel: "Lihat di toko" }
   ],
 
