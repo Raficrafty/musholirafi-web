@@ -23,7 +23,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 - `assets/js/data.js`: SEMUA isi yang sering berubah (produk, harga, diskon, edisi musim, event, bimbel, kontak, FAQ, testimoni). Ubah data di sini, jangan menulis ulang HTML.
 - `assets/js/main.js`: mesin website (animasi scroll, edisi musim, partikel, diskon, toko, keranjang, checkout, lembar rasa dan data, slideshow residensial, denah ilmu yang bisa dibuka, grafik, buku yang terbuka saat di-scroll). Semua fitur dicek dulu keberadaan elemennya, jadi aman dipakai di halaman turunan.
 - `assets/img/`: maskot, gambar kerja residensial, ikon, `og-image.png` (1200 × 630).
-- `favicon.svg`, `site.webmanifest`, `robots.txt`, `sitemap.xml`.
+- `favicon.ico` (16, 32, 48 px) dan `assets/img/icon-192.png`, `icon-512.png`, `icon-512-maskable.png`, `apple-touch-icon.png`: ikon maskot untuk tab browser dan hasil pencarian Google. `favicon.svg` hanya cadangan berisi gambar maskot yang sama. Lalu `site.webmanifest`, `robots.txt`, `sitemap.xml`.
 - Tidak ada build step.
 
 ## Cara mengubah isi (di `data.js`)
