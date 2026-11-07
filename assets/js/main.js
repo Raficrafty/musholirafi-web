@@ -37,6 +37,7 @@
   let reduce = root.classList.contains("calm");
   const isDraft = !!S.draft;
   const nick = S.nickname || "Rafi";
+  const greet = S.waGreeting || `Halo ${S.name || nick}`; // salam pembuka pesan WhatsApp
   const todayStr = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
   const isActive = (until) => !until || String(until) >= todayStr();
   const fmtDate = (s) => { try { return new Date(s + "T00:00:00").toLocaleDateString("id-ID", { day: "numeric", month: "short" }); } catch (e) { return s; } };
@@ -102,7 +103,7 @@
     return /^628\d{7,12}$/.test(d) ? d : null;
   };
   const discordInvite = () => (S.links && S.links.discordInvite) || ((S.socials || []).find((s) => s.icon === "discord" && s.url) || {}).url || "";
-  const discordHref = () => discordInvite() || waLink(`Halo Kak ${nick}, aku mau gabung server Discord-mu.`);
+  const discordHref = () => discordInvite() || waLink(`${greet}, aku mau gabung server Discord-mu.`);
   const discordBtn = (cls, label) => `<a class="${cls}" href="${esc(discordHref())}" target="_blank" rel="noopener">${icon("discord")}${esc(discordInvite() ? label : "Minta undangan Discord")}</a>`;
 
   /* Toast */
@@ -301,7 +302,7 @@
 
   function freeHref(p) {
     if (p.free && p.free.via === "link" && p.free.url) return p.free.url;
-    return waLink(`Halo Kak ${nick}, aku mau ambil "${p.title}" yang gratis. Namaku `);
+    return waLink(`${greet}, aku mau ambil "${p.title}" yang gratis. Namaku `);
   }
   const freeButton = (p, cls, label) => `<a class="${cls}" href="${esc(freeHref(p))}" target="_blank" rel="noopener">${esc(label)}</a>`;
 
@@ -458,7 +459,7 @@
     const n = waNumber(), c = S.contact || {};
     const waDisplay = n ? "0" + n.slice(2).replace(/(\d{3})(\d{4})(\d+)/, "$1-$2-$3") : "";
     const rows = [
-      ["WhatsApp", n ? `<a href="${esc(waLink(`Halo Kak ${nick}, aku mau tanya.`))}" target="_blank" rel="noopener">${esc(waDisplay)}</a>` : ""],
+      ["WhatsApp", n ? `<a href="${esc(waLink(`${greet}, aku mau tanya.`))}" target="_blank" rel="noopener">${esc(waDisplay)}</a>` : ""],
       ["Email", c.email ? `<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>` : ""],
       ["Discord", discordInvite() ? `<a href="${esc(discordInvite())}" target="_blank" rel="noopener">${esc(c.discordHandle || "Gabung server")}</a>` : (c.discordHandle ? `<b>${esc(c.discordHandle)}</b>` : "")],
       ["Jam admin", c.hours ? `<b>${esc(c.hours)}</b>` : ""]
@@ -466,7 +467,7 @@
     contactList.innerHTML = rows.filter(([, v]) => v || isDraft).map(([k, v]) => `<div class="contact-row"><span>${k}</span>${v || '<span class="empty">belum diisi</span>'}</div>`).join("");
   }
   $$("[data-discord]").forEach((a) => { a.href = discordHref(); a.target = "_blank"; a.rel = "noopener"; });
-  $$("[data-wa]").forEach((a) => { a.href = waLink(a.dataset.wa.replace("{nick}", nick)); a.target = "_blank"; a.rel = "noopener"; });
+  $$("[data-wa]").forEach((a) => { a.href = waLink(a.dataset.wa.replace("{greet}", greet).replace("{nick}", nick)); a.target = "_blank"; a.rel = "noopener"; });
   $$("[data-link]").forEach((a) => { const u = (S.links || {})[a.dataset.link]; if (u) { a.href = u; a.target = "_blank"; a.rel = "noopener"; } });
 
   /* Data mesin pencari */
@@ -610,12 +611,12 @@
       if (card) card.classList.toggle("is-soon", !!p.soon);
       if (p.soon) {
         el.innerHTML = `<div class="class-price soon">Coming soon<small>rencana ${rupiah(p.price)} / ${esc(p.unit || "sesi")}</small></div>
-        <div class="class-actions"><a class="btn soft small" href="${esc(waLink(`Halo Kak ${nick}, kabari aku kalau ${p.title} sudah dibuka ya.`))}" target="_blank" rel="noopener">Kabari aku</a></div>`;
+        <div class="class-actions"><a class="btn soft small" href="${esc(waLink(`${greet}, kabari aku kalau ${p.title} sudah dibuka ya.`))}" target="_blank" rel="noopener">Kabari aku</a></div>`;
         return;
       }
       const d = discountFor(p);
       el.innerHTML = `<div class="class-price">${d ? `<small><s>${rupiah(p.price)}</s></small>` : ""}${rupiah(priceOf(p))}<small>/ ${esc(p.unit || "sesi")}</small></div>
-        <div class="class-actions"><button class="btn primary small" type="button" data-add="${esc(p.id)}">Daftar</button><a class="btn soft small" href="${esc(waLink(`Halo Kak ${nick}, aku mau tanya soal ${p.title}.`))}" target="_blank" rel="noopener">Tanya dulu</a></div>`;
+        <div class="class-actions"><button class="btn primary small" type="button" data-add="${esc(p.id)}">Daftar</button><a class="btn soft small" href="${esc(waLink(`${greet}, aku mau tanya soal ${p.title}.`))}" target="_blank" rel="noopener">Tanya dulu</a></div>`;
     });
   }
   function renderEventStrip() {
@@ -645,7 +646,7 @@
         <div class="book cover-${esc(p.cat)}"><div class="face"><div class="f-top"><span>${esc(catLabel(p.cat))}</span><span>${esc(String(p.sku || "").split("-").pop())}</span></div>${art(p.art)}<div class="f-title">${esc(p.title)}</div><div class="f-author">${esc(S.name || "")}</div></div><span class="spine"></span><span class="pages"></span></div>
       </div>
       <div class="product-body"><p class="product-cat">${esc(catLabel(p.cat))}</p><h3>${esc(p.title)}</h3><p class="desc">${esc(p.desc)}</p><p class="format">${esc(p.format)}</p></div>
-      <div class="product-foot"><span class="price soon">Coming soon<small>sedang kusiapkan</small></span><div class="p-actions"><a class="btn soft small" href="${esc(waLink(`Halo Kak ${nick}, kabari aku kalau "${p.title}" sudah siap ya.`))}" target="_blank" rel="noopener">Kabari aku</a></div></div>
+      <div class="product-foot"><span class="price soon">Coming soon<small>sedang kusiapkan</small></span><div class="p-actions"><a class="btn soft small" href="${esc(waLink(`${greet}, kabari aku kalau "${p.title}" sudah siap ya.`))}" target="_blank" rel="noopener">Kabari aku</a></div></div>
     </article>`;
     const badge = free ? '<span class="p-badge free">Gratis</span>' : d ? `<span class="p-badge sale">Hemat ${d.percent}%</span>` : p.badge ? `<span class="p-badge">${esc(p.badge)}</span>` : "";
     const price = free ? '<span class="price">Gratis<small>untuk semua</small></span>' : `<span class="price">${d ? `<s>${rupiah(p.price)}</s>` : ""}${rupiah(priceOf(p))}</span>`;
@@ -1197,7 +1198,7 @@
   function orderMessage(o) {
     const lines = o.items.map((it, i) => `${i + 1}. ${it.title} (${it.sku})${it.qty > 1 ? " x" + it.qty : ""}: ${rupiah(it.price * it.qty)}${it.off ? ` (hemat ${it.off}%)` : ""}`);
     return [
-      `Halo Kak ${nick}, aku mau konfirmasi pembayaran.`, "",
+      `${greet}, aku mau konfirmasi pembayaran.`, "",
       `No. pesanan: ${o.id}`, `Nama: ${o.name}`, `WhatsApp: ${o.wa}`, o.email ? `Email: ${o.email}` : null, "",
       "Pesanan:", ...lines, "",
       `Subtotal: ${rupiah(o.subtotal)}`, o.code ? `Kode unik: ${o.code}` : null, `Total dibayar: ${rupiah(o.total)}`,
