@@ -827,6 +827,89 @@
     });
   }
 
+  /* Cerita di balik foto: di layar lebar kartu bergeser ke samping mengikuti scroll, di HP digeser jari */
+  const pf = $("#cerita-foto");
+  if (pf) {
+    const pin = $(".pf-pin", pf), sticky = $(".pf-sticky", pf), track = $(".pf-track", pf), ui = $(".pf-ui", pf);
+    const cards = $$(".pf-card", pf), num = $(".pf-count b", pf), fill = $(".pf-bar i", pf);
+    const wideMq = matchMedia("(min-width: 760px) and (min-height: 560px)");
+    let shift = 0, stickTop = 0, cur = -1, started = false;
+    const mark = (view, p) => {
+      if (fill) fill.style.transform = `scaleX(${p.toFixed(3)})`;
+      if (!started) return;
+      const w = track.clientWidth, mid = view + w * (pinned() ? 0.2 + 0.6 * p : 0.5); // titik acuan bergeser supaya kartu pertama dan terakhir ikut terhitung
+      let best = 0, bd = Infinity;
+      cards.forEach((c, i) => {
+        const left = c.offsetLeft, d = Math.abs(left + c.offsetWidth / 2 - mid);
+        if (d < bd) { bd = d; best = i; }
+        if (left < view + w * 0.9) c.classList.add("on");
+      });
+      if (best !== cur) {
+        cur = best;
+        cards.forEach((c, i) => c.classList.toggle("now", i === best));
+        if (num) num.textContent = pad(best + 1);
+      }
+    };
+    const pinned = () => pf.classList.contains("pf-pinned");
+    const onPinScroll = () => {
+      if (!pinned()) return;
+      const r = pin.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      if (!started && r.top < innerHeight * 0.55) started = true;
+      const p = shift > 0 ? clamp((stickTop - r.top) / shift) : 0;
+      track.style.transform = `translate3d(${(-p * shift).toFixed(1)}px,0,0)`;
+      if (p > 0.02 && ui) ui.classList.add("used");
+      mark(p * shift, p);
+    };
+    const layout = () => {
+      const on = wideMq.matches;
+      pf.classList.toggle("pf-pinned", on);
+      track.tabIndex = on ? -1 : 0;
+      if (on) {
+        stickTop = parseFloat(getComputedStyle(sticky).top) || 0;
+        const last = track.lastElementChild;
+        shift = Math.max(0, last.offsetLeft + last.offsetWidth + (parseFloat(getComputedStyle(track).paddingRight) || 0) - track.clientWidth);
+        pin.style.height = `${sticky.offsetHeight + shift}px`;
+        onPinScroll();
+      } else {
+        pin.style.height = ""; track.style.transform = ""; shift = 0;
+        const max = track.scrollWidth - track.clientWidth;
+        mark(track.scrollLeft, max > 0 ? clamp(track.scrollLeft / max) : 0);
+      }
+    };
+    scrollFns.push(onPinScroll);
+    let tRaf = 0;
+    track.addEventListener("scroll", () => {
+      if (pinned() || tRaf) return;
+      tRaf = requestAnimationFrame(() => {
+        tRaf = 0;
+        const max = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft > 8 && ui) ui.classList.add("used");
+        mark(track.scrollLeft, max > 0 ? clamp(track.scrollLeft / max) : 0);
+      });
+    }, { passive: true });
+    whenIn(track, () => { started = true; layout(); });
+    if (wideMq.addEventListener) wideMq.addEventListener("change", layout);
+    addEventListener("resize", layout);
+    addEventListener("load", layout);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+    layout();
+  }
+
+  /* Halaman cerita lengkap: garis perjalanan terisi mengikuti scroll */
+  const jy = $(".journey");
+  if (jy) {
+    const steps = $$(".jy", jy);
+    scrollFns.push(() => {
+      const r = jy.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > innerHeight + 100) return;
+      const line = innerHeight * 0.6;
+      jy.style.setProperty("--jp", clamp((line - r.top) / r.height).toFixed(3));
+      steps.forEach((s) => s.classList.toggle("on", s.getBoundingClientRect().top < line));
+    });
+    onScroll();
+  }
+
   /* Lembar A-01: geser antara rasa dan data */
   const rdStage = $("#rd-stage"), rdRange = $("#rd-range"), rdCap = $("#rd-cap");
   if (rdStage && rdRange) {
