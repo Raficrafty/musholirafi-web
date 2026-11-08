@@ -484,6 +484,8 @@
           itemListElement: products.filter((p) => p.price > 0 && !p.soon).map((p, i) => ({
             "@type": "ListItem", position: i + 1,
             item: { "@type": "Product", name: p.title, sku: p.sku, description: p.desc, brand: { "@type": "Person", name: S.name },
+              // Google mewajibkan gambar untuk listingan penjual. shortcut: produk tanpa field image memakai og-image, isi image di data.js kalau sudah ada foto sampulnya
+              image: new URL(p.image || "assets/img/og-image.png", S.url || location.href).href,
               offers: { "@type": "Offer", priceCurrency: "IDR", price: priceOf(p), availability: "https://schema.org/InStock", url: (S.url || "") + "#toko" } }
           }))
         });
