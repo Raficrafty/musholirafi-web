@@ -5,7 +5,7 @@
  * Salin URL aplikasi web (berakhiran /exec) ke newsletterEndpoint di assets/js/data.js.
  *
  * Kolom: Waktu | Email | Status | Sumber. Kalau pelanggan minta berhenti, hapus barisnya (kebijakan privasi menjanjikan itu).
- * Sel F2 berisi semua email berstatus aktif, siap disalin ke kolom BCC Gmail.
+ * Sel G1 berisi semua email berstatus aktif, siap disalin ke kolom BCC Gmail.
  *
  * @OnlyCurrentDoc
  */
@@ -37,7 +37,8 @@ function sheet() {
     sh.appendRow(['Waktu', 'Email', 'Status', 'Sumber']);
     sh.setFrozenRows(1);
     sh.getRange('F1').setValue('Salin ke BCC (email aktif)');
-    sh.getRange('F2').setFormula('=IFERROR(TEXTJOIN(", ", TRUE, FILTER(B2:B, C2:C="aktif")), "")');
+    // Rumus di baris 1 supaya pelanggan pertama masuk ke baris 2. Titik koma diterima Sheets di semua lokal, koma ditolak di lokal Indonesia.
+    sh.getRange('G1').setFormula('=IFERROR(TEXTJOIN(", "; TRUE; FILTER(B2:B; C2:C="aktif")); "")');
   }
   return sh;
 }
@@ -51,7 +52,7 @@ function out(status) {
   return ContentService.createTextOutput(JSON.stringify({ status: status })).setMimeType(ContentService.MimeType.JSON);
 }
 
-// Jalankan sekali dari editor untuk membuat tab Pelanggan dan rumus F2 tanpa menunggu pelanggan pertama
+// Jalankan sekali dari editor untuk membuat tab Pelanggan dan rumus G1 tanpa menunggu pelanggan pertama
 function siapkan() {
   sheet();
 }

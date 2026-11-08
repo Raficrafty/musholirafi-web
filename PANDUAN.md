@@ -96,12 +96,12 @@ Kalau skripnya diubah, klik Terapkan, Kelola deployment, ikon pensil, Versi: Ver
 
 Mengirim newsletter:
 1. Tulis isinya bareng Claude, lalu salin.
-2. Di Google Sheet, salin sel F2 (semua email berstatus aktif).
+2. Di Google Sheet, salin sel G1 (semua email berstatus aktif).
 3. Di Gmail klik Tulis. Kolom Kepada isi emailmu sendiri. Klik Bcc, tempel daftar email tadi. Dengan Bcc, pelanggan tidak bisa melihat email pelanggan lain.
 4. Tempel isi newsletter. Tutup dengan kalimat: "Kamu menerima email ini karena berlangganan di musholirafi.my.id. Balas dengan kata BERHENTI kalau tidak mau menerima lagi."
 5. Kirim ke dirimu sendiri dulu untuk mengecek tampilannya, baru kirim ke semua.
 
 Catatan:
 - Gmail biasa membatasi sekitar 500 penerima per hari. Kalau pelanggan sudah lebih dari itu, kirim bertahap atau pindah ke layanan email massal.
-- Kalau ada yang membalas BERHENTI, hapus barisnya (klik kanan nomor baris, Hapus baris). Email itu otomatis hilang dari sel F2, dan kalau ia mendaftar lagi nanti, emailnya masuk lagi. Kebijakan privasi menjanjikan email itu dihapus, jadi jangan cuma disembunyikan.
+- Kalau ada yang membalas BERHENTI, hapus barisnya (klik kanan nomor baris, Hapus baris). Email itu otomatis hilang dari sel G1, dan kalau ia mendaftar lagi nanti, emailnya masuk lagi. Kebijakan privasi menjanjikan email itu dihapus, jadi jangan cuma disembunyikan.
 - URL aplikasi web terlihat di sumber halaman, jadi siapa pun bisa mengirim email ke daftar ini. Skrip menolak format yang salah, mengabaikan bot, dan tidak menyimpan email yang sama dua kali. Kalau ada baris aneh, hapus saja.
