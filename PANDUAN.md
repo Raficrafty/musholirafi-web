@@ -19,7 +19,7 @@ Label "contoh" sudah tidak ada. Produk yang belum siap diberi `soon: true`, jadi
 - Produk gratis (`price: 0`) diambil lewat WhatsApp. Kalau mau langsung unduh, pakai `free: { via: "link", url: "https://drive.google.com/..." }`.
 - Render rumah: simpan gambarnya di `assets/img/` (disarankan .webp, lebar 1400 px), lalu tambahkan di `residential.images` dengan `fit: "cover"`. Gambar berganti otomatis dengan animasi.
 - Isi tiap ruang di Denah ilmu ada di `rooms`. Obrolan contoh di gambaran Discord ada di `seasons.<nama>.chat` dan berganti tiap edisi.
-- Kelas bimbel ada di dua tempat: harga di `programs` (data.js), teks kartunya di `index.html` bagian `id="bimbel"`. `id` di `programs` harus sama dengan `data-offer` di kartu.
+- Kelas bimbel ada di dua tempat: harga di `programs` (data.js), teks kartunya di `bimbel.html` bagian `id="bimbel"`. `id` di `programs` harus sama dengan `data-offer` di kartu.
 - Testimoni: isi `testimonials` HANYA dengan testimoni asli, lengkap dengan izin orangnya. Kosong berarti bagian testimoni disembunyikan otomatis.
 - Mau merapikan website tanpa dilihat pengunjung: ubah `maintenance: false` menjadi `true`. Semua pengunjung melihat halaman "sedang direnovasi". Kamu sendiri tetap bisa membuka situsnya dengan menambahkan `?pratinjau` di belakang alamat.
 

@@ -193,7 +193,8 @@
     addEventListener("resize", () => movePill(pillTarget));
   }
 
-  if (nav && "IntersectionObserver" in window) {
+  /* Penanda bagian saat scroll, hanya kalau menu berisi tautan #bagian di halaman yang sama */
+  if (nav && "IntersectionObserver" in window && $$('a[href^="#"]', nav).length) {
     const links = $$('a[href^="#"]', nav), map = new Map();
     links.forEach((a) => { const sec = document.getElementById(a.getAttribute("href").slice(1)); if (sec) map.set(sec, a); });
     const navIO = new IntersectionObserver((ents) => ents.forEach((en) => {
@@ -205,6 +206,21 @@
     }), { rootMargin: "-45% 0px -50% 0px" });
     $$("main > section[id], main > div.found").forEach((sec) => navIO.observe(sec));
   }
+  /* Menu halaman yang sedang dibuka */
+  const curPage = nav && $('a[aria-current="page"]', nav);
+  if (curPage) { pillTarget = curPage; requestAnimationFrame(() => movePill(curPage)); }
+
+  /* Website dibagi per halaman. Tautan #bagian (misal dari data.js) yang bagiannya ada di halaman lain dibuka di halaman itu.
+     Menambah bagian baru yang dirujuk dari halaman lain: tambahkan id dan halamannya di sini. */
+  const PAGE_OF = {"atur-finansial":"belajar.html#atur-finansial","bantu":"belajar.html","belajar":"belajar.html#belajar","belajar-ai":"belajar.html#belajar-ai","belajar-efektif":"belajar.html#belajar-efektif","beranda":"./","bimbel":"bimbel.html","buku":"toko.html#buku","cara-pesan":"toko.html#cara-pesan","catatan-singkat":"belajar.html#catatan-singkat","edisi":"./#edisi","faq":"toko.html#faq","ilmu":"tentang.html#ilmu","karya":"karya.html","maba":"toko.html#maba","mini-kritis":"belajar.html#mini-kritis","mini-tujuan":"belajar.html#mini-tujuan","mulai":"./#mulai","newsletter":"./#newsletter","posisi":"belajar.html#posisi","sekarang":"tentang.html#sekarang","tentang":"tentang.html","testimoni":"bimbel.html#testimoni","toko":"toko.html#toko","tools":"tentang.html#tools","works":"karya.html#works"};
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented) return;
+    const id = a.getAttribute("href").slice(1);
+    if (!id || document.getElementById(id) || !PAGE_OF[id]) return;
+    e.preventDefault();
+    location.href = PAGE_OF[id];
+  });
 
   /* ---------------------------------------------------------
      4. Muncul saat di-scroll
@@ -478,7 +494,7 @@
       const data = JSON.parse(ld.textContent);
       const person = (data["@graph"] || []).find((n) => n["@type"] === "Person");
       if (person) person.sameAs = socials.filter((s) => s.url).map((s) => s.url);
-      if (!isDraft && products.length) {
+      if (!isDraft && products.length && $("#products")) {
         data["@graph"].push({
           "@type": "ItemList", "@id": (S.url || "") + "#produk", name: "Modul, buku, dan jurnal",
           itemListElement: products.filter((p) => p.price > 0 && !p.soon).map((p, i) => ({
@@ -486,7 +502,7 @@
             item: { "@type": "Product", name: p.title, sku: p.sku, description: p.desc, brand: { "@type": "Person", name: S.name },
               // Google mewajibkan gambar untuk listingan penjual. shortcut: produk tanpa field image memakai og-image, isi image di data.js kalau sudah ada foto sampulnya
               image: new URL(p.image || "assets/img/og-image.png", S.url || location.href).href,
-              offers: { "@type": "Offer", priceCurrency: "IDR", price: priceOf(p), availability: "https://schema.org/InStock", url: (S.url || "") + "#toko" } }
+              offers: { "@type": "Offer", priceCurrency: "IDR", price: priceOf(p), availability: "https://schema.org/InStock", url: new URL("toko.html#toko", S.url || location.href).href } }
           }))
         });
       }
@@ -1225,7 +1241,7 @@
     if (t.dataset.inc) cart.find((i) => i.id === id).qty += 1;
     else if (t.dataset.dec) { const it = cart.find((i) => i.id === id); it.qty -= 1; if (it.qty < 1) cart = cart.filter((i) => i.id !== id); }
     else if (t.dataset.remove) cart = cart.filter((i) => i.id !== id);
-    else if (t.dataset.closeTo) { closeSheet(); location.hash = t.dataset.closeTo; return; }
+    else if (t.dataset.closeTo) { const to = t.dataset.closeTo; closeSheet(); if (!document.getElementById(to) && PAGE_OF[to]) location.href = PAGE_OF[to]; else location.hash = to; return; }
     else return;
     currentOrder = null;
     saveCart(); renderCart();

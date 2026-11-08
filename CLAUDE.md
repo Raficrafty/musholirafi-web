@@ -16,7 +16,16 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 - Strategi lengkap (SWOT, segmentasi, saluran) ada di `STRATEGI-SWOT.md` di luar folder situs.
 
 ## Struktur repo
-- `index.html`: halaman utama. Teks penting ditulis langsung di HTML supaya terbaca mesin pencari.
+- Website dibagi per halaman (sejak November 2026, setelah masukan teman bahwa satu halaman panjang terlalu melelahkan di HP). Fondasi utamanya ruang belajar mahasiswa. Toko, bimbel, dan karya adalah pendukung.
+  - `index.html`: beranda pendek. Pembuka, edisi musim, kartu pintu ke tiap halaman (`#mulai`), dan newsletter.
+  - `belajar.html`: bantuan per topik (`#bantu`), belajar gratis (`#belajar`), dan lembar rasa dan data (`#posisi`).
+  - `karya.html`: karya dan riset. `bimbel.html`: bimbel Discord dan testimoni.
+  - `toko.html`: toko (`#toko`), Catatan Semester 1 (`#maba`), buku, cara pesan, dan FAQ.
+  - `tentang.html`: cerita singkat, kolase, galeri cerita foto, sedang dikerjakan, denah ilmu, dan alat kerja.
+  - Header, footer, keranjang, dan dialog sama di semua halaman. Kalau mengubahnya, ubah di semua halaman.
+  - Menu memakai tautan halaman dengan `aria-current="page"` di halaman yang sedang dibuka.
+  - Tautan `#bagian` dari `data.js` yang bagiannya ada di halaman lain dialihkan oleh `PAGE_OF` di `main.js`. Bagian baru yang dirujuk dari halaman lain ditambahkan juga di sana.
+  - Teks penting ditulis langsung di HTML supaya terbaca mesin pencari. Bagian pertama tiap halaman memakai `<h1>`.
 - `cerita.html`: cerita lengkap. `kebijakan-privasi.html`, `404.html`, `maintenance.html` (tidak diindeks, tidak masuk sitemap).
 - `assets/files/`: file gratis yang bisa langsung diunduh (misal `lembar-tujuan-3-bulan.pdf`).
 - `assets/css/style.css`: semua gaya. Token warna di `:root`, versi gelap di `@media (prefers-color-scheme:dark)` dan `:root[data-theme="dark"]`.
@@ -27,11 +36,11 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 - Tidak ada build step.
 
 ## Cara mengubah isi (di `data.js`)
-- Produk `cat: "catatan"` (Catatan Semester 1) tidak tampil di toko utama. Mereka tampil di bagian "Khusus mahasiswa baru" (`#maba` di index.html), dikelompokkan per `subject` (nama mata kuliah). Diatur lewat `MABA_CAT` di main.js.
+- Produk `cat: "catatan"` (Catatan Semester 1) tidak tampil di toko utama. Mereka tampil di bagian "Khusus mahasiswa baru" (`#maba` di toko.html), dikelompokkan per `subject` (nama mata kuliah). Diatur lewat `MABA_CAT` di main.js.
 - Tidak ada lagi label "contoh". Yang belum siap diberi `soon: true` (tampil "Coming soon", tombol Kabari aku, tidak bisa masuk keranjang).
 - `draft: true` hanya menampilkan bilah draf dan pemilih pratinjau edisi. `maintenance: true` mengarahkan semua pengunjung ke `maintenance.html` (pemilik tetap bisa melihat situs dengan menambahkan `?pratinjau` di alamat).
 - Proyek residensial: gambar di `residential.images` (`fit: "contain"` untuk gambar kerja, `"cover"` untuk render). Gambar berganti otomatis tiap 6 detik.
-- Isi ruang di Denah ilmu: `rooms` (kunci sama dengan `data-room` di `index.html`).
+- Isi ruang di Denah ilmu: `rooms` (kunci sama dengan `data-room` di `tentang.html`).
 - Obrolan gambaran Discord: `seasons.<nama>.chat`, berganti tiap edisi. Nama server dan channel di `discord`.
 - Produk baru: tambah objek di `products` dengan `id` unik, `sku` berformat `MR-<KODE>-<NO>`, `cat` salah satu kunci `categories`, `price` dalam rupiah tanpa titik, `art` salah satu pola sampul (ruler, chat, cube, chair, plan, lines, grid, gift, book, spark).
 - Diskon produk: `discount: { percent: 10, until: "2026-12-15" }`. Diskon edisi: `seasons.<nama>.discount` dengan `cats`. Yang dipakai adalah diskon terbesar. Harga dibulatkan ke Rp100.
@@ -63,14 +72,15 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 `mr-theme`, `mr-cart`, `mr-cat`, `mr-last-order` (localStorage), `mr-season-preview`, `mr-draft-hidden` (sessionStorage). Kalau menambah kunci baru, perbarui juga tabel di `kebijakan-privasi.html`.
 
 ## Deploy
-- Alamat aktif sekarang: https://musholirafi.netlify.app (Netlify, terhubung ke repo GitHub `Raficrafty/musholirafi-web`). Domain musholirafi.com belum dibeli. Alamat `*.workers.dev` diblokir sebagian besar internet Indonesia, jadi jangan dipakai. Saat domain sendiri sudah dibeli, ganti semua `https://musholirafi.netlify.app` (canonical, og, JSON-LD, sitemap, robots, `domain` dan `url` di data.js) ke alamat baru.
+- Alamat aktif sekarang: https://musholirafi.my.id (domain dari DomaiNesia, dibeli November 2026, perpanjangan sekitar Rp35.000 per tahun belum PPN, perpanjang sebelum habis). Disajikan GitHub Pages dari repo `Raficrafty/musholirafi-web`, branch `main`, folder root. File `CNAME` berisi nama domain dan wajib tetap ada. DNS di DomaiNesia: empat A record `@` ke 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, dan CNAME `www` ke `raficrafty.github.io`. Pindah dari Netlify karena kuota gratis Netlify hanya sekitar 20 update per bulan. GitHub Pages tidak membatasi jumlah update. Alamat `*.workers.dev` diblokir sebagian besar internet Indonesia, jadi jangan dipakai. Kalau domain berganti lagi, ganti semua `https://musholirafi.my.id` (canonical, og, JSON-LD, sitemap, robots, CNAME, _redirects, `domain` dan `url` di data.js).
+- GitHub Pages mengabaikan file `_headers` dan `_redirects` (keduanya khusus Netlify), jadi Content-Security-Policy dari `_headers` tidak berlaku di sana. `_redirects` mengalihkan alamat lama musholirafi.netlify.app ke domain baru setiap kali Netlify men-deploy. File `.nojekyll` wajib tetap ada. Repo harus publik. Setiap commit ke `main` tayang dalam 1 sampai 2 menit.
 - Situs statis. Bisa di Netlify, Cloudflare Pages, atau GitHub Pages. Setiap perubahan di branch `main` tayang otomatis.
 - Untuk perubahan besar, kerjakan di branch baru lalu buat pull request supaya pemilik bisa cek pratinjaunya dulu.
 - Halaman baru wajib masuk `sitemap.xml`.
 - File `_headers` memasang Content-Security-Policy. Efek sampingnya badge "Powered by Netlify" (paket gratis) tidak tampil. Setiap script inline di HTML wajib punya hash sha256 di `_headers`. Kalau script kecil di `<head>` diubah atau script inline baru ditambahkan, hitung ulang hash-nya, kalau tidak script itu diblokir browser. Jangan menambah `onclick=` atau atribut event lain di HTML.
 
 ## Cerita foto dan cerita lengkap
-- Galeri "Cerita di balik foto" ada di `index.html`, bagian `#tentang`, blok `#cerita-foto`. Isinya HTML biasa, bukan dari `data.js`.
+- Galeri "Cerita di balik foto" ada di `tentang.html`, bagian `#tentang`, blok `#cerita-foto`. Isinya HTML biasa, bukan dari `data.js`.
 - Menambah foto: simpan file `.webp` di `assets/img/` dengan awalan `cerita-`, tinggi maksimal sekitar 640 px. Salin satu `<figure class="pf-card">`, lalu ganti `--ar` (lebar dibagi tinggi foto), `--rot` (kemiringan kecil, misal -2deg sampai 2deg), gambar, alt, label, judul, dan cerita. Ubah juga angka total di `.pf-count` (sekarang "/ 11") dan kata jumlahnya di judul kecilnya (sekarang "Sebelas").
 - Kelas tambahan di `.pf-photo`: `rain` untuk foto hujan, `glow` untuk cahaya hangat.
 - Kolase di samping "Cerita singkat" (`.collage`): `.f1` maskot, `.f2` berisi beberapa `.xf` yang berganti tiap 5 detik, `.f3` satu foto. Kalau jumlah `.xf` diubah, sesuaikan `--d` per foto dan durasi siklus `20s` di CSS (cari `.collage .xf`).
