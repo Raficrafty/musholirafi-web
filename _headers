@@ -1,0 +1,4 @@
+# Header keamanan untuk Netlify. Efek sampingnya: badge "Powered by Netlify" tidak bisa tampil.
+# Kalau script kecil di <head> atau script di kebijakan-privasi.html diubah, hash sha256 di bawah wajib dihitung ulang.
+/*
+  Content-Security-Policy: script-src 'self' 'sha256-8KtqvYVk0EseMDnISgij/ZFQ23FkZ8L1JXnv7qahp/E=' 'sha256-DluTAQ97/KtA9JQ0m04jXfEUBbhhtBM+q1S02d1dA8U='; object-src 'none'; base-uri 'self'

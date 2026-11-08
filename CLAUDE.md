@@ -67,6 +67,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 - Situs statis. Bisa di Netlify, Cloudflare Pages, atau GitHub Pages. Setiap perubahan di branch `main` tayang otomatis.
 - Untuk perubahan besar, kerjakan di branch baru lalu buat pull request supaya pemilik bisa cek pratinjaunya dulu.
 - Halaman baru wajib masuk `sitemap.xml`.
+- File `_headers` memasang Content-Security-Policy. Efek sampingnya badge "Powered by Netlify" (paket gratis) tidak tampil. Setiap script inline di HTML wajib punya hash sha256 di `_headers`. Kalau script kecil di `<head>` diubah atau script inline baru ditambahkan, hitung ulang hash-nya, kalau tidak script itu diblokir browser. Jangan menambah `onclick=` atau atribut event lain di HTML.
 
 ## Cerita foto dan cerita lengkap
 - Galeri "Cerita di balik foto" ada di `index.html`, bagian `#tentang`, blok `#cerita-foto`. Isinya HTML biasa, bukan dari `data.js`.
