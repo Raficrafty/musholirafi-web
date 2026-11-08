@@ -1,13 +1,13 @@
-# CLAUDE.md · Website musholirafi.com (v3)
+# CLAUDE.md · Website musholirafi.my.id (v3)
 
-File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. Isinya konteks permanen, jadi pemilik tidak perlu menjelaskan ulang dari nol.
+File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. Di claude.ai, pemilik mengunggah ZIP repo dari GitHub dan Claude membaca file ini lebih dulu. Isinya konteks permanen, jadi pemilik tidak perlu menjelaskan ulang dari nol.
 
 ## Pemilik
 - Musholi Rafi (nama lengkap Musholi Rafi Nurtova, panggilan Rafi), mahasiswa Program Studi Desain Interior ISI Yogyakarta.
 - Mimpi: menjadi dosen lalu profesor. Khawatir teknologi dan AI membuat orang malas berpikir.
 - Kekuatan: berpikir kritis, rasional, dan berbasis data di lingkungan kampus seni yang banyak berangkat dari rasa.
 - Menjual ilmu: modul, buku (penulis pemula, terbit mandiri, belum di penerbit besar), jurnal, dan bimbel privat lewat Discord (ergonomi, software desain, AI, cara belajar).
-- Toko lama di Lynk (lynk.id/catatankuliah.di). Newsletter di Substack (musholirafi.substack.com). LinkedIn: linkedin.com/in/musholirafi.
+- Toko lama di Lynk (lynk.id/catatankuliah.di). Newsletter Catatan Rafi sekarang lewat Google Sheet milik pemilik (lihat bagian Newsletter dan kode promo). Halaman Substack lama (musholirafi.substack.com) masih ditautkan sebagai profil. LinkedIn: linkedin.com/in/musholirafi.
 
 ## Pasar dan pesan utama
 - Target 90 persen mahasiswa Desain Interior ISI Yogyakarta (semua angkatan) dan dosennya, 10 persen publik.
@@ -76,7 +76,8 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 - Alamat aktif sekarang: https://musholirafi.my.id (domain dari DomaiNesia, dibeli November 2026, perpanjangan sekitar Rp35.000 per tahun belum PPN, perpanjang sebelum habis). Disajikan GitHub Pages dari repo `Raficrafty/musholirafi-web`, branch `main`, folder root. File `CNAME` berisi nama domain dan wajib tetap ada. DNS di DomaiNesia: empat A record `@` ke 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, dan CNAME `www` ke `raficrafty.github.io`. Pindah dari Netlify karena kuota gratis Netlify hanya sekitar 20 update per bulan. GitHub Pages tidak membatasi jumlah update. Alamat `*.workers.dev` diblokir sebagian besar internet Indonesia, jadi jangan dipakai. Kalau domain berganti lagi, ganti semua `https://musholirafi.my.id` (canonical, og, JSON-LD, sitemap, robots, CNAME, _redirects, `domain` dan `url` di data.js).
 - GitHub Pages mengabaikan file `_headers` dan `_redirects` (keduanya khusus Netlify), jadi Content-Security-Policy dari `_headers` tidak berlaku di sana. `_redirects` mengalihkan alamat lama musholirafi.netlify.app ke domain baru setiap kali Netlify men-deploy. File `.nojekyll` wajib tetap ada. Repo harus publik. Setiap commit ke `main` tayang dalam 1 sampai 2 menit.
 - Situs statis. Bisa di Netlify, Cloudflare Pages, atau GitHub Pages. Setiap perubahan di branch `main` tayang otomatis.
-- Untuk perubahan besar, kerjakan di branch baru lalu buat pull request supaya pemilik bisa cek pratinjaunya dulu.
+- Cara update: pemilik mengunggah file yang berubah lewat GitHub web (Add file, Upload files) langsung ke branch `main`. Claude memberi satu ZIP berisi file yang berubah saja, dengan jalur folder sama seperti di repo. `assets/js/data.js` tidak pernah ikut di ZIP karena pemilik sering mengeditnya langsung di GitHub. Perubahan data.js diberikan sebagai potongan teks beserta letaknya.
+- GitHub Pages menyimpan salinan file sampai 10 menit. Kalau perubahan belum terlihat, cek di jendela penyamaran.
 - Halaman baru wajib masuk `sitemap.xml`.
 - File `_headers` memasang Content-Security-Policy. Efek sampingnya badge "Powered by Netlify" (paket gratis) tidak tampil. Setiap script inline di HTML wajib punya hash sha256 di `_headers`. Kalau script kecil di `<head>` diubah atau script inline baru ditambahkan, hitung ulang hash-nya, kalau tidak script itu diblokir browser. Jangan menambah `onclick=` atau atribut event lain di HTML.
 
@@ -97,8 +98,8 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 - Tulis ringkasan perubahan dengan bahasa sederhana untuk pemilik.
 
 ## Rencana berikutnya
-1. Isi semua baris GANTI di `data.js`, lalu `draft: false`.
-2. Domain musholirafi.com, Google Search Console, kirim sitemap.
+1. Isi baris GANTI yang masih kosong di `data.js` (misal `links.discordInvite`). `draft` sudah `false`.
+2. 7 Desember 2026 (kuota Netlify reset): Trigger deploy di Netlify supaya `_redirects` mengalihkan musholirafi.netlify.app ke musholirafi.my.id, cek pengalihannya, matikan build Netlify, lalu pakai Perubahan alamat di Google Search Console dari properti lama ke musholirafi.my.id. Domain, Search Console, dan sitemap untuk musholirafi.my.id sudah beres.
 3. Halaman catatan baru per topik (belajar efektif, belajar AI, metodologi) untuk SEO.
 4. Payment gateway (Midtrans atau Xendit) dengan QRIS dinamis lewat serverless function. Kunci disimpan di environment variable hosting.
 
