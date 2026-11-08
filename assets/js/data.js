@@ -11,8 +11,8 @@ window.SITE = {
   name: "Musholi Rafi",
   fullName: "Musholi Rafi Nurtova",
   nickname: "Rafi",
-  domain: "musholirafi.netlify.app",
-  url: "https://musholirafi.netlify.app/",
+  domain: "musholirafi.my.id",
+  url: "https://musholirafi.my.id/",
   updated: "November 2026",
   photo: "",                           // opsional: misal "assets/img/foto.webp". Kosong = pakai maskot.
   newsletterName: "Catatan Rafi",      // CEK: nama newsletter Substack-mu
