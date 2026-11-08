@@ -20,6 +20,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
   - `index.html`: beranda pendek. Pembuka, edisi musim, kartu pintu ke tiap halaman (`#mulai`), dan newsletter.
   - `belajar.html`: bantuan per topik (`#bantu`), belajar gratis (`#belajar`), dan lembar rasa dan data (`#posisi`).
   - `karya.html`: karya dan riset. `bimbel.html`: bimbel Discord dan testimoni.
+  - `jasa-website.html`: jasa pembuatan website (paket Santai, Reguler, Kilat, kegunaan, contoh, FAQ). Harga ditulis langsung di HTML, bukan di data.js. Tidak masuk menu utama, ditautkan dari pintu lebar di beranda (`.door-wide`) dan ajakan di bawah karya. Gambar contoh `assets/img/jasa-contoh-beranda.webp` adalah tangkapan layar beranda, perbarui kalau beranda berubah banyak.
   - `toko.html`: toko (`#toko`), Catatan Semester 1 (`#maba`), buku, cara pesan, dan FAQ.
   - `tentang.html`: cerita singkat, kolase, galeri cerita foto, sedang dikerjakan, denah ilmu, dan alat kerja.
   - Header, footer, keranjang, dan dialog sama di semua halaman. Kalau mengubahnya, ubah di semua halaman.
