@@ -71,8 +71,10 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 
 ## Cerita foto dan cerita lengkap
 - Galeri "Cerita di balik foto" ada di `index.html`, bagian `#tentang`, blok `#cerita-foto`. Isinya HTML biasa, bukan dari `data.js`.
-- Menambah foto: simpan file `.webp` di `assets/img/` dengan awalan `cerita-`, tinggi maksimal sekitar 640 px. Salin satu `<figure class="pf-card">`, lalu ganti `--ar` (lebar dibagi tinggi foto), `--rot` (kemiringan kecil, misal -2deg sampai 2deg), gambar, alt, label, judul, dan cerita. Ubah juga angka "/ 09" di `.pf-count` dan kata "Sembilan" di judul kecilnya.
+- Menambah foto: simpan file `.webp` di `assets/img/` dengan awalan `cerita-`, tinggi maksimal sekitar 640 px. Salin satu `<figure class="pf-card">`, lalu ganti `--ar` (lebar dibagi tinggi foto), `--rot` (kemiringan kecil, misal -2deg sampai 2deg), gambar, alt, label, judul, dan cerita. Ubah juga angka total di `.pf-count` (sekarang "/ 11") dan kata jumlahnya di judul kecilnya (sekarang "Sebelas").
 - Kelas tambahan di `.pf-photo`: `rain` untuk foto hujan, `glow` untuk cahaya hangat.
+- Kolase di samping "Cerita singkat" (`.collage`): `.f1` maskot, `.f2` berisi beberapa `.xf` yang berganti tiap 5 detik, `.f3` satu foto. Kalau jumlah `.xf` diubah, sesuaikan `--d` per foto dan durasi siklus `20s` di CSS (cari `.collage .xf`).
+- Wajah orang lain yang ikut terfoto juga dipotong, begitu juga tanggal kamera di pojok foto.
 - Wajah pemilik tidak boleh terlihat di foto mana pun. Foto dari belakang atau gambar saja.
 - Halaman `cerita.html` berisi perjalanan per tahun (`.journey`), ditulis dari folder jurnal pemilik. Hal yang berat boleh ditulis, tapi tanpa nama teman, tanpa masalah keluarga, tanpa nominal uang, dan tanpa menjelekkan orang atau kampus.
 
