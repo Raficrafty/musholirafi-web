@@ -101,3 +101,9 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. I
 2. Domain musholirafi.com, Google Search Console, kirim sitemap.
 3. Halaman catatan baru per topik (belajar efektif, belajar AI, metodologi) untuk SEO.
 4. Payment gateway (Midtrans atau Xendit) dengan QRIS dinamis lewat serverless function. Kunci disimpan di environment variable hosting.
+
+## Newsletter dan kode promo
+- Form newsletter (`[data-newsletter]` di index.html) mengirim email ke Google Apps Script di `S.newsletterEndpoint` (data.js) dengan `fetch` mode `no-cors`, lalu Apps Script menyimpannya di tab Pelanggan di Google Sheet milik pemilik. Kode Apps Script ada di `tools/newsletter-apps-script.gs`. Kalau `newsletterEndpoint` kosong, form kembali ke Substack.
+- Isian `website` di form newsletter adalah jebakan bot (disembunyikan dengan `.nl-hp`). Jangan dihapus.
+- Newsletter dikirim manual dari Gmail dengan Bcc (sel F2 di Sheet berisi semua email aktif). Panduannya di PANDUAN.md bagian 11.
+- Kode promo ada di `S.promoCodes` (data.js): `{ code, percent, from?, until? }`. Kolom kode promo di checkout dibuat oleh main.js hanya kalau daftar ini berisi. Potongan dihitung dari subtotal setelah diskon produk dan ikut tercatat di pesan WhatsApp.

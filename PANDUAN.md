@@ -27,6 +27,9 @@ Label "contoh" sudah tidak ada. Produk yang belum siap diberi `soon: true`, jadi
 - Diskon satu produk: tambahkan `discount: { percent: 15, until: "2026-12-31" }` di produk itu.
 - Diskon edisi musim: ubah `discount` di `seasons.<nama>`, misal `{ percent: 20, until: "2026-11-30", cats: ["modul"] }`. `cats` boleh berisi `modul`, `buku`, `jurnal`, atau `bimbel`.
 - Kalau dua diskon berlaku bersamaan, yang dipakai yang terbesar. Setelah tanggal `until` lewat, diskon hilang sendiri dan hitung mundurnya juga.
+- Kode promo untuk pelanggan newsletter: tambahkan di data.js, misalnya
+  `promoCodes: [ { code: "PELANGGAN10", percent: 10, from: "2026-12-01", until: "2026-12-07" } ],`
+  Kolom kode promo baru muncul di checkout kalau daftar ini berisi. `from` boleh dikosongkan. Potongannya dihitung dari subtotal setelah diskon produk. Kode tertulis di sumber halaman, jadi orang yang paham teknis bisa membacanya. Cek kodenya di pesan WhatsApp sebelum mengirim produk.
 
 ## 4. Edisi musim dan event
 - `season: "auto"` memilih edisi dari bulan (hujan November sampai Maret, kemarau April sampai Oktober). Event di `events` menimpanya selama tanggalnya aktif (Ramadan, Idul Fitri, Idul Adha, Kemerdekaan).
@@ -77,3 +80,28 @@ Jangan pernah mengirim password GitHub atau kunci rahasia di chat. Koneksinya le
 - Ganti gambar bagikan (yang muncul saat link dikirim di WhatsApp): `assets/img/og-image.png`, ukuran 1200 × 630.
 - Website menyimpan beberapa pengaturan kecil di browser pengunjung. Daftarnya ada di `kebijakan-privasi.html`. Kalau menambah fitur yang menyimpan data, perbarui halaman itu.
 - Animasi selalu penuh untuk semua pengunjung, termasuk yang mematikan "Animation effects" di Windows atau menyalakan "Reduce motion" di Mac. Tombol animasi di footer sudah dihapus.
+
+## 11. Newsletter lewat Google Sheet (pengganti Substack)
+Email pelanggan masuk ke Google Sheet milikmu. Kamu yang mengirim newsletter dari Gmail.
+
+Pasang sekali (10 menit):
+1. Buka sheets.google.com, buat spreadsheet kosong, beri nama "Pelanggan Catatan Rafi".
+2. Klik Ekstensi, lalu Apps Script. Hapus isi editor, tempel seluruh isi `tools/newsletter-apps-script.gs`, lalu klik ikon simpan.
+3. Di menu fungsi pilih `siapkan`, klik Jalankan. Google meminta izin: pilih akunmu, klik Lanjutan, lalu "Buka ... (tidak aman)", lalu Izinkan. Peringatan ini muncul karena skripnya buatanmu sendiri dan belum diperiksa Google. Skrip hanya bisa membuka spreadsheet ini.
+4. Klik Terapkan, Deployment baru. Ikon gerigi pilih Aplikasi web. Jalankan sebagai: Saya. Yang memiliki akses: Siapa saja. Klik Terapkan, lalu salin URL aplikasi web (berakhiran `/exec`).
+5. Di data.js, di bawah `newsletterName`, tambahkan `newsletterEndpoint: "URL tadi",` lalu commit.
+6. Tes: buka beranda, isi emailmu sendiri di bagian Newsletter. Dalam beberapa detik email itu muncul di tab Pelanggan.
+
+Kalau skripnya diubah, klik Terapkan, Kelola deployment, ikon pensil, Versi: Versi baru, Terapkan. URL-nya tetap sama.
+
+Mengirim newsletter:
+1. Tulis isinya bareng Claude, lalu salin.
+2. Di Google Sheet, salin sel F2 (semua email berstatus aktif).
+3. Di Gmail klik Tulis. Kolom Kepada isi emailmu sendiri. Klik Bcc, tempel daftar email tadi. Dengan Bcc, pelanggan tidak bisa melihat email pelanggan lain.
+4. Tempel isi newsletter. Tutup dengan kalimat: "Kamu menerima email ini karena berlangganan di musholirafi.my.id. Balas dengan kata BERHENTI kalau tidak mau menerima lagi."
+5. Kirim ke dirimu sendiri dulu untuk mengecek tampilannya, baru kirim ke semua.
+
+Catatan:
+- Gmail biasa membatasi sekitar 500 penerima per hari. Kalau pelanggan sudah lebih dari itu, kirim bertahap atau pindah ke layanan email massal.
+- Kalau ada yang membalas BERHENTI, hapus barisnya (klik kanan nomor baris, Hapus baris). Email itu otomatis hilang dari sel F2, dan kalau ia mendaftar lagi nanti, emailnya masuk lagi. Kebijakan privasi menjanjikan email itu dihapus, jadi jangan cuma disembunyikan.
+- URL aplikasi web terlihat di sumber halaman, jadi siapa pun bisa mengirim email ke daftar ini. Skrip menolak format yang salah, mengabaikan bot, dan tidak menyimpan email yang sama dua kali. Kalau ada baris aneh, hapus saja.

@@ -752,15 +752,32 @@
   const faqBox = $("#faq-list");
   if (faqBox) faqBox.innerHTML = (S.faq || []).map((f) => `<details><summary>${esc(f.q)}</summary><p>${esc(String(f.a).replace("{hours}", (S.contact && S.contact.hours) || ""))}</p></details>`).join("");
 
-  /* Newsletter */
+  /* Newsletter: email masuk ke Google Sheet lewat Apps Script (newsletterEndpoint di data.js). Kalau kosong, kembali ke Substack. */
   $$("[data-newsletter]").forEach((form) => {
-    const sub = (S.links && S.links.substack) || "";
-    if (sub) form.action = sub.replace(/\/$/, "") + "/subscribe";
-    form.addEventListener("submit", (e) => {
-      const input = $("input[type=email]", form);
-      if (!sub) { e.preventDefault(); toast("Alamat Substack belum diisi di data.js"); return; }
-      if (input && !input.value.trim()) { e.preventDefault(); input.focus(); return; }
-      toast("Lanjutkan konfirmasi di tab Substack yang baru terbuka");
+    const ep = S.newsletterEndpoint || "", sub = (S.links && S.links.substack) || "", note = $(".nl-note", form);
+    if (!ep && sub) form.action = sub.replace(/\/$/, "") + "/subscribe";
+    if (ep && note) note.textContent = "Emailmu hanya kupakai untuk newsletter, info diskon, dan kode promo. Tanpa spam, berhenti kapan saja.";
+    form.addEventListener("submit", async (e) => {
+      const input = $("input[type=email]", form), btn = $("button[type=submit]", form), email = input ? input.value.trim() : "";
+      if (!email) { e.preventDefault(); if (input) input.focus(); return; }
+      if (!ep) {
+        if (!sub) { e.preventDefault(); toast("Alamat newsletter belum diisi di data.js"); return; }
+        toast("Lanjutkan konfirmasi di tab Substack yang baru terbuka");
+        return;
+      }
+      e.preventDefault();
+      if (btn) btn.disabled = true;
+      try {
+        // no-cors: Apps Script tetap menerima datanya, hanya balasannya yang tidak bisa dibaca browser
+        await fetch(ep, { method: "POST", mode: "no-cors", body: new URLSearchParams({ email, sumber: location.pathname, website: form.elements.website ? form.elements.website.value : "" }) });
+        form.reset();
+        if (note) note.textContent = "Terima kasih, emailmu sudah terdaftar. Catatan berikutnya langsung masuk ke inbox-mu.";
+        toast("Emailmu sudah terdaftar");
+      } catch (err) {
+        toast("Gagal mengirim. Cek internetmu lalu coba lagi.");
+      } finally {
+        if (btn) btn.disabled = false;
+      }
     });
   });
   $$("[data-newsletter-name]").forEach((el) => { el.textContent = S.newsletterName || "Newsletter"; });
@@ -1183,6 +1200,22 @@
   let cart = store.get("mr-cart", []).filter((i) => i && catalog[i.id] && catalog[i.id].price > 0 && !catalog[i.id].soon && i.qty > 0);
   let currentOrder = null;
   const subtotal = () => cart.reduce((a, i) => a + priceOf(catalog[i.id]) * i.qty, 0);
+  /* Kode promo dari data.js (promoCodes). Kodenya terbaca di sumber halaman, jadi cek lagi kodenya di pesan WhatsApp. */
+  const promos = (S.promoCodes || []).filter((c) => c && c.code && c.percent > 0);
+  let promoEl = null;
+  function promoFor(raw) {
+    const k = String(raw || "").trim().toUpperCase();
+    if (!k) return null;
+    const c = promos.find((x) => String(x.code).toUpperCase() === k && (!x.from || String(x.from) <= todayStr()) && isActive(x.until));
+    return c ? { code: k, percent: Math.min(100, c.percent) } : false;
+  }
+  const promoCut = (sub, p) => (p ? Math.round((sub * p.percent) / 100 / 100) * 100 : 0);
+  function formSummary() {
+    const fs = $("#form-summary");
+    if (!fs) return;
+    const p = promoEl ? promoFor(promoEl.value) : null, sub = subtotal(), cut = promoCut(sub, p);
+    fs.innerHTML = `<div class="summary">${cart.map(lineHTML).join("")}${totalRow()}${p ? `<div class="summary-row"><span>Kode promo ${esc(p.code)} (${p.percent}%)</span><span>-${rupiah(cut)}</span></div><div class="summary-row total"><span>Setelah promo</span><span>${rupiah(sub - cut)}</span></div>` : ""}</div>`;
+  }
   function saveCart(bump) {
     store.set("mr-cart", cart);
     const c = $("#cart-count");
@@ -1254,7 +1287,7 @@
     const idx = ["cart", "form", "pay"].indexOf(step);
     $$(".stepper span", sheetEl).forEach((s, i) => s.classList.toggle("on", i <= idx));
     const t = $("#sheet-title"); if (t) t.textContent = titles[step];
-    if (step === "form") { const fs = $("#form-summary"); if (fs) fs.innerHTML = `<div class="summary">${cart.map(lineHTML).join("")}${totalRow()}</div>`; }
+    if (step === "form") formSummary();
     const body = $(".sheet-body", sheetEl); if (body) body.scrollTop = 0;
   }
   function openSheet(step) {
@@ -1276,6 +1309,14 @@
   function setErr(input, errEl, bad) { if (errEl) errEl.hidden = !bad; if (bad) input.setAttribute("aria-invalid", "true"); else input.removeAttribute("aria-invalid"); }
   function makeOrderId() { const d = new Date(); return `MR-${String(d.getFullYear()).slice(2)}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${Math.floor(1000 + Math.random() * 9000)}`; }
   const orderForm = $("#order-form");
+  if (orderForm && promos.length) {
+    const f = document.createElement("div");
+    f.className = "field";
+    f.innerHTML = '<label for="o-promo">Kode promo <span class="opt">(opsional)</span></label><input id="o-promo" name="o-promo" autocomplete="off" autocapitalize="characters" spellcheck="false"><span class="err" id="o-promo-err" hidden>Kode promo tidak dikenal atau sudah tidak berlaku.</span>';
+    orderForm.insertBefore(f, $("#form-summary"));
+    promoEl = $("#o-promo");
+    promoEl.addEventListener("input", () => { setErr(promoEl, $("#o-promo-err"), false); formSummary(); });
+  }
   if (orderForm) orderForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const nameEl = $("#o-name"), waEl = $("#o-wa");
@@ -1285,12 +1326,14 @@
     if (!name) { nameEl.focus(); return; }
     if (!wa) { waEl.focus(); return; }
     if (!cart.length) { showStep("cart"); return; }
-    const sub = subtotal();
+    const promo = promoEl ? promoFor(promoEl.value) : null;
+    if (promo === false) { setErr(promoEl, $("#o-promo-err"), true); promoEl.focus(); return; }
+    const sub = subtotal(), cut = promoCut(sub, promo);
     const code = S.payment && S.payment.uniqueCode === false ? 0 : Math.floor(Math.random() * 199) + 1;
     currentOrder = {
       id: makeOrderId(), name, wa, email: ($("#o-email") || {}).value ? $("#o-email").value.trim() : "", note: ($("#o-note") || {}).value ? $("#o-note").value.trim() : "",
       items: cart.map((i) => { const p = catalog[i.id], d = discountFor(p); return { sku: p.sku, title: p.title, qty: i.qty, price: priceOf(p), off: d ? d.percent : 0 }; }),
-      subtotal: sub, code, total: sub + code, createdAt: new Date().toISOString()
+      subtotal: sub, promo: promo ? { code: promo.code, percent: promo.percent, cut } : null, code, total: sub - cut + code, createdAt: new Date().toISOString()
     };
     store.set("mr-last-order", currentOrder);
     renderPay(currentOrder); showStep("pay");
@@ -1303,7 +1346,7 @@
       `${greet}, aku mau konfirmasi pembayaran.`, "",
       `No. pesanan: ${o.id}`, `Nama: ${o.name}`, `WhatsApp: ${o.wa}`, o.email ? `Email: ${o.email}` : null, "",
       "Pesanan:", ...lines, "",
-      `Subtotal: ${rupiah(o.subtotal)}`, o.code ? `Kode unik: ${o.code}` : null, `Total dibayar: ${rupiah(o.total)}`,
+      `Subtotal: ${rupiah(o.subtotal)}`, o.promo ? `Kode promo: ${o.promo.code} (hemat ${o.promo.percent}%): -${rupiah(o.promo.cut)}` : null, o.code ? `Kode unik: ${o.code}` : null, `Total dibayar: ${rupiah(o.total)}`,
       o.note ? "" : null, o.note ? `Catatan: ${o.note}` : null, "",
       "Bukti bayar QRIS aku lampirkan di pesan berikutnya."
     ].filter((l) => l !== null).join("\n");
@@ -1312,7 +1355,10 @@
     const set = (id, v) => { const n = $(id); if (n) n.textContent = v; };
     set("#pay-id", o.id);
     set("#pay-total", rupiah(o.total));
-    set("#pay-breakdown", o.code ? `${rupiah(o.subtotal)} + kode unik ${o.code}. Kode unik membantu mencocokkan pembayaranmu.` : "Total sesuai pesanan.");
+    const parts = [`Harga ${rupiah(o.subtotal)}`];
+    if (o.promo) parts.push(`dikurangi promo ${o.promo.code} ${rupiah(o.promo.cut)}`);
+    if (o.code) parts.push(`ditambah kode unik ${o.code}`);
+    set("#pay-breakdown", parts.length > 1 ? `${parts.join(", ")}.${o.code ? " Kode unik membantu mencocokkan pembayaranmu." : ""}` : "Total sesuai pesanan.");
     const slot = $("#qris-slot");
     if (slot) slot.innerHTML = S.payment && S.payment.qrisImage
       ? `<img class="qris-img" src="${esc(S.payment.qrisImage)}" alt="Kode QRIS untuk pembayaran">`
