@@ -16,7 +16,9 @@ window.SITE = {
   updated: "November 2026",
   photo: "",                           // opsional: misal "assets/img/foto.webp". Kosong = pakai maskot.
   newsletterName: "Catatan Rafi",      // CEK: nama newsletter Substack-mu
-
+  newsletterEndpoint: "https://script.google.com/macros/s/AKfycbxMSJc7ZSF7Or9yhMyJd5I2m-iEw970U67OPrcrPPqimjjFoH-87Cfs_ymJFy3kxZwO9Q/exec",
+     promoCodes: [ { code: "PELANGGAN10", percent: 10, from: "2026-11-09", until: "2026-12-07" } ],
+   
   links: {
     substack: "https://musholirafi.substack.com",
     linkedin: "https://www.linkedin.com/in/musholirafi/",
