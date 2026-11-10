@@ -1323,6 +1323,10 @@ a.chip{text-decoration:none}
 .calm .dc-msg{transform:none}
 .calm .nav a{transform:none}
 .calm .work:hover,.calm .help:hover,.calm .class:hover,.calm .now-card:hover{transform:none}
+.calm .fly-item{display:none}
+.calm .total-big .odo-reel{transition:none}
+.calm .total-big.lit .odo-hot,.calm #cart-btn.catch{animation:none}
+.calm .fd-card.enter,.calm .fd-opts .chip.enter{animation-name:soft}
 
 /* =========================================================
    Tambahan v3.2: cerita di balik foto, cerita lengkap, logo Catatan Kuliah D.I.
@@ -1525,3 +1529,55 @@ a.chip{text-decoration:none}
 @media (max-width:860px){.svc-uses{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.svc-uses{grid-template-columns:minmax(0,1fr)}}
 .nl-hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;opacity:0}
+
+/* ---------- Produk terbang ke keranjang ---------- */
+.fly-item{position:fixed;z-index:1000;pointer-events:none;will-change:transform}
+.fly-inner{width:100%;height:100%;will-change:transform,opacity;filter:drop-shadow(0 14px 18px rgba(28,26,43,.3))}
+.fly-inner .book{width:100%;--rx:0deg;--ry:0deg;transform:none}
+.fly-inner .book .spine,.fly-inner .book .pages{display:none}
+.fly-chip{display:grid;place-items:center;border-radius:50%;background:var(--g-warm);color:var(--on-grad)}
+.fly-chip svg{width:24px;height:24px}
+#cart-btn.catch{animation:cart-catch .55s var(--ease)}
+@keyframes cart-catch{25%{transform:translateY(3px) scale(.93) rotate(-4deg)}60%{transform:translateY(-2px) scale(1.06) rotate(3deg)}}
+
+/* ---------- Nominal odometer di layar QRIS ---------- */
+.total-big{line-height:1.15}
+.total-big .odo-num,.total-big .odo-hot,.total-big .odo-sep,.total-big .odo-d{display:inline-block;vertical-align:top}
+.total-big .odo-d{height:1.15em;overflow:hidden}
+.total-big .odo-reel{display:block;line-height:1.15em;transition:transform calc(1100ms + var(--j,0) * 110ms) cubic-bezier(.2,.85,.25,1.06)}
+.total-big.spin .odo-reel{transform:translateY(calc(var(--n,0) * -1.15em))}
+.total-big .odo-hot{padding:0 .14em;margin-left:.04em;border-radius:.28em;transition:background-color .3s,color .3s}
+.total-big.lit .odo-hot{background:var(--g-warm);color:var(--on-grad);animation:odo-glow 1.3s var(--ease) 2}
+@keyframes odo-glow{0%,100%{box-shadow:0 0 0 0 rgba(255,145,94,0)}40%{box-shadow:0 0 0 7px rgba(255,145,94,.25),0 0 26px 4px rgba(255,204,85,.45)}}
+.odo-hint{font-size:.8rem;font-weight:700;color:var(--accent)}
+.odo-hint::before{content:"\2191  "}
+.pay-mail{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--g-soft);border:1px solid var(--line);font-size:.86rem;line-height:1.5}
+
+/* ---------- Pencari cocok untukmu (toko.html #cocok) ---------- */
+.finder{position:relative;margin-bottom:clamp(26px,4vw,40px);padding:clamp(18px,3vw,26px);border-radius:var(--r-lg);background:var(--g-soft);border:1px solid var(--line);scroll-margin-top:calc(var(--header-h) + 16px)}
+.fd-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.fd-ic{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--g-warm);color:var(--on-grad)}
+.fd-ic svg{width:24px;height:24px}
+.fd-head>div{flex:1 1 220px;min-width:0}
+.fd-title{font-size:1.25rem;line-height:1.2;font-weight:750}
+.fd-head p{margin-top:4px;color:var(--muted);font-size:.92rem}
+.fd-body{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line-strong)}
+.fd-prog{display:flex;gap:6px;max-width:220px;margin-bottom:12px}
+.fd-prog i{flex:1;height:5px;border-radius:5px;background:var(--line)}
+.fd-prog i.on{background:var(--g-warm)}
+.fd-step{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.fd-q h3{margin:6px 0 12px;font-size:1.15rem}
+.fd-opts{display:flex;flex-wrap:wrap;gap:8px}
+.fd-opts .chip{max-width:100%;text-align:left}
+.fd-opts .chip.enter,.fd-card.enter{animation:fade-up .5s var(--ease) both;animation-delay:calc(var(--i,0) * 70ms)}
+.fd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-top:10px}
+.fd-card{display:flex;flex-direction:column;gap:8px;min-width:0;padding:16px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+.fd-card h4{font-size:1rem;line-height:1.3;overflow-wrap:anywhere}
+.fd-card p{flex:1;color:var(--muted);font-size:.86rem}
+.fd-act{margin-top:4px}
+.fd-tag{align-self:flex-start;padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:800;color:var(--on-grad)}
+.fd-tag.free{background:var(--g-sky)}
+.fd-tag.paid,.fd-tag.prog{background:var(--g-warm)}
+.fd-tag.soon{background:var(--g-mix)}
+.fd-note{margin-top:14px;color:var(--muted);font-size:.88rem}
+.fd-q .link-btn,.fd-res .link-btn{margin:12px 0 0}

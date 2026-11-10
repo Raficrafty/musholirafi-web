@@ -105,3 +105,38 @@ Catatan:
 - Gmail biasa membatasi sekitar 500 penerima per hari. Kalau pelanggan sudah lebih dari itu, kirim bertahap atau pindah ke layanan email massal.
 - Kalau ada yang membalas BERHENTI, hapus barisnya (klik kanan nomor baris, Hapus baris). Email itu otomatis hilang dari sel G1, dan kalau ia mendaftar lagi nanti, emailnya masuk lagi. Kebijakan privasi menjanjikan email itu dihapus, jadi jangan cuma disembunyikan.
 - URL aplikasi web terlihat di sumber halaman, jadi siapa pun bisa mengirim email ke daftar ini. Skrip menolak format yang salah, mengabaikan bot, dan tidak menyimpan email yang sama dua kali. Kalau ada baris aneh, hapus saja.
+
+## 12. Kirim file otomatis lewat email (tab Pesanan)
+Setiap pesanan masuk ke Google Sheet. Setelah kamu cek pembayarannya di mutasi QRIS, cukup centang kolom Lunas. Email berisi tautan file langsung terkirim ke pembeli.
+
+Pasang sekali (15 menit):
+1. Buka sheets.google.com, buat spreadsheet kosong BARU, beri nama "Pesanan Toko Rafi". Sengaja dipisah dari spreadsheet Pelanggan newsletter, supaya newsletter yang sudah jalan tidak terganggu.
+2. Klik Ekstensi, lalu Apps Script. Hapus isi editor, tempel seluruh isi `tools/pesanan-apps-script.gs`, lalu klik ikon simpan.
+3. Di menu fungsi pilih `siapkan`, klik Jalankan. Google meminta izin, termasuk izin mengirim email atas namamu. Pilih akunmu, klik Lanjutan, lalu "Buka ... (tidak aman)", lalu Izinkan. Peringatan ini muncul karena skripnya buatanmu sendiri.
+4. Sekarang ada tab Pesanan dan tab Produk. Tab Produk sudah berisi SKU, nama, dan harga produkmu. Kolom Tautan file masih kosong.
+5. Isi Tautan file: unggah file produk ke Google Drive, klik kanan file, Bagikan. Di Akses umum pilih "Siapa saja yang memiliki link" dan peran Pelihat. Klik Salin link, lalu tempel di kolom Tautan file di baris SKU yang sama. Tautan ini hanya ada di Sheet-mu, tidak di website.
+6. Kembali ke Apps Script. Klik Terapkan, Deployment baru. Ikon gerigi pilih Aplikasi web. Jalankan sebagai: Saya. Yang memiliki akses: Siapa saja. Klik Terapkan, lalu salin URL aplikasi web (berakhiran `/exec`).
+7. Di data.js, di bawah baris `newsletterEndpoint`, tambahkan `orderEndpoint: "URL tadi",` lalu commit.
+8. Tes: tunggu 2 menit, buka toko lewat jendela penyamaran, pesan produk termurah dengan emailmu sendiri sampai muncul layar QRIS (tidak perlu bayar). Dalam beberapa detik baris baru muncul di tab Pesanan. Centang Lunas di baris itu, lalu cek emailmu. Setelah itu hapus baris tes tadi.
+
+Setiap ada pesanan:
+1. Buka tab Pesanan (dari HP bisa lewat aplikasi Google Sheets).
+2. Cek mutasi QRIS dan bukti bayar di WhatsApp. Cocokkan tiga hal: nominal persis sama dengan Total dibayar, kode unik sama, dan Total masuk akal dibanding Harga normal. Total sedikit lebih rendah itu wajar karena diskon atau kode promo. Kalau jauh lebih rendah, cek ulang sebelum mencentang.
+3. Centang Lunas. Kolom Status berubah menjadi "Terkirim" beserta jam kirimnya.
+
+Arti kolom Status:
+- `Menunggu bayar`: pesanan dibuat, belum kamu centang.
+- `Menunggu bayar, tanpa email`: pembeli tidak mengisi email. Kirim file lewat WhatsApp seperti biasa.
+- `Lunas. Belum ada tautan file di tab Produk, kirim manual`: isi dulu Tautan file produk itu, lalu pakai menu Toko di bawah.
+- `Gagal: ...` atau `Kuota email hari ini habis`: coba lagi lewat menu Toko.
+
+Kirim ulang: klik baris pesanannya, lalu menu Toko (di samping menu Bantuan), Kirim ulang file untuk baris terpilih. Menu ini muncul setelah Sheet dibuka ulang.
+
+Catatan:
+- Bimbel tidak punya file. Di email tertulis "yang ini kukirim lewat WhatsApp", jadi undangan Discord tetap kamu kirim manual.
+- Produk baru: tambahkan satu baris di tab Produk (SKU sama persis dengan di data.js, nama, tautan file, harga).
+- Gmail biasa bisa mengirim sekitar 100 email per hari lewat Apps Script. Lampiran tidak dipakai, cukup tautan Drive.
+- Skrip tidak pernah mengirim email saat pesanan baru dibuat. Email hanya keluar setelah kamu centang Lunas. Alamat skrip terlihat di sumber halaman, jadi aturan ini mencegah orang iseng memakai skripmu untuk menyepam.
+- Orang yang sudah membeli tetap bisa membagikan tautan Drive-nya. Risiko ini sama seperti saat file dikirim lewat WhatsApp.
+- Kebijakan privasi menjanjikan data pesanan dihapus paling lama satu tahun setelah pesanan selesai. Hapus baris lama secara berkala.
+- Kalau skripnya diubah, klik Terapkan, Kelola deployment, ikon pensil, Versi: Versi baru, Terapkan. URL-nya tetap sama.

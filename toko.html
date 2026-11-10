@@ -105,6 +105,14 @@
         <h1>Modul, kursus, dan buku</h1>
         <p class="sec-lede">Materi yang kususun sendiri supaya kamu paham lebih cepat. Mulai dari yang gratis dulu. Beli karena kamu butuh, bukan karena ikut-ikutan teman. Kalau terasa bermanfaat, membeli modul adalah cara terbaik untuk mendukungku terus berbagi.</p>
       </header>
+      <div class="finder" id="cocok" data-reveal>
+        <div class="fd-head">
+          <span class="fd-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span>
+          <div><h2 class="fd-title">Cari yang cocok untukmu</h2><p>Tiga pilihan singkat, lalu aku sarankan mulai dari mana. Hasilnya sering justru materi gratis.</p></div>
+          <button class="btn primary small" type="button" id="fd-start">Mulai</button>
+        </div>
+        <div class="fd-body" id="fd-body" aria-live="polite" hidden></div>
+      </div>
       <div class="filters" id="filters" role="group" aria-label="Saring kategori"></div>
       <div class="products" id="products"></div>
       <div class="shop-note"><span class="qris-pill">QRIS</span><span>Bisa dibayar dari GoPay, OVO, DANA, ShopeePay, LinkAja, dan m-banking yang mendukung QRIS. Beberapa produk juga tersedia di <a data-link="lynk" href="https://lynk.id/catatankuliah.di" target="_blank" rel="noopener">Lynk</a>.</span></div>
@@ -179,7 +187,7 @@
       <div class="order-story">
         <ol class="os-steps">
           <li class="os-step active" data-s="1"><span class="n">Langkah 1</span><h3>Pilih produk atau program</h3><p>Tekan Tambah di produk atau Daftar di program bimbel, lalu buka keranjang di pojok kanan atas.</p></li>
-          <li class="os-step" data-s="2"><span class="n">Langkah 2</span><h3>Isi nama dan WhatsApp</h3><p>Cukup dua data itu. Email boleh dikosongkan kalau file cukup dikirim lewat WhatsApp.</p></li>
+          <li class="os-step" data-s="2"><span class="n">Langkah 2</span><h3>Isi nama dan WhatsApp</h3><p>Isi juga emailmu kalau mau file dikirim ke kotak masuk. Boleh dikosongkan, nanti file kukirim lewat WhatsApp.</p></li>
           <li class="os-step" data-s="3"><span class="n">Langkah 3</span><h3>Bayar pakai QRIS</h3><p>Scan QRIS dan ketik nominal persis, termasuk kode unik 1 sampai 199 rupiah di ujungnya.</p></li>
           <li class="os-step" data-s="4"><span class="n">Langkah 4</span><h3>Kirim bukti lewat WhatsApp</h3><p>Pesan konfirmasi sudah tersusun otomatis. Tinggal lampirkan tangkapan layar bukti bayar.</p></li>
         </ol>

@@ -21,7 +21,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
   - `belajar.html`: bantuan per topik (`#bantu`), belajar gratis (`#belajar`), dan lembar rasa dan data (`#posisi`).
   - `karya.html`: karya dan riset. `bimbel.html`: bimbel Discord dan testimoni.
   - `jasa-website.html`: jasa pembuatan website (paket Santai, Reguler, Kilat, kegunaan, contoh, FAQ). Harga ditulis langsung di HTML, bukan di data.js. Tidak masuk menu utama, ditautkan dari pintu lebar di beranda (`.door-wide`) dan ajakan di bawah karya. Gambar contoh `assets/img/jasa-contoh-beranda.webp` adalah tangkapan layar beranda, perbarui kalau beranda berubah banyak.
-  - `toko.html`: toko (`#toko`), Catatan Semester 1 (`#maba`), buku, cara pesan, dan FAQ.
+  - `toko.html`: toko (`#toko`) dengan pencari "Cari yang cocok untukmu" (`#cocok`, tiga pilihan lalu saran dari yang gratis dulu), Catatan Semester 1 (`#maba`), buku, cara pesan, dan FAQ.
   - `tentang.html`: cerita singkat, kolase, galeri cerita foto, sedang dikerjakan, denah ilmu, dan alat kerja.
   - Header, footer, keranjang, dan dialog sama di semua halaman. Kalau mengubahnya, ubah di semua halaman.
   - Menu memakai tautan halaman dengan `aria-current="page"` di halaman yang sedang dibuka.
@@ -31,7 +31,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 - `assets/files/`: file gratis yang bisa langsung diunduh (misal `lembar-tujuan-3-bulan.pdf`).
 - `assets/css/style.css`: semua gaya. Token warna di `:root`, versi gelap di `@media (prefers-color-scheme:dark)` dan `:root[data-theme="dark"]`.
 - `assets/js/data.js`: SEMUA isi yang sering berubah (produk, harga, diskon, edisi musim, event, bimbel, kontak, FAQ, testimoni). Ubah data di sini, jangan menulis ulang HTML.
-- `assets/js/main.js`: mesin website (animasi scroll, edisi musim, partikel, diskon, toko, keranjang, checkout, lembar rasa dan data, slideshow residensial, denah ilmu yang bisa dibuka, grafik, buku yang terbuka saat di-scroll). Semua fitur dicek dulu keberadaan elemennya, jadi aman dipakai di halaman turunan.
+- `assets/js/main.js`: mesin website (animasi scroll, edisi musim, partikel, diskon, toko, produk terbang ke keranjang, pencari cocok untukmu (`NEEDS` dan `FREE_PAGES`, produk dicocokkan lewat kata di judul dan deskripsi), keranjang, checkout, nominal odometer di layar QRIS, lembar rasa dan data, slideshow residensial, denah ilmu yang bisa dibuka, grafik, buku yang terbuka saat di-scroll). Semua fitur dicek dulu keberadaan elemennya, jadi aman dipakai di halaman turunan.
 - `assets/img/`: maskot, gambar kerja residensial, ikon, `og-image.png` (1200 × 630).
 - `favicon.ico` (16, 32, 48 px) dan `assets/img/icon-192.png`, `icon-512.png`, `icon-512-maskable.png`, `apple-touch-icon.png`: ikon maskot untuk tab browser dan hasil pencarian Google. `favicon.svg` hanya cadangan berisi gambar maskot yang sama. Lalu `site.webmanifest`, `robots.txt`, `sitemap.xml`.
 - Tidak ada build step.
@@ -67,6 +67,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 ## Pembayaran (tahap sekarang)
 - QRIS statis, ditambah kode unik 1 sampai 199 rupiah, lalu konfirmasi lewat WhatsApp. Belum ada backend.
 - Nomor WA admin di `contact.whatsapp` (format 628...). Gambar QRIS di `payment.qrisImage`.
+- Pengiriman file (Jalan A, November 2026): saat Buat pesanan, `main.js` mengirim pesanan ke `S.orderEndpoint` (data.js) dengan `fetch` no-cors. Apps Script di `tools/pesanan-apps-script.gs` (spreadsheet terpisah dari newsletter) menulis baris di tab Pesanan. Pemilik mencentang Lunas, lalu pemicu `saatDicentang` mengirim email berisi tautan Drive dari tab Produk. Script TIDAK BOLEH mengirim email saat pesanan dibuat, karena alamat script terbuka untuk umum. Tautan file hanya ada di Sheet, jangan ditaruh di data.js. Panduan di PANDUAN.md bagian 12.
 - Jangan pernah menaruh API key, password, token, atau server key payment gateway di repo ini. Isi `index.html` bisa dilihat siapa saja lewat browser.
 
 ## Penyimpanan di browser

@@ -212,7 +212,7 @@
 
   /* Website dibagi per halaman. Tautan #bagian (misal dari data.js) yang bagiannya ada di halaman lain dibuka di halaman itu.
      Menambah bagian baru yang dirujuk dari halaman lain: tambahkan id dan halamannya di sini. */
-  const PAGE_OF = {"atur-finansial":"belajar.html#atur-finansial","bantu":"belajar.html","belajar":"belajar.html#belajar","belajar-ai":"belajar.html#belajar-ai","belajar-efektif":"belajar.html#belajar-efektif","beranda":"./","bimbel":"bimbel.html","buku":"toko.html#buku","cara-pesan":"toko.html#cara-pesan","catatan-singkat":"belajar.html#catatan-singkat","edisi":"./#edisi","faq":"toko.html#faq","ilmu":"tentang.html#ilmu","jasa-website":"jasa-website.html","paket-website":"jasa-website.html#paket-website","karya":"karya.html","maba":"toko.html#maba","mini-kritis":"belajar.html#mini-kritis","mini-tujuan":"belajar.html#mini-tujuan","mulai":"./#mulai","newsletter":"./#newsletter","posisi":"belajar.html#posisi","sekarang":"tentang.html#sekarang","tentang":"tentang.html","testimoni":"bimbel.html#testimoni","toko":"toko.html#toko","tools":"tentang.html#tools","works":"karya.html#works"};
+  const PAGE_OF = {"atur-finansial":"belajar.html#atur-finansial","bantu":"belajar.html","belajar":"belajar.html#belajar","belajar-ai":"belajar.html#belajar-ai","belajar-efektif":"belajar.html#belajar-efektif","beranda":"./","bimbel":"bimbel.html","buku":"toko.html#buku","cara-pesan":"toko.html#cara-pesan","cocok":"toko.html#cocok","catatan-singkat":"belajar.html#catatan-singkat","edisi":"./#edisi","faq":"toko.html#faq","ilmu":"tentang.html#ilmu","jasa-website":"jasa-website.html","paket-website":"jasa-website.html#paket-website","karya":"karya.html","maba":"toko.html#maba","mini-kritis":"belajar.html#mini-kritis","mini-tujuan":"belajar.html#mini-tujuan","mulai":"./#mulai","newsletter":"./#newsletter","posisi":"belajar.html#posisi","sekarang":"tentang.html#sekarang","tentang":"tentang.html","testimoni":"bimbel.html#testimoni","toko":"toko.html#toko","tools":"tentang.html#tools","works":"karya.html#works"};
   document.addEventListener("click", (e) => {
     const a = e.target.closest && e.target.closest('a[href^="#"]');
     if (!a || e.defaultPrevented) return;
@@ -1224,7 +1224,41 @@
       if (bump) { c.classList.remove("bump"); void c.offsetWidth; c.classList.add("bump"); }
     }
   }
-  function addToCart(id) {
+  /* Produk terbang ke keranjang: sampul mini melayang ke tombol Keranjang di header, lalu angkanya memantul saat mendarat. */
+  function flyToCart(from, done) {
+    const target = $("#cart-btn");
+    const calm = reduce || root.classList.contains("calm");
+    if (calm || !from || !target || typeof document.body.animate !== "function") { done(); return; }
+    const book = from.closest(".product") ? $(".book", from.closest(".product")) : null;
+    const src = book || from;
+    const a = src.getBoundingClientRect(), b = target.getBoundingClientRect();
+    if (!a.width || !b.width || b.bottom < 0 || b.top > innerHeight || a.bottom < 0 || a.top > innerHeight) { done(); return; }
+    const w = book ? Math.min(a.width, 150) : 46, h = book ? w * 1.5 : 46;
+    const x0 = a.left + a.width / 2 - w / 2, y0 = a.top + a.height / 2 - h / 2;
+    const dx = b.left + b.width / 2 - (x0 + w / 2), dy = b.top + b.height / 2 - (y0 + h / 2);
+    const outer = document.createElement("div"), inner = document.createElement("div");
+    outer.className = "fly-item";
+    outer.setAttribute("aria-hidden", "true");
+    outer.style.cssText = `left:${x0}px;top:${y0}px;width:${w}px;height:${h}px`;
+    inner.className = "fly-inner" + (book ? "" : " fly-chip");
+    if (book) { const c = book.cloneNode(true); c.removeAttribute("style"); inner.appendChild(c); }
+    else inner.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17l9-10"/></svg>';
+    outer.appendChild(inner);
+    document.body.appendChild(outer);
+    const dur = Math.min(900, 560 + Math.hypot(dx, dy) * 0.35), end = Math.max(0.16, 30 / w);
+    // Gerak mendatar dan tegak dipisah supaya lintasannya melengkung seperti dilempar
+    outer.animate([{ transform: "translateX(0)" }, { transform: `translateX(${dx}px)` }], { duration: dur, easing: "cubic-bezier(.35,0,.6,1)", fill: "forwards" });
+    const anim = inner.animate([
+      { transform: "translateY(0) scale(1) rotate(0)", opacity: 1 },
+      { transform: `translateY(${Math.max(40, h * 0.25)}px) scale(.82) rotate(-10deg)`, opacity: 1, offset: 0.18 },
+      { transform: `translateY(${dy}px) scale(${end}) rotate(14deg)`, opacity: 0.35 }
+    ], { duration: dur, easing: "cubic-bezier(.55,0,.75,.45)", fill: "forwards" });
+    let finished = false;
+    const finish = () => { if (finished) return; finished = true; outer.remove(); target.classList.remove("catch"); void target.offsetWidth; target.classList.add("catch"); done(); };
+    anim.onfinish = finish;
+    setTimeout(finish, dur + 300);
+  }
+  function addToCart(id, from) {
     const p = catalog[id];
     if (!p || !p.price) return;
     if (p.soon) { toast(`${p.title} masih coming soon`); return; }
@@ -1234,12 +1268,12 @@
       item.qty += 1;
     } else cart.push({ id, qty: 1 });
     currentOrder = null;
-    saveCart(true); renderCart();
-    toast(`${p.title} masuk keranjang`);
+    store.set("mr-cart", cart); renderCart();
+    flyToCart(from, () => { saveCart(true); toast(`${p.title} masuk keranjang`); });
   }
   document.addEventListener("click", (e) => {
     const add = e.target.closest("[data-add]");
-    if (add) { e.preventDefault(); addToCart(add.dataset.add); }
+    if (add) { e.preventDefault(); addToCart(add.dataset.add, add); }
   });
 
   function lineHTML(i) {
@@ -1309,6 +1343,31 @@
   function setErr(input, errEl, bad) { if (errEl) errEl.hidden = !bad; if (bad) input.setAttribute("aria-invalid", "true"); else input.removeAttribute("aria-invalid"); }
   function makeOrderId() { const d = new Date(); return `MR-${String(d.getFullYear()).slice(2)}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${Math.floor(1000 + Math.random() * 9000)}`; }
   const orderForm = $("#order-form");
+  /* Pesanan masuk ke tab Pesanan di Google Sheet lewat Apps Script (orderEndpoint di data.js).
+     Script TIDAK mengirim email saat pesanan dibuat. File baru terkirim setelah pemilik mencentang Lunas di Sheet. */
+  const orderEp = S.orderEndpoint || "";
+  const emailRe = /^[^\s@=+\-][^\s@]*@[^\s@]+\.[^\s@]{2,}$/;
+  const emailEl = $("#o-email");
+  if (emailEl) {
+    const opt = emailEl.parentNode.querySelector(".opt");
+    if (opt && orderEp) opt.textContent = "(isi supaya file terkirim otomatis)";
+    const er = document.createElement("span");
+    er.className = "err"; er.id = "o-email-err"; er.hidden = true;
+    er.textContent = "Format email belum benar. Contoh: nama@gmail.com";
+    emailEl.insertAdjacentElement("afterend", er);
+    emailEl.addEventListener("input", () => setErr(emailEl, er, false));
+  }
+  function sendOrder(o) {
+    if (!orderEp) return;
+    const body = new URLSearchParams({
+      id: o.id, nama: o.name, wa: o.wa, email: o.email,
+      pesanan: o.items.map((it) => `${it.title}${it.qty > 1 ? " x" + it.qty : ""}`).join(", "),
+      sku: o.items.map((it) => `${it.sku}${it.qty > 1 ? " x" + it.qty : ""}`).join(","),
+      total: String(o.total), kode: String(o.code || ""), promo: o.promo ? o.promo.code : "", website: ""
+    });
+    // no-cors: Apps Script tetap menerima datanya, hanya balasannya yang tidak bisa dibaca browser
+    try { fetch(orderEp, { method: "POST", mode: "no-cors", body, keepalive: true }).catch(() => {}); } catch (e) { /* abaikan, konfirmasi tetap lewat WhatsApp */ }
+  }
   if (orderForm && promos.length) {
     const f = document.createElement("div");
     f.className = "field";
@@ -1325,17 +1384,20 @@
     setErr(waEl, $("#o-wa-err"), !wa);
     if (!name) { nameEl.focus(); return; }
     if (!wa) { waEl.focus(); return; }
+    const mail = emailEl ? emailEl.value.trim().toLowerCase() : "";
+    if (emailEl) { setErr(emailEl, $("#o-email-err"), !!mail && !emailRe.test(mail)); if (mail && !emailRe.test(mail)) { emailEl.focus(); return; } }
     if (!cart.length) { showStep("cart"); return; }
     const promo = promoEl ? promoFor(promoEl.value) : null;
     if (promo === false) { setErr(promoEl, $("#o-promo-err"), true); promoEl.focus(); return; }
     const sub = subtotal(), cut = promoCut(sub, promo);
     const code = S.payment && S.payment.uniqueCode === false ? 0 : Math.floor(Math.random() * 199) + 1;
     currentOrder = {
-      id: makeOrderId(), name, wa, email: ($("#o-email") || {}).value ? $("#o-email").value.trim() : "", note: ($("#o-note") || {}).value ? $("#o-note").value.trim() : "",
+      id: makeOrderId(), name, wa, email: mail, note: ($("#o-note") || {}).value ? $("#o-note").value.trim() : "",
       items: cart.map((i) => { const p = catalog[i.id], d = discountFor(p); return { sku: p.sku, title: p.title, qty: i.qty, price: priceOf(p), off: d ? d.percent : 0 }; }),
       subtotal: sub, promo: promo ? { code: promo.code, percent: promo.percent, cut } : null, code, total: sub - cut + code, createdAt: new Date().toISOString()
     };
     store.set("mr-last-order", currentOrder);
+    sendOrder(currentOrder);
     renderPay(currentOrder); showStep("pay");
   });
   ["#o-name", "#o-wa"].forEach((s) => { const i = $(s); if (i) i.addEventListener("input", () => { i.removeAttribute("aria-invalid"); const er = $(s + "-err"); if (er) er.hidden = true; }); });
@@ -1351,10 +1413,43 @@
       "Bukti bayar QRIS aku lampirkan di pesan berikutnya."
     ].filter((l) => l !== null).join("\n");
   }
+  /* Nominal berputar seperti odometer, lalu tiga angka terakhir menyala supaya tidak lupa diketik. */
+  let odoTimer = 0;
+  function odometer(el, total, hot) {
+    const txt = rupiah(total), lastDigits = [];
+    txt.replace(/\d/g, (d, i) => { lastDigits.push(i); return d; });
+    const hotFrom = hot ? lastDigits[Math.max(0, lastDigits.length - 3)] : Infinity;
+    const plain = `<span class="odo-num">${txt.slice(0, hotFrom === Infinity ? txt.length : hotFrom)}</span>${hot ? `<span class="odo-hot">${txt.slice(hotFrom)}</span>` : ""}`;
+    el.setAttribute("aria-label", txt);
+    clearTimeout(odoTimer);
+    if (reduce || root.classList.contains("calm")) { el.innerHTML = plain; el.classList.toggle("lit", !!hot); return; }
+    let k = 0;
+    const reel = "01234567890123456789".split("").join("<br>");
+    const cells = (part) => part.split("").map((ch) => /\d/.test(ch) ? `<span class="odo-d"><span class="odo-reel" style="--n:${10 + Number(ch)};--j:${k++}">${reel}</span></span>` : `<span class="odo-sep">${ch}</span>`).join("");
+    el.classList.remove("lit", "spin");
+    const head = cells(txt.slice(0, hotFrom === Infinity ? txt.length : hotFrom));
+    el.innerHTML = `<span class="odo-num" aria-hidden="true">${head}</span>${hot ? `<span class="odo-hot" aria-hidden="true">${cells(txt.slice(hotFrom))}</span>` : ""}`;
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("spin")));
+    odoTimer = setTimeout(() => { el.classList.remove("spin"); el.innerHTML = plain; el.classList.toggle("lit", !!hot); }, 1100 + k * 110 + 250);
+  }
   function renderPay(o) {
     const set = (id, v) => { const n = $(id); if (n) n.textContent = v; };
     set("#pay-id", o.id);
-    set("#pay-total", rupiah(o.total));
+    const totalEl = $("#pay-total");
+    if (totalEl) {
+      odometer(totalEl, o.total, !!o.code);
+      let hint = $("#pay-hint");
+      if (!hint) { hint = document.createElement("p"); hint.id = "pay-hint"; hint.className = "odo-hint"; totalEl.insertAdjacentElement("afterend", hint); }
+      hint.hidden = !o.code;
+      hint.textContent = "Tiga angka yang menyala ikut diketik";
+    }
+    const steps = $(".pay-steps", sheetEl || document);
+    if (steps) {
+      let mailNote = $("#pay-mail");
+      if (!mailNote) { mailNote = document.createElement("p"); mailNote.id = "pay-mail"; mailNote.className = "pay-mail"; steps.insertAdjacentElement("beforebegin", mailNote); }
+      mailNote.hidden = !orderEp;
+      mailNote.textContent = o.email ? `File dikirim otomatis ke ${o.email} setelah pembayaranmu kucek. Kalau belum ada di kotak masuk, cek juga folder Spam.` : "File dikirim lewat WhatsApp setelah pembayaranmu kucek.";
+    }
     const parts = [`Harga ${rupiah(o.subtotal)}`];
     if (o.promo) parts.push(`dikurangi promo ${o.promo.code} ${rupiah(o.promo.cut)}`);
     if (o.code) parts.push(`ditambah kode unik ${o.code}`);
@@ -1387,6 +1482,87 @@
     if (orderForm) orderForm.reset();
     toast(id ? `Terima kasih. Simpan nomor pesanan ${id}` : "Keranjang dikosongkan");
   });
+
+  /* ---------------------------------------------------------
+     8b. Pencari "cocok untukmu" (toko.html #cocok)
+     Tiga pilihan singkat, lalu saran dari yang gratis dulu. Produk dicocokkan lewat kata di judul dan deskripsinya,
+     jadi produk baru di data.js ikut tersaring tanpa mengubah file ini.
+     --------------------------------------------------------- */
+  const finderEl = $("#cocok");
+  if (finderEl) {
+    const FREE_PAGES = {
+      efektif: ["Belajar efektif", "belajar.html#belajar-efektif", "Active recall dan jadwal ulang supaya materi kuliah tidak cepat hilang."],
+      posisi: ["Lembar rasa dan data", "belajar.html#posisi", "Latihan menjawab pertanyaan kenapa dari dosen dengan data."],
+      tools: ["Alat kerjaku", "tentang.html#tools", "Software yang kupakai dan urutan belajarnya."],
+      ai: ["Belajar AI", "belajar.html#belajar-ai", "Memakai AI sebagai teman diskusi, bukan pengganti nalar."],
+      gratis: ["Ilmu yang kubagikan gratis", "belajar.html#belajar", "Newsletter, Discord, dan catatan singkat untuk hidup kuliah."],
+      discord: ["Kelas Sabtu di Discord", "belajar.html#belajar", "Kelas bareng gratis tiap Sabtu malam dan tanya jawab tugas."]
+    };
+    const NEEDS = {
+      ujian: { label: "Ujian teori", re: /ujian|soal|sejarah|pancasila/i, free: ["efektif", "discord"], prog: /cara belajar|konsultasi/i },
+      asistensi: { label: "Asistensi dan riset", re: /asistensi|metodologi|alasan desain|riset|logbook/i, free: ["posisi", "discord"], prog: /asistensi|ergonomi/i },
+      ergonomi: { label: "Ergonomi dan ukuran", re: /ergonomi|antropometri|dimensi manusia/i, free: ["posisi", "discord"], prog: /ergonomi/i },
+      software: { label: "Software desain", re: /sketchup|autocad|figma|software|\b3d\b/i, free: ["tools", "discord"], prog: /sketchup|autocad|software/i },
+      waktu: { label: "Atur waktu dan belajar", re: /jadwal|tujuan|notion|kebiasaan|cara belajar/i, free: ["efektif", "gratis"], prog: /cara belajar|notion/i },
+      ai: { label: "Pakai AI dengan benar", re: /\bai\b/i, free: ["ai", "discord"], prog: /\bai\b/i },
+      dasar: { label: "Dasar desain interior", re: /basic|dasar desain|sistem bangunan|mebel berkelanjutan|sustainable/i, free: ["gratis", "discord"], prog: null }
+    };
+    const QS = [
+      { key: "lvl", title: "Posisimu sekarang", opts: [["s12", "Semester 1 sampai 2"], ["s36", "Semester 3 sampai 6"], ["s7", "Semester 7 ke atas"], ["umum", "Dosen atau umum"]] },
+      { key: "need", title: "Yang sedang terasa berat", opts: Object.entries(NEEDS).map(([k, v]) => [k, v.label]) },
+      { key: "mode", title: "Cara yang kamu mau", opts: [["gratis", "Yang gratis dulu"], ["dukung", "Beli sekalian dukung"], ["bimbing", "Dibimbing langsung"]] }
+    ];
+    const body = $("#fd-body", finderEl), startBtn = $("#fd-start", finderEl);
+    let ans = {}, qi = 0;
+    const text = (p) => [p.title, p.desc, p.subject, p.format].join(" ");
+    function pick() {
+      const need = NEEDS[ans.need] || NEEDS.dasar, out = [];
+      const okLvl = (p) => ans.lvl === "s12" || p.cat !== MABA_CAT;
+      const matches = products.filter((p) => okLvl(p) && need.re.test(text(p)));
+      const freeProds = matches.filter((p) => !p.price && !p.soon);
+      const paid = matches.filter((p) => p.price > 0).sort((a, b) => (!!a.soon - !!b.soon) || priceOf(a) - priceOf(b));
+      const prog = need.prog ? programs.filter((p) => need.prog.test(p.title)).sort((a, b) => !!a.soon - !!b.soon)[0] : null;
+      const freeList = freeProds.map((p) => ({ kind: "free", p })).concat(need.free.map((k) => ({ kind: "page", page: FREE_PAGES[k] })));
+      if (ans.mode === "gratis") out.push(...freeList.slice(0, 3));
+      else if (ans.mode === "dukung") { out.push(freeList[0]); paid.slice(0, 2).forEach((p) => out.push({ kind: "paid", p })); }
+      else { out.push(freeList[0]); if (prog) out.push({ kind: "prog", p: prog }); else out.push({ kind: "ask" }); if (paid[0]) out.push({ kind: "paid", p: paid[0] }); }
+      if (out.length < 2) out.push(...freeList.slice(1, 3 - out.length + 1));
+      return out.filter(Boolean).slice(0, 3);
+    }
+    function cardHTML(r, i) {
+      const wrap = (tag, cls, title, desc, act) => `<article class="fd-card enter" style="--i:${i}"><span class="fd-tag ${cls}">${tag}</span><h4>${esc(title)}</h4><p>${esc(desc)}</p><div class="fd-act">${act}</div></article>`;
+      if (r.kind === "page") return wrap("Gratis", "free", r.page[0], r.page[2], `<a class="btn sky small" href="${esc(r.page[1])}">Buka</a>`);
+      if (r.kind === "ask") return wrap("Tanya dulu", "prog", "Ngobrol singkat lewat WhatsApp", "Ceritakan kesulitanmu dulu. Nanti kita cari jalan keluar yang paling pas.", `<a class="btn soft small" href="${esc(waLink(`${greet}, aku mau tanya soal ${NEEDS[ans.need].label.toLowerCase()}.`))}" target="_blank" rel="noopener">Chat aku</a>`);
+      const p = r.p, d = discountFor(p);
+      if (r.kind === "free") return wrap("Gratis", "free", p.title, p.desc, freeButton(p, "btn sky small", "Ambil gratis"));
+      if (p.soon) return wrap("Coming soon", "soon", p.title, p.desc, `<a class="btn soft small" href="${esc(waLink(`${greet}, kabari aku kalau "${p.title}" sudah siap ya.`))}" target="_blank" rel="noopener">Kabari aku</a>`);
+      const tag = r.kind === "prog" ? `Bimbel · ${rupiah(priceOf(p))}` : `${d ? `Hemat ${d.percent}% · ` : ""}${rupiah(priceOf(p))}`;
+      return wrap(tag, r.kind === "prog" ? "prog" : "paid", p.title, p.desc || (r.kind === "prog" ? "Dibimbing langsung lewat Discord, jadwalnya kita atur bareng." : ""), `<button class="btn primary small" type="button" data-add="${esc(p.id)}">${r.kind === "prog" ? "Daftar" : "Tambah"}</button>`);
+    }
+    function render() {
+      if (qi < QS.length) {
+        const q = QS[qi];
+        body.innerHTML = `<div class="fd-q" role="group" aria-labelledby="fd-qt"><div class="fd-prog" aria-hidden="true">${QS.map((_, i) => `<i class="${i <= qi ? "on" : ""}"></i>`).join("")}</div>
+          <p class="fd-step">Langkah ${qi + 1} dari ${QS.length}</p><h3 id="fd-qt">${esc(q.title)}</h3>
+          <div class="fd-opts">${q.opts.map(([k, v], i) => `<button type="button" class="chip enter" style="--i:${i}" data-fd="${esc(k)}" aria-pressed="${ans[q.key] === k}">${esc(v)}</button>`).join("")}</div>
+          ${qi ? '<button type="button" class="link-btn" data-fd-back>Kembali</button>' : ""}</div>`;
+        const first = $("[data-fd]", body); if (first && body.dataset.focus) first.focus();
+        return;
+      }
+      body.innerHTML = `<div class="fd-res"><p class="fd-step">Saran untukmu</p><div class="fd-grid">${pick().map(cardHTML).join("")}</div>
+        <p class="fd-note">Sengaja dimulai dari yang gratis. Beli kalau memang terasa butuh, bukan karena ikut-ikutan.</p>
+        <button type="button" class="link-btn" data-fd-again>Ulangi dari awal</button></div>`;
+    }
+    if (startBtn && body) startBtn.addEventListener("click", () => {
+      ans = {}; qi = 0; body.hidden = false; body.dataset.focus = "1"; startBtn.hidden = true; render();
+    });
+    if (body) body.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-fd]");
+      if (b) { ans[QS[qi].key] = b.dataset.fd; b.setAttribute("aria-pressed", "true"); qi += 1; setTimeout(render, 160); return; }
+      if (e.target.closest("[data-fd-back]")) { qi = Math.max(0, qi - 1); render(); return; }
+      if (e.target.closest("[data-fd-again]")) { ans = {}; qi = 0; render(); }
+    });
+  }
 
   /* ---------------------------------------------------------
      9. Mulai
