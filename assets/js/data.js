@@ -17,6 +17,7 @@ window.SITE = {
   photo: "",                           // opsional: misal "assets/img/foto.webp". Kosong = pakai maskot.
   newsletterName: "Catatan Rafi",      // CEK: nama newsletter Substack-mu
   newsletterEndpoint: "https://script.google.com/macros/s/AKfycbxMSJc7ZSF7Or9yhMyJd5I2m-iEw970U67OPrcrPPqimjjFoH-87Cfs_ymJFy3kxZwO9Q/exec",
+     orderEndpoint: "TEMPEL_URL_EXEC_DARI_SHEET_PESANAN",
      promoCodes: [ { code: "PELANGGAN10", percent: 10, from: "2026-11-09", until: "2026-12-07" } ],
    
   links: {
@@ -340,7 +341,7 @@ window.SITE = {
   faq: [
     { q: "Metode pembayaran", a: "Semua pembayaran lewat QRIS. Kamu bisa scan dari GoPay, OVO, DANA, ShopeePay, LinkAja, atau aplikasi m-banking yang mendukung QRIS. Beberapa produk juga tersedia di Lynk." },
     { q: "Fungsi kode unik di nominal", a: "Angka kecil di ujung nominal (maksimal Rp199) membantu mencocokkan pembayaranmu dengan nomor pesanan. Jadi pastikan nominal yang kamu ketik persis sama." },
-    { q: "Waktu pengiriman produk", a: "Produk digital dikirim lewat WhatsApp setelah pembayaran dicek, biasanya di hari yang sama selama jam admin {hours}." },
+    { q: "Waktu pengiriman produk", a: "Setelah pembayaran kucek, file dikirim ke email yang kamu isi saat memesan. Kalau email dikosongkan, file kukirim lewat WhatsApp. Biasanya di hari yang sama selama jam admin {hours}." },
     { q: "Produk bertanda Coming soon", a: "Produk itu sedang kusiapkan dan belum bisa dibeli. Tekan Kabari aku, nanti aku kabari begitu sudah siap." },
     { q: "Pra-pesan buku Pas di Badan", a: "Kamu membayar harga pra-pesan sekarang, lalu e-book dikirim lewat WhatsApp atau email begitu terbit. Perkembangan naskahnya bisa kamu lihat di bagian Sedang dikerjakan." },
     { q: "Cara ikut bimbel di Discord", a: "Setelah pembayaran dicek, aku kirim undangan server Discord dan membuat channel pribadi untukmu. Kamu cukup punya akun Discord, mikrofon, dan koneksi internet yang stabil. Dari HP juga bisa." },
