@@ -68,6 +68,17 @@ window.SITE = {
      --------------------------------------------------------- */
   season: "auto",
   seasons: {
+     uts: {
+      label: "Edisi UTS Bahasa Inggris",
+      title: "UTS Bahasa Inggris sudah dekat, belajar tinggal klik",
+      desc: "Ringkasan Tense dan Parts of Speech, 56 soal berpenjelasan, dan 14 video pilihan ada di satu halaman. Harga edisi UTS Rp5.000 sampai 24 November.",
+      cta: { label: "Lihat paket belajar", href: "belajar-inggris.html" },
+      chat: [
+        ["Kamu", "20.14", "UTS Inggris tinggal sebentar dan aku belum paham tense sama sekali."],
+        ["Rafi", "20.15", "Mulai dari rumusnya dulu. Nama tense itu petunjuk bentuk kata kerjanya, jadi kamu tinggal ingat pola dan contohnya."],
+        ["Rafi", "20.16", "Aku sudah kumpulkan ringkasan, soal latihan, dan videonya di satu halaman supaya kamu tinggal belajar."]
+      ]
+    },
     hujan: {
       label: "Edisi Musim Hujan", months: [11, 12, 1, 2, 3],
       title: "Hujan di luar, tugas studio jalan terus",
@@ -171,6 +182,7 @@ window.SITE = {
     }
   },
   events: [                             // CEK tanggal setiap tahun
+    { season: "uts",         start: "2026-11-23", end: "2026-11-24" },
     { season: "ramadan",     start: "2027-02-08", end: "2027-03-08" },
     { season: "idulfitri",   start: "2027-03-09", end: "2027-03-20" },
     { season: "iduladha",    start: "2027-05-15", end: "2027-05-20" },
@@ -269,6 +281,7 @@ window.SITE = {
   ],
 
   categories: {
+    inggris: "Bahasa Inggris",
     gratis: "Gratis",
     catatan: "Catatan Semester 1",
     buku: "Buku",
@@ -285,6 +298,7 @@ window.SITE = {
      Produk gratis (price: 0): free.via "wa" (minta lewat WhatsApp) atau "link" (isi free.url untuk unduh langsung). */
   products: [
     /* Dari Lynk, November 2026. Harga sama dengan Lynk. lynk: tautan produk yang sama di Lynk. */
+    { id: "inggris-tense-uts", sku: "MR-ING-01", cat: "inggris", art: "book", title: "Belajar Bahasa Inggris: Tense dan Parts of Speech", desc: "Ringkasan, 12 tense, parts of speech, 56 soal berpenjelasan, dan 14 video pilihan. Dibuka dengan kode akses yang kukirim lewat WhatsApp setelah pembayaran.", format: "Belajar online, dibuka dengan kode akses", price: 5000, badge: "Edisi UTS" },
     { id: "buku-sistem-bangunan", sku: "MR-BK-03", cat: "buku", art: "plan", title: "Sistem Bangunan untuk Desain Interior", desc: "Buku pegangan mata kuliah Sistem Bangunan. Struktur, air, listrik, udara, cahaya, sampai akustik dijelaskan dengan bahasa sederhana, lengkap dengan contoh gambar kerja renovasi rumah AURANDA. Setiap angka diberi tanda WAJIB, LAZIM, atau KEBIASAAN.", format: "E-book PDF, 29 bab dan lampiran A sampai G, sekitar 400 halaman", price: 21999, badge: "Terbaru", lynk: "https://lynk.id/catatankuliah.di/49o6j1kvjgwq" },
     { id: "buku-mebel-berkelanjutan", sku: "MR-BK-04", cat: "buku", art: "chair", title: "Sustainable Design: Desain Mebel Berkelanjutan", desc: "Buku pegangan merancang kursi dari semester pertama sampai tugas akhir. Ekonomi, fisika, biologi, kimia, psikologi, sampai urusan sampah dirangkai jadi satu alur metodologi desain.", format: "E-book PDF, 227 halaman", price: 21000, lynk: "https://lynk.id/catatankuliah.di/r4o58l496jvv" },
     { id: "buku-basic-desain-interior", sku: "MR-BK-05", cat: "buku", art: "book", title: "Basic Desain Interior", desc: "Rangkuman empat buku besar desain interior untuk pemula dan orang awam. Disusun dari buku Kilmer dan Kilmer, Mitton, Mitton dan Nystuen, serta Ronin.", format: "E-book PDF", price: 15999, badge: "Untuk pemula", lynk: "https://lynk.id/catatankuliah.di/3rdz7pgm0ww7" },
