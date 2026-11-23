@@ -269,7 +269,7 @@
     if (n.length < 2) return (n[0] || "produk") ;
     return n.slice(0, -1).join(", ") + " dan " + n[n.length - 1];
   };
-  const SEASON_ICON = { hujan: "rain", kemarau: "sun", gugur: "leaf", salju: "snow", ramadan: "moon", idulfitri: "moon", iduladha: "star", kemerdekaan: "flag" };
+  const SEASON_ICON = { hujan: "rain", kemarau: "sun", gugur: "leaf", salju: "snow", ramadan: "moon", idulfitri: "moon", iduladha: "star", kemerdekaan: "flag", uts: "book" };
 
   function resolveSeason() {
     const seasons = S.seasons || {};
@@ -348,7 +348,7 @@
         <span class="fs-badge">${icon(SEASON_ICON[seasonKey])}${esc(season.label)}</span>
         <h2>${esc(season.title || season.label)}</h2>
         <p>${esc(season.desc || "")}</p>
-        <div class="fs-actions">${fb ? freeButton(fb, "btn primary shine", "Ambil gratis") : ""}<a class="btn soft" href="#toko">${dc ? "Lihat produk diskon" : "Lihat toko"}</a></div>
+        <div class="fs-actions">${fb ? freeButton(fb, "btn primary shine", "Ambil gratis") : ""}${season.cta ? `<a class="btn primary shine" href="${esc(season.cta.href)}">${esc(season.cta.label)}</a>` : ""}<a class="btn soft" href="#toko">${dc ? "Lihat produk diskon" : "Lihat toko"}</a></div>
       </div>
       <div class="fs-list">${items.join("")}</div>`;
     tickCountdowns();
