@@ -21,7 +21,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
   - `belajar.html`: bantuan per topik (`#bantu`), belajar gratis (`#belajar`), dan lembar rasa dan data (`#posisi`).
   - `karya.html`: karya dan riset. `bimbel.html`: bimbel Discord dan testimoni.
   - `jasa-website.html`: jasa pembuatan website (paket Santai, Reguler, Kilat, kegunaan, contoh, FAQ). Harga ditulis langsung di HTML, bukan di data.js. Tidak masuk menu utama, ditautkan dari pintu lebar di beranda (`.door-wide`) dan ajakan di bawah karya. Gambar contoh `assets/img/jasa-contoh-beranda.webp` adalah tangkapan layar beranda, perbarui kalau beranda berubah banyak.
-  - `toko.html`: toko (`#toko`) dengan pencari "Cari yang cocok untukmu" (`#cocok`, tiga pilihan lalu saran dari yang gratis dulu), Catatan Semester 1 (`#maba`), buku, cara pesan, dan FAQ.
+  - `toko.html`: toko (`#toko`), Catatan Semester 1 (`#maba`), buku, cara pesan, dan FAQ.
   - `tentang.html`: cerita singkat, kolase, galeri cerita foto, sedang dikerjakan, denah ilmu, dan alat kerja.
   - Header, footer, keranjang, dan dialog sama di semua halaman. Kalau mengubahnya, ubah di semua halaman.
   - Menu memakai tautan halaman dengan `aria-current="page"` di halaman yang sedang dibuka.
@@ -31,7 +31,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 - `assets/files/`: file gratis yang bisa langsung diunduh (misal `lembar-tujuan-3-bulan.pdf`).
 - `assets/css/style.css`: semua gaya. Token warna di `:root`, versi gelap di `@media (prefers-color-scheme:dark)` dan `:root[data-theme="dark"]`.
 - `assets/js/data.js`: SEMUA isi yang sering berubah (produk, harga, diskon, edisi musim, event, bimbel, kontak, FAQ, testimoni). Ubah data di sini, jangan menulis ulang HTML.
-- `assets/js/main.js`: mesin website (animasi scroll, edisi musim, partikel, diskon, toko, produk terbang ke keranjang, pencari cocok untukmu (`NEEDS` dan `FREE_PAGES`, produk dicocokkan lewat kata di judul dan deskripsi), keranjang, checkout, nominal odometer di layar QRIS, lembar rasa dan data, slideshow residensial, denah ilmu yang bisa dibuka, grafik, buku yang terbuka saat di-scroll). Semua fitur dicek dulu keberadaan elemennya, jadi aman dipakai di halaman turunan.
+- `assets/js/main.js`: mesin website (animasi scroll, edisi musim, partikel, diskon, toko, keranjang, checkout, lembar rasa dan data, slideshow residensial, denah ilmu yang bisa dibuka, grafik, buku yang terbuka saat di-scroll). Semua fitur dicek dulu keberadaan elemennya, jadi aman dipakai di halaman turunan.
 - `assets/img/`: maskot, gambar kerja residensial, ikon, `og-image.png` (1200 × 630).
 - `favicon.ico` (16, 32, 48 px) dan `assets/img/icon-192.png`, `icon-512.png`, `icon-512-maskable.png`, `apple-touch-icon.png`: ikon maskot untuk tab browser dan hasil pencarian Google. `favicon.svg` hanya cadangan berisi gambar maskot yang sama. Lalu `site.webmanifest`, `robots.txt`, `sitemap.xml`.
 - Tidak ada build step.
@@ -67,7 +67,6 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 ## Pembayaran (tahap sekarang)
 - QRIS statis, ditambah kode unik 1 sampai 199 rupiah, lalu konfirmasi lewat WhatsApp. Belum ada backend.
 - Nomor WA admin di `contact.whatsapp` (format 628...). Gambar QRIS di `payment.qrisImage`.
-- Pengiriman file (Jalan A, November 2026): saat Buat pesanan, `main.js` mengirim pesanan ke `S.orderEndpoint` (data.js) dengan `fetch` no-cors. Apps Script di `tools/pesanan-apps-script.gs` (spreadsheet terpisah dari newsletter) menulis baris di tab Pesanan. Pemilik mencentang Lunas, lalu pemicu `saatDicentang` mengirim email berisi tautan Drive dari tab Produk. Script TIDAK BOLEH mengirim email saat pesanan dibuat, karena alamat script terbuka untuk umum. Tautan file hanya ada di Sheet, jangan ditaruh di data.js. Panduan di PANDUAN.md bagian 12.
 - Jangan pernah menaruh API key, password, token, atau server key payment gateway di repo ini. Isi `index.html` bisa dilihat siapa saja lewat browser.
 
 ## Penyimpanan di browser
@@ -77,7 +76,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 - Alamat aktif sekarang: https://musholirafi.my.id (domain dari DomaiNesia, dibeli November 2026, perpanjangan sekitar Rp35.000 per tahun belum PPN, perpanjang sebelum habis). Disajikan GitHub Pages dari repo `Raficrafty/musholirafi-web`, branch `main`, folder root. File `CNAME` berisi nama domain dan wajib tetap ada. DNS di DomaiNesia: empat A record `@` ke 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, dan CNAME `www` ke `raficrafty.github.io`. Pindah dari Netlify karena kuota gratis Netlify hanya sekitar 20 update per bulan. GitHub Pages tidak membatasi jumlah update. Alamat `*.workers.dev` diblokir sebagian besar internet Indonesia, jadi jangan dipakai. Kalau domain berganti lagi, ganti semua `https://musholirafi.my.id` (canonical, og, JSON-LD, sitemap, robots, CNAME, _redirects, `domain` dan `url` di data.js).
 - GitHub Pages mengabaikan file `_headers` dan `_redirects` (keduanya khusus Netlify), jadi Content-Security-Policy dari `_headers` tidak berlaku di sana. `_redirects` mengalihkan alamat lama musholirafi.netlify.app ke domain baru setiap kali Netlify men-deploy. File `.nojekyll` wajib tetap ada. Repo harus publik. Setiap commit ke `main` tayang dalam 1 sampai 2 menit.
 - Situs statis. Bisa di Netlify, Cloudflare Pages, atau GitHub Pages. Setiap perubahan di branch `main` tayang otomatis.
-- Cara update: pemilik mengunggah file yang berubah lewat GitHub web (Add file, Upload files) langsung ke branch `main`. Claude memberi satu ZIP berisi file yang berubah saja, dengan jalur folder sama seperti di repo. `assets/js/data.js` tidak pernah ikut di ZIP karena pemilik sering mengeditnya langsung di GitHub. Perubahan data.js diberikan sebagai potongan teks beserta letaknya.
+- Cara update: pemilik mengunggah file yang berubah lewat GitHub web (Add file, Upload files) langsung ke branch `main`. Claude memberi satu ZIP berisi file yang berubah saja, dengan jalur folder sama seperti di repo. Sejak 25 November 2026 pemilik mengizinkan `assets/js/data.js` ikut di ZIP, supaya pemilik tidak perlu mengeditnya sendiri. Claude mengedit data.js dari salinan yang diunggah pemilik, jadi kalau pemilik sempat mengubah data.js langsung di GitHub, minta data.js terbaru dulu supaya tidak tertimpa.
 - GitHub Pages menyimpan salinan file sampai 10 menit. Kalau perubahan belum terlihat, cek di jendela penyamaran.
 - Halaman baru wajib masuk `sitemap.xml`.
 - File `_headers` memasang Content-Security-Policy. Efek sampingnya badge "Powered by Netlify" (paket gratis) tidak tampil. Setiap script inline di HTML wajib punya hash sha256 di `_headers`. Kalau script kecil di `<head>` diubah atau script inline baru ditambahkan, hitung ulang hash-nya, kalau tidak script itu diblokir browser. Jangan menambah `onclick=` atau atribut event lain di HTML.

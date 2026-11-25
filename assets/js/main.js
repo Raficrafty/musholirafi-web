@@ -680,6 +680,7 @@
       </div>
       <div class="product-body"><p class="product-cat">${esc(catLabel(p.cat))}</p><h3>${esc(p.title)}</h3><p class="desc">${esc(p.desc)}</p><p class="format">${esc(p.format)}</p>${d ? `<p class="deal">${esc(dealText(d))}</p>` : ""}</div>
       <div class="product-foot">${price}<div class="p-actions">${action}</div></div>
+      ${p.page ? `<a class="lynk-btn" href="${esc(p.page)}">${esc(p.pageLabel || "Lihat halaman belajar")}</a>` : ""}
       ${p.lynk ? `<a class="lynk-btn" href="${esc(p.lynk)}" target="_blank" rel="noopener">Atau beli di Lynk</a>` : ""}
     </article>`;
   }

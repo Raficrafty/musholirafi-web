@@ -33,6 +33,28 @@
   var b64 = function (s) { var b = atob(s), u = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; };
   var norm = function (s) { return String(s || "").normalize("NFKC").toUpperCase().replace(/[^A-Z0-9]/g, ""); };
 
+  /* Tema: materi di dalam iframe mengikuti tombol tema website. */
+  var frame = null;
+  var siteTheme = function () {
+    var t = document.documentElement.getAttribute("data-theme");
+    if (t === "dark" || t === "light") return t;
+    return window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  };
+  var pushTheme = function () {
+    if (frame && frame.contentWindow) frame.contentWindow.postMessage({ mrTheme: siteTheme() }, "*");
+  };
+  var withTheme = function (html) {
+    var js = '<script>(function(){var r=document.documentElement;r.setAttribute("data-theme","' + siteTheme() + '");' +
+      'addEventListener("message",function(e){var t=e.data&&e.data.mrTheme;if(e.source===parent&&(t==="dark"||t==="light"))r.setAttribute("data-theme",t);});})();<\/script>';
+    var re = /<head(\s[^>]*)?>/i;
+    return re.test(html) ? html.replace(re, function (m) { return m + js; }) : html;
+  };
+  if (window.MutationObserver) new MutationObserver(pushTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  if (window.matchMedia) {
+    var mq = matchMedia("(prefers-color-scheme: dark)");
+    if (mq.addEventListener) mq.addEventListener("change", pushTheme); else if (mq.addListener) mq.addListener(pushTheme);
+  }
+
   async function unlock(code) {
     if (!window.crypto || !window.crypto.subtle) throw new Error("nocrypto");
     if (!blob) {
@@ -51,12 +73,14 @@
     f.className = "eng-frame";
     f.title = "Materi belajar Tense dan Parts of Speech";
     f.setAttribute("sandbox", "allow-scripts allow-popups allow-popups-to-escape-sandbox");
-    f.srcdoc = html;
+    f.srcdoc = withTheme(html);
+    frame = f;
+    f.addEventListener("load", pushTheme);
     stage.appendChild(f);
     box.hidden = true;
     stage.hidden = false;
     $("#eng-close").addEventListener("click", function () {
-      stage.hidden = true; stage.innerHTML = ""; box.hidden = false; input.value = ""; say("");
+      frame = null; stage.hidden = true; stage.innerHTML = ""; box.hidden = false; input.value = ""; say("");
       box.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     stage.scrollIntoView({ behavior: "smooth", block: "start" });
