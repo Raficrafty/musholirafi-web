@@ -1,0 +1,25 @@
+/* Pintu Materi premium: kartu lebar horizontal dengan ikon permata beranimasi.
+   Dipakai di belajar.html. Memakai kartu .help sebagai dasar, jadi warna, hover, dan mode gelap ikut gaya situs. */
+.help.prem-door{display:flex;align-items:center;gap:20px;width:100%;height:auto;min-height:0;margin:0 0 22px;text-align:left;position:relative}
+.help.door-wide.prem-door{margin:0}
+.prem-door .prem-body{flex:1;min-width:0}
+.prem-door .prem-tag{display:inline-flex;align-items:center;gap:7px;margin:0 0 8px;padding:5px 11px;border:1px solid var(--line-strong);border-radius:999px;font:500 .7rem/1 "Martian Mono",ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase}
+.prem-door .prem-tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--g-warm)}
+.prem-door h3{margin:0 0 6px}
+.prem-door p{margin:0}
+.prem-door .go{margin:0 0 0 auto;white-space:nowrap}
+.help.prem-door .prem-ic{position:relative;flex:none;margin:0;overflow:visible;background:var(--g-warm)}
+.prem-ic svg{animation:premFloat 3.6s ease-in-out infinite}
+.prem-ic::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.7) 50%,transparent 65%) 100% 0/250% 100% no-repeat;animation:premShine 3.2s ease-in-out infinite}
+.prem-spark{position:absolute;display:block;background:var(--g-warm);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);opacity:0;animation:premTwinkle 2.8s ease-in-out infinite}
+.prem-spark.s1{top:-7px;right:-7px;width:16px;height:16px}
+.prem-spark.s2{bottom:-5px;left:-7px;width:11px;height:11px;animation-delay:1.3s}
+@keyframes premFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-3px) rotate(-5deg)}}
+@keyframes premShine{0%,45%{background-position:100% 0}100%{background-position:0% 0}}
+@keyframes premTwinkle{0%,100%{opacity:0;transform:scale(.2) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+@media (max-width:640px){
+  .help.prem-door{flex-wrap:wrap;gap:14px}
+  .prem-door .go{width:100%;margin:0}
+}
+/* Gerak tenang: dimatikan kalau kelas .calm dinyalakan lagi */
+.calm .prem-ic svg,.calm .prem-ic::after,.calm .prem-spark{animation:none}

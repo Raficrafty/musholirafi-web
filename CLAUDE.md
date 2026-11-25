@@ -17,10 +17,12 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 
 ## Struktur repo
 - Website dibagi per halaman (sejak November 2026, setelah masukan teman bahwa satu halaman panjang terlalu melelahkan di HP). Fondasi utamanya ruang belajar mahasiswa. Toko, bimbel, dan karya adalah pendukung.
-  - `index.html`: beranda pendek. Pembuka, edisi musim, kartu pintu ke tiap halaman (`#mulai`), dan newsletter.
+  - `index.html`: beranda pendek. Pembuka, edisi musim, kartu pintu ke tiap halaman (`#mulai`), dan newsletter. Di bawah kartu pintu ada dua pintu lebar (`.door-wide`): Materi premium (`.prem-door`, ke `materi-premium.html`) lalu Jasa pembuatan website.
   - `belajar.html`: bantuan per topik (`#bantu`), belajar gratis (`#belajar`), dan lembar rasa dan data (`#posisi`).
   - `karya.html`: karya dan riset. `bimbel.html`: bimbel Discord dan testimoni.
   - `jasa-website.html`: jasa pembuatan website (paket Santai, Reguler, Kilat, kegunaan, contoh, FAQ). Harga ditulis langsung di HTML, bukan di data.js. Tidak masuk menu utama, ditautkan dari pintu lebar di beranda (`.door-wide`) dan ajakan di bawah karya. Gambar contoh `assets/img/jasa-contoh-beranda.webp` adalah tangkapan layar beranda, perbarui kalau beranda berubah banyak.
+  - `materi-premium.html`: pintu ke semua materi premium (sekarang hanya Bahasa Inggris yang tersedia, mata kuliah lain tampil "Sedang kusiapkan" dengan tombol Kabari aku lewat `data-wa`). Teksnya ditulis langsung di HTML.
+  - `belajar-inggris.html`: paket Bahasa Inggris (preview gratis, harga, cara bayar, pembuka kode). Isi berbayar tersimpan terenkripsi di `assets/data/inggris.enc.json` dan dibuka `assets/js/inggris.js` lewat kode akses; tema materi mengikuti tombol tema website. Produknya `inggris-tense-uts` di data.js punya isian `page`.
   - `toko.html`: toko (`#toko`), Catatan Semester 1 (`#maba`), buku, cara pesan, dan FAQ.
   - `tentang.html`: cerita singkat, kolase, galeri cerita foto, sedang dikerjakan, denah ilmu, dan alat kerja.
   - Header, footer, keranjang, dan dialog sama di semua halaman. Kalau mengubahnya, ubah di semua halaman.
@@ -30,6 +32,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 - `cerita.html`: cerita lengkap. `kebijakan-privasi.html`, `404.html`, `maintenance.html` (tidak diindeks, tidak masuk sitemap).
 - `assets/files/`: file gratis yang bisa langsung diunduh (misal `lembar-tujuan-3-bulan.pdf`).
 - `assets/css/style.css`: semua gaya. Token warna di `:root`, versi gelap di `@media (prefers-color-scheme:dark)` dan `:root[data-theme="dark"]`.
+- `assets/css/premium.css`: gaya kecil untuk pintu Materi premium (`.prem-door`, ikon permata beranimasi). Ditautkan setelah style.css di halaman yang memakai pintu itu (sekarang belajar.html dan index.html). Dasarnya kartu `.help`, jadi warna dan mode gelap ikut situs.
 - `assets/js/data.js`: SEMUA isi yang sering berubah (produk, harga, diskon, edisi musim, event, bimbel, kontak, FAQ, testimoni). Ubah data di sini, jangan menulis ulang HTML.
 - `assets/js/main.js`: mesin website (animasi scroll, edisi musim, partikel, diskon, toko, keranjang, checkout, lembar rasa dan data, slideshow residensial, denah ilmu yang bisa dibuka, grafik, buku yang terbuka saat di-scroll). Semua fitur dicek dulu keberadaan elemennya, jadi aman dipakai di halaman turunan.
 - `assets/img/`: maskot, gambar kerja residensial, ikon, `og-image.png` (1200 × 630).
