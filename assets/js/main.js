@@ -269,7 +269,7 @@
     if (n.length < 2) return (n[0] || "produk") ;
     return n.slice(0, -1).join(", ") + " dan " + n[n.length - 1];
   };
-  const SEASON_ICON = { hujan: "rain", kemarau: "sun", gugur: "leaf", salju: "snow", ramadan: "moon", idulfitri: "moon", iduladha: "star", kemerdekaan: "flag", uts: "book" };
+  const SEASON_ICON = { hujan: "rain", kemarau: "sun", gugur: "leaf", salju: "snow", ramadan: "moon", idulfitri: "moon", iduladha: "star", kemerdekaan: "flag", uts: "book", uas: "calendar" };
 
   function resolveSeason() {
     const seasons = S.seasons || {};
@@ -314,7 +314,20 @@
     if (d === 1) return `Berakhir dalam 1 hari ${h} jam`;
     return `Berakhir dalam ${h} jam ${m} menit`;
   }
-  function tickCountdowns() { $$("[data-until]").forEach((el) => { el.textContent = countdownText(el.dataset.until); }); }
+  /* Jadwal ujian di edisi musim (season.exams). Hitungnya per hari kalender, ujian yang sudah lewat tidak ditampilkan. */
+  const DAY_NAMES = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  const MONTH_NAMES = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+  const dayDiff = (s) => Math.round((new Date(s + "T00:00:00") - new Date(todayStr() + "T00:00:00")) / 864e5);
+  function examLine(el) {
+    const s = el.dataset.exam, n = dayDiff(s), d = new Date(s + "T00:00:00");
+    const when = `${el.dataset.approx === "1" ? "Kemungkinan " : ""}${DAY_NAMES[d.getDay()]} ${d.getDate()} ${MONTH_NAMES[d.getMonth()]}`;
+    const left = n < 0 ? "sudah lewat" : n === 0 ? "hari ini" : n === 1 ? "besok" : `tinggal ${n} hari`;
+    return [`${when}, ${left}`, el.dataset.note, el.dataset.prod ? `Cocok dengan ${el.dataset.prod}` : ""].filter(Boolean).join(". ") + ".";
+  }
+  function tickCountdowns() {
+    $$("[data-until]").forEach((el) => { el.textContent = countdownText(el.dataset.until); });
+    $$("[data-exam]").forEach((el) => { el.textContent = examLine(el); });
+  }
   setInterval(tickCountdowns, 30000);
 
   function freeHref(p) {
@@ -344,13 +357,24 @@
     if (fb) items.push(`<div class="fs-item"><span class="ic">${icon("gift")}</span><div><b>Gratis: ${esc(fb.title)}</b><span>${esc(fb.format)}. ${fb.free && fb.free.via === "link" ? "Langsung unduh, tanpa daftar." : "Tinggal minta lewat WhatsApp."}</span></div></div>`);
     if (ev) items.push(`<div class="fs-item"><span class="ic">${icon("calendar")}</span><div><b>${esc(ev.title)}</b><span>${esc(ev.when)} di Discord. Terbuka untuk semua.</span></div></div>`);
     if (dc) items.push(`<div class="fs-item"><span class="ic">${icon("tag")}</span><div><b>Diskon ${dc.percent}% untuk ${esc(catsText(dc.cats))}</b><span class="countdown" data-until="${esc(dc.until)}"></span></div></div>`);
+    const examItems = (season.exams || [])
+      .filter((x) => x && x.title && x.date && dayDiff(x.date) >= 0)
+      .sort((a, b) => String(a.date).localeCompare(String(b.date)))
+      .slice(0, Number(season.examLimit) || 3)
+      .map((x) => {
+        const p = x.product && catalog[x.product], d = p && discountFor(p);
+        let act = "";
+        if (p && p.soon) act = `<a class="btn soft small" style="margin-top:.55rem" href="${esc(waLink(`${greet}, kabari aku kalau "${p.title}" sudah siap ya.`))}" target="_blank" rel="noopener">Kabari aku</a>`;
+        else if (p && p.price > 0) act = `<button class="btn primary small" style="margin-top:.55rem" type="button" data-add="${esc(p.id)}">${p.cat === "bimbel" ? "Daftar" : "Tambah"} ${rupiah(priceOf(p))}${p.cat === "bimbel" && p.unit ? " per " + esc(p.unit) : ""}${d ? `, hemat ${d.percent}%` : ""}</button>`;
+        return `<div class="fs-item"><span class="ic">${icon("calendar")}</span><div><b>${esc(x.title)}</b><span class="countdown" data-exam="${esc(x.date)}" data-approx="${x.approx ? "1" : "0"}" data-note="${esc(x.note || "")}" data-prod="${esc(p ? p.title : "")}"></span>${act}</div></div>`;
+      });
     box.innerHTML = `<div class="fs-copy">
         <span class="fs-badge">${icon(SEASON_ICON[seasonKey])}${esc(season.label)}</span>
         <h2>${esc(season.title || season.label)}</h2>
         <p>${esc(season.desc || "")}</p>
         <div class="fs-actions">${fb ? freeButton(fb, "btn primary shine", "Ambil gratis") : ""}${season.cta ? `<a class="btn primary shine" href="${esc(season.cta.href)}">${esc(season.cta.label)}</a>` : ""}<a class="btn soft" href="#toko">${dc ? "Lihat produk diskon" : "Lihat toko"}</a></div>
       </div>
-      <div class="fs-list">${items.join("")}</div>`;
+      <div class="fs-list">${examItems.concat(items).join("")}</div>`;
     tickCountdowns();
   }
 

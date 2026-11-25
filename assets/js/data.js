@@ -68,6 +68,32 @@ window.SITE = {
      --------------------------------------------------------- */
   season: "auto",
   seasons: {
+    uas: {
+      label: "Edisi UAS",
+      title: "UAS tinggal hitungan hari, belajar mulai dari yang terdekat",
+      desc: "Daftar ujian di sini adalah jadwal kelasku, dari presentasi Metodologi 2 Desember sampai ujian terakhir 11 Desember. Tiap ujian kupasangkan dengan materi yang paling cocok, supaya belajarnya tidak kebut semalam.",
+      cta: { label: "Latihan jawab pertanyaan dosen", href: "belajar.html#posisi" },
+      freebie: "gratis-checklist-asistensi",   // CEK: pastikan file-nya sudah siap
+      event: { title: "Kelas bareng gratis: latihan jawab pertanyaan dosen", when: "Sabtu 28 November dan 5 Desember, 19.00 sampai 20.00 WIB" },   // CEK
+      discount: { percent: 20, until: "2026-12-11", cats: ["modul", "buku"] },   // CEK. Hapus baris ini kalau tidak mau diskon.
+      /* Jadwal ujian dengan hitung mundur otomatis. date: tahun-bulan-tanggal. approx: true = tampil "Kemungkinan".
+         product: id produk atau program yang paling cocok (muncul tombol tambah ke keranjang).
+         Ujian yang sudah lewat hilang sendiri. examLimit: jumlah ujian terdekat yang tampil (isi 6 untuk menampilkan semua). */
+      examLimit: 4,
+      exams: [
+        { title: "Presentasi Metodologi Desain", date: "2026-12-02", note: "Presentasi kelompok, cara bicara dan pemahaman metodologi diuji", product: "modul-metodologi" },
+        { title: "Ujian Ergonomi Desain", date: "2026-12-07", note: "Tertulis, dasar sampai menengah, banyak istilah asing", product: "modul-dimensi-manusia" },
+        { title: "Ujian Bahasa Inggris", date: "2026-12-08", approx: true, note: "Grammar lanjutan dan cara memakainya", product: "inggris-tense-uts" },   // CEK tanggal
+        { title: "Ujian Sistem Bangunan", date: "2026-12-09", note: "Dasar sampai menengah, ada hitungan terang lampu (lux) dan bukaan jendela", product: "buku-sistem-bangunan" },
+        { title: "Ujian Regeneratif Desain", date: "2026-12-10", note: "Praktik lapangan, perancangan, dan model 3D", product: "buku-mebel-berkelanjutan" },   // CEK: produk yang paling dekat
+        { title: "Ujian Aplikasi Komputer", date: "2026-12-11", note: "Presentasi kelompok di depan 4 dosen", product: "bimbel-software" }
+      ],
+      chat: [
+        ["Kamu", "20.10", "UAS tinggal sebentar dan aku paling takut ditanya dosen lalu langsung blank."],
+        ["Rafi", "20.11", "Siapkan tiga alasan untuk tiap keputusan desainmu, lalu latih jawabannya dengan suara keras."],
+        ["Rafi", "20.12", "Sabtu kita latihan bareng di voice. Aku jadi dosennya, kamu menjawab."]
+      ]
+    },
      uts: {
       label: "Edisi UTS Bahasa Inggris",
       title: "UTS Bahasa Inggris sudah dekat, belajar tinggal klik",
@@ -182,6 +208,7 @@ window.SITE = {
     }
   },
   events: [                             // CEK tanggal setiap tahun
+    { season: "uas",         start: "2026-11-25", end: "2026-12-11" },
     { season: "uts",         start: "2026-11-23", end: "2026-11-24" },
     { season: "ramadan",     start: "2027-02-08", end: "2027-03-08" },
     { season: "idulfitri",   start: "2027-03-09", end: "2027-03-20" },
