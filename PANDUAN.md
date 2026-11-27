@@ -140,3 +140,43 @@ Catatan:
 - Orang yang sudah membeli tetap bisa membagikan tautan Drive-nya. Risiko ini sama seperti saat file dikirim lewat WhatsApp.
 - Kebijakan privasi menjanjikan data pesanan dihapus paling lama satu tahun setelah pesanan selesai. Hapus baris lama secara berkala.
 - Kalau skripnya diubah, klik Terapkan, Kelola deployment, ikon pensil, Versi: Versi baru, Terapkan. URL-nya tetap sama.
+
+## 13. Pameran Semester 3 dan tur 3D AURANDA
+Tombol Semester 3 ada di halaman Karya, di bagian Pameran. Tombol itu membuka `pameran-semester-3.html`, dan dari sana tur 3D dibuka di `tur-auranda.html`. Alamat yang dibagikan ke orang: `https://musholirafi.my.id/tur-auranda.html`.
+
+Kode QR:
+- `assets/img/qr-tur-auranda.png` untuk poster, slide, dan cetak. `assets/img/qr-tur-auranda.svg` dipakai di website dan tetap tajam di ukuran berapa pun. Dua-duanya mengarah ke alamat di atas. Kalau alamat tur berubah, kode QR wajib dibuat ulang (minta Claude).
+- Saat dicetak, pakai ukuran minimal sekitar 3 × 3 cm, jangan diberi warna, dan jangan ditumpuk gambar atau tulisan. Tes dulu dengan HP sebelum dicetak banyak.
+
+File-file tur:
+- `assets/js/tur-data.js`: isi tur. Ini yang boleh kamu edit tangan.
+- `assets/js/tur-model.js`: bentuk denah dari model SketchUp. Dibuat otomatis, jangan diedit tangan. Kalau model SketchUp berubah, minta Claude membuatnya ulang.
+- `assets/js/tur.js` dan `assets/css/tur.css`: mesin dan tampilan tur. Tidak perlu disentuh.
+- `assets/img/tur/`: gambar render.
+
+Menambah foto biasa (satu titik pandang baru):
+1. Siapkan gambar render selebar sekitar 2400 px dalam format .webp. Buat juga versi kecil selebar 480 px dengan nama berakhiran `-s.webp` (misal `ruang-makan-siang.webp` dan `ruang-makan-siang-s.webp`). Simpan keduanya di `assets/img/tur/`.
+2. Buka `tur-data.js`, salin satu blok di dalam `scenes`, lalu ganti `id`, `nama`, `room`, `pos` (letak kamera di denah, dalam cm), `arah` (arah pandang di tengah gambar, 0 = utara, 90 = timur), dan nama file gambar.
+3. Isi `hs` (lingkaran untuk pindah ke titik lain) dan `pins` (penanda ukuran perabot). Posisinya ditulis `[kiri, atas]` sebagai pecahan 0 sampai 1 dari gambar.
+4. Perbarui angka di `pameran-semester-3.html` (titik pandang dan gambar render) supaya sama dengan isi tur.
+
+Mencari posisi dengan mode edit:
+- Buka `https://musholirafi.my.id/tur-auranda.html?edit`, lalu pindah ke titik pandang yang mau diatur.
+- Tahan tombol Alt (Option di Mac), lalu klik di gambar. Posisinya tercatat dan otomatis tersalin, tinggal ditempel di `tur-data.js`.
+- Di denah besar, Alt + klik memindahkan letak kamera. Tombol +5° dan -5° mengubah arah, kipas biru di denah mini ikut berputar. Tombol Salin blok menyalin `pos` dan `arah`.
+- Di HP, geser sampai titik yang dimaksud ada di tengah layar, lalu tekan Titik tengah.
+
+Menambah panorama 360 derajat (Street View sungguhan):
+Foto biasa hanya bisa dilihat dari satu arah. Panorama membuat pengunjung bisa memutar penuh ke segala arah, dan tombol Ukur bisa mengukur jarak langsung di gambar. Panorama dan foto biasa boleh dicampur dalam satu tur.
+1. Di Enscape, pakai ekspor panorama (Export Panorama). Pilih lebar 4096 px atau lebih. Hasilnya gambar berperbandingan 2 banding 1.
+2. Ubah ke .webp lalu simpan di `assets/img/tur/pano/`. Buat juga versi kecil selebar 480 px dengan akhiran `-s` (misal `keluarga-siang.webp` dan `keluarga-siang-s.webp`). Versi kecil itu muncul di daftar Ruang. Kalau tidak ada, daftar Ruang menampilkan kotak polos.
+3. Di bagian paling bawah `tur-data.js` ada contoh blok `type: "pano"` dalam komentar. Hapus tanda komentarnya, taruh di dalam `scenes`, lalu isi `pos`, `tinggi` (tinggi kamera, dalam cm), `arah` (arah kompas yang tepat di tengah gambar panorama), dan nama file.
+4. Cek di tur. Kalau kipas biru di denah mini tidak cocok dengan isi gambar, ubah angka `arah` sampai cocok.
+5. Lingkaran untuk pindah ruang di panorama (`hs`) memakai `az` (arah kompas, 0 utara, 90 timur) dan `el` (naik turun dalam derajat, 0 setinggi mata, minus ke arah lantai). Cara mudah mencarinya: buka `tur-auranda.html?edit#id-panorama-mu`, tahan Alt lalu klik di gambar tepat di pintu yang dituju. Angka `az` dan `el` tercatat dan tersalin, tinggal ditempel.
+6. Panorama yang terlalu berat bisa lambat di HP lama. Lebar 4096 px sudah cukup.
+
+Yang perlu dijaga:
+- Nama keluarga klien dan alamat rumahnya tidak ditampilkan di website. Repo ini publik, jadi jangan menuliskannya di file mana pun, termasuk komentar.
+- Layar TV di render sudah dibuat gelap supaya tidak memperlihatkan tayangan atau logo milik orang lain. Kalau render baru memperlihatkan layar TV menyala, gelapkan dulu sebelum dipakai.
+- Gambar di tur ditulis sebagai visualisasi AI dari render Enscape. Kalimatnya ada di `tur-data.js` (`catatan`) dan di `pameran-semester-3.html`. Ubah di dua tempat itu kalau cara pembuatan gambarnya berbeda.
+- Tur tidak memakai cookie dan tidak menyimpan data pengunjung.
