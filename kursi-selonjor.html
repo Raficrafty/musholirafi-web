@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="id" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kursi Selonjor | Pameran | Musholi Rafi</title>
+<meta name="description" content="Kursi Selonjor: kursi santai dari jati dan rotan dengan dingklik. Model 3D yang bisa diputar, animasi sambungan dan cara rakit, gambar kerja, material, dan RAB.">
+<meta name="author" content="Musholi Rafi">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://musholirafi.my.id/kursi-selonjor.html">
+<meta name="theme-color" content="#FBF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#13111B" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/img/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="Musholi Rafi">
+<meta property="og:title" content="Kursi Selonjor | Pameran | Musholi Rafi">
+<meta property="og:description" content="Kursi Selonjor: kursi santai dari jati dan rotan dengan dingklik. Model 3D yang bisa diputar, animasi sambungan dan cara rakit, gambar kerja, material, dan RAB.">
+<meta property="og:url" content="https://musholirafi.my.id/kursi-selonjor.html">
+<meta property="og:image" content="https://musholirafi.my.id/assets/img/pameran-og-selonjor.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kursi Selonjor | Pameran | Musholi Rafi">
+<meta name="twitter:description" content="Kursi Selonjor: kursi santai dari jati dan rotan dengan dingklik. Model 3D yang bisa diputar, animasi sambungan dan cara rakit, gambar kerja, material, dan RAB.">
+<meta name="twitter:image" content="https://musholirafi.my.id/assets/img/pameran-og-selonjor.jpg">
+<script>(function(d){var r=d.documentElement;r.classList.remove("no-js");r.classList.add("js");try{var t=localStorage.getItem("mr-theme");if(t==="dark"||t==="light")r.setAttribute("data-theme",t);var m=localStorage.getItem("mr-motion");if(m==="full"||m==="calm")r.setAttribute("data-motion",m)}catch(e){}var q=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches,m2=r.getAttribute("data-motion");if(m2==="calm"||(q&&m2!=="full"))r.classList.add("calm")})(document);</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,0..100,0..1&family=Martian+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pameran.css">
+<script src="assets/js/data.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/pameran-data.js" defer></script>
+<script src="assets/vendor/three.min.js" defer></script>
+<script src="assets/js/pameran-3d.js" defer></script>
+<script src="assets/js/pameran-sambungan.js" defer></script>
+<script src="assets/js/pameran.js" defer></script>
+<script src="assets/js/pameran-suasana.js" defer></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="lg-swoosh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5DBDEE"/><stop offset=".5" stop-color="#FFCC55"/><stop offset="1" stop-color="#FF8A5C"/></linearGradient>
+    <linearGradient id="g-squig" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5DBDEE"/><stop offset=".5" stop-color="#FFCC55"/><stop offset="1" stop-color="#FF8A5C"/></linearGradient>
+    <linearGradient id="g-ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5DBDEE"/><stop offset=".5" stop-color="#FFCC55"/><stop offset="1" stop-color="#FF8A5C"/></linearGradient>
+  </defs>
+</svg>
+<a class="skip" href="#konten">Langsung ke isi</a>
+<div class="bg-art" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="draft" id="draft-bar" hidden>
+  <div class="wrap">
+    <span>Mode draf. Baris bertanda GANTI di data.js masih perlu diisi sebelum website dipromosikan.</span>
+    <div class="draft-tools">
+      <label for="season-preview">Coba edisi</label>
+      <select id="season-preview"></select>
+      <button type="button" id="draft-close">Sembunyikan</button>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="./" aria-label="Musholi Rafi, ke beranda">
+      <b>musholi rafi</b>
+      <svg viewBox="0 0 160 16" preserveAspectRatio="none" aria-hidden="true"><path class="swoosh" d="M3 11C40 3 96 2 150 8"/><path class="tick" d="M152 3l4 5"/></svg>
+    </a>
+    <nav class="nav" id="nav" aria-label="Menu utama">
+      <a href="belajar.html">Belajar</a>
+      <a href="karya.html" aria-current="page">Karya</a>
+      <a href="bimbel.html">Bimbel</a>
+      <a href="toko.html">Toko</a>
+      <a href="tentang.html">Tentang</a>
+      <span class="nav-pill" aria-hidden="true"></span>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Ganti ke mode gelap" aria-pressed="false" title="Ganti tema siang dan malam">
+        <span class="tt-sky"><span class="tt-star"></span><span class="tt-star"></span><span class="tt-star"></span></span>
+        <span class="tt-cloud"></span>
+        <span class="tt-knob"></span>
+      </button>
+      <button class="icon-btn" id="cart-btn" type="button" aria-label="Buka keranjang">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14l-1.2 10.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 7Z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
+        <span class="cart-label">Keranjang</span>
+        <span class="cart-count" id="cart-count">0</span>
+      </button>
+      <a class="btn primary shine header-cta" href="./#newsletter">Langganan gratis</a>
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Buka menu">
+        <svg class="burger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="b1" d="M4 7h16"/><path class="b2" d="M4 12h16"/><path class="b3" d="M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+</header>
+
+<main id="konten" class="kursi" data-chair="selonjor">
+  <section class="stage" id="atas" aria-labelledby="k-judul">
+    <div class="stage-bg" aria-hidden="true"></div>
+    <h1 class="stage-name" id="k-judul"><span>Selonjor</span></h1>
+    <div class="stage-view" id="stage-view" role="group" aria-label="Model 3D Kursi Selonjor">
+      <img class="stage-poster" id="stage-poster" src="assets/img/pameran-selonjor.webp" alt="Kursi Selonjor dalam model 3D, tampak serong. Rangka jati, anyaman cane, bantal lurik, dan dingklik di depannya." width="1200" height="900" decoding="async" fetchpriority="high">
+      <div class="k3d-host" id="hero3d"></div>
+      <div class="hs-layer" id="hs-layer"></div>
+      <p class="stage-load" id="stage-load" role="status">Memuat model 3D</p>
+      <aside class="part-card" id="part-card" hidden aria-live="polite">
+        <button class="pc-x" type="button" id="pc-x" aria-label="Tutup keterangan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <p class="pc-code num" id="pc-code"></p>
+        <h2 class="pc-name" id="pc-name"></h2>
+        <p class="pc-text" id="pc-text"></p>
+        <dl class="pc-dl" id="pc-dl"></dl>
+        <p class="pc-ev" id="pc-ev"></p>
+      </aside>
+      <div class="hud" id="hud">
+        <div class="hud-dock">
+          <div class="hud-tabs" role="group" aria-label="Menu kendali model">
+            <button type="button" data-tab="lihat" aria-pressed="true" aria-controls="hp-lihat">Lihat</button>
+            <button type="button" data-tab="gerak" aria-pressed="false" aria-controls="hp-gerak">Gerak</button>
+            <button type="button" data-tab="bongkar" aria-pressed="false" aria-controls="hp-bongkar">Bongkar</button>
+          </div>
+          <div class="hud-panel" id="hp-lihat" data-panel="lihat">
+            <div class="seg" role="group" aria-label="Mode tampilan">
+              <button type="button" data-mode="solid" aria-pressed="true">Utuh</button>
+              <button type="button" data-mode="xray" aria-pressed="false">Tembus</button>
+              <button type="button" data-mode="lines" aria-pressed="false">Garis</button>
+            </div>
+            <div class="seg" role="group" aria-label="Sudut pandang">
+              <button type="button" data-view="home">Serong</button>
+              <button type="button" data-view="depan">Depan</button>
+              <button type="button" data-view="samping">Samping</button>
+              <button type="button" data-view="belakang">Belakang</button>
+              <button type="button" data-view="atas">Atas</button>
+            </div>
+            <div class="chips" role="group" aria-label="Bagian yang tampil">
+              <button type="button" class="chip" data-layer="kayu" aria-pressed="true">Rangka</button>
+              <button type="button" class="chip" data-layer="anyam" aria-pressed="true">Anyaman</button>
+              <button type="button" class="chip" data-layer="bantal" aria-pressed="true">Bantal</button>
+              <button type="button" class="chip" data-layer="lain" aria-pressed="true">Pelengkap</button>
+              <button type="button" class="chip" data-group="dingklik" aria-pressed="true">Dingklik</button>
+            </div>
+          </div>
+          <div class="hud-panel" id="hp-gerak" data-panel="gerak" hidden>
+            <div class="chips" role="group" aria-label="Gerakan bagian kursi"><button type="button" class="chip" data-act="dingklik" aria-pressed="false">Singkirkan dingklik</button><button type="button" class="chip" data-act="kepala" aria-pressed="false">Naikkan bantal kepala</button><button type="button" class="chip" data-act="bantal" aria-pressed="false">Angkat bantal duduk</button></div>
+          </div>
+          <div class="hud-panel" id="hp-bongkar" data-panel="bongkar" hidden>
+            <label class="range"><span>Bongkar</span><input type="range" id="explode" min="0" max="100" value="0" aria-label="Seberapa jauh bagian kursi dibongkar"></label>
+            <button type="button" class="chip" data-do="rapat">Rapatkan</button>
+          </div>
+        </div>
+        <div class="hud-side" role="group" aria-label="Kamera">
+          <button type="button" class="hud-btn" data-do="auto" aria-pressed="true" aria-label="Putar otomatis" title="Putar otomatis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.5h-4.5"/></svg></button>
+          <button type="button" class="hud-btn" data-do="in" aria-label="Perbesar" title="Perbesar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button type="button" class="hud-btn" data-do="out" aria-label="Perkecil" title="Perkecil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/></svg></button>
+          <button type="button" class="hud-btn hud-free" data-do="free" aria-pressed="false" aria-label="Putar bebas dengan satu jari" title="Putar bebas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 11V6a1.6 1.6 0 0 1 3.2 0v4.2m0-.7a1.6 1.6 0 0 1 3.2 0v1m0-.2a1.6 1.6 0 0 1 3.2 0V15a6 6 0 0 1-6 6h-1.4a6 6 0 0 1-4.8-2.4L4 15.4a1.6 1.6 0 0 1 2.5-2L9 15.5"/></svg></button>
+          <button type="button" class="hud-btn" data-do="reset" aria-label="Kembali ke sudut awal" title="Sudut awal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v4.5h4.5"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="wrap stage-top">
+      <nav class="crumbs" aria-label="Jejak halaman"><a href="karya.html">Karya</a><span aria-hidden="true">/</span><a href="pameran.html">Pameran</a><span aria-hidden="true">/</span><span aria-current="page">Selonjor</span></nav>
+      <span class="status-chip">Rancangan 2026</span>
+    </div>
+    <p class="stage-hint"><span class="hint-fine">Seret untuk memutar. Klik model lalu gulir untuk zoom. Klik bagian kursi untuk melihat namanya.</span><span class="hint-coarse">Geser untuk memutar, cubit untuk zoom. Ketuk bagian kursi untuk melihat namanya.</span></p>
+  </section>
+  <section class="k-intro">
+    <div class="wrap k-intro-grid">
+      <div class="k-copy" data-reveal>
+        <p class="k-tag">Kursi santai untuk melambat</p>
+        <dl class="k-def"><dt>Selonjor</dt><dd>Duduk dengan kaki lurus ke depan.</dd></dl>
+        <p class="k-lede">Di zaman serba cepat, orang butuh tempat untuk melambat. Tempat itu harus bisa dipakai semua usia tanpa rasa sungkan.</p>
+        <p class="k-status-note"><b>Kursi santai dengan dingklik.</b> Kursi ini masih rancangan. Gambar di halaman ini adalah model 3D dari SketchUp dan visualisasi suasana dari AI, bukan foto kursi jadi.</p>
+      </div>
+      <div class="k-data" data-reveal>
+        <ul class="k-facts"><li><span class="num"><b>660</b> mm</span><span class="lbl">Lebar</span><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></li><li><span class="num"><b>860</b> mm</span><span class="lbl">Dalam</span><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></li><li><span class="num"><b>1000</b> mm</span><span class="lbl">Tinggi</span><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></li><li><span class="num"><b>370</b> mm</span><span class="lbl">Tinggi dudukan</span><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></li><li><span class="num"><b>11</b> kg</span><span class="lbl">Berat rangka</span><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></li></ul>
+        <p class="k-note">Tinggi dudukan 370 mm diukur di tepi depan bantal saat kosong. Saat diduduki turun jadi sekitar 355 mm. Sudut dudukan 8°, sandaran 26° dari tegak.</p>
+        <details class="ev-legend"><summary>Arti label bukti</summary><ul class="ev-list"><li><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span><span>Diambil dari lembar gambar kerja.</span></li><li><span class="ev ukur" title="Ukur 3D: diukur dari model 3D rancangan.">Ukur 3D</span><span>Diukur dari model 3D rancangan.</span></li><li><span class="ev ref" title="Referensi: dari rujukan umum dan teknik yang sudah dikenal.">Referensi</span><span>Dari rujukan umum dan teknik yang sudah dikenal.</span></li><li><span class="ev est" title="Estimasi: perkiraan yang belum dicek ke penjual atau pengrajin.">Estimasi</span><span>Perkiraan yang belum dicek ke penjual atau pengrajin.</span></li><li><span class="ev hip" title="Hipotesis: dugaan perancang yang menunggu gambar kerja.">Hipotesis</span><span>Dugaan perancang yang menunggu gambar kerja.</span></li><li><span class="ev vis" title="Visualisasi AI: gambar suasana dibuat dengan AI mengikuti rancangan, bukan foto kursi jadi.">Visualisasi AI</span><span>Gambar suasana dibuat dengan AI mengikuti rancangan, bukan foto kursi jadi.</span></li></ul></details>
+      </div>
+    </div>
+  </section>
+  <nav class="chapters" id="chapters" aria-label="Bagian halaman"><div class="wrap"><ul><li><a href="#filosofi">Filosofi</a></li><li><a href="#suasana">Suasana</a></li><li><a href="#material">Material</a></li><li><a href="#rakit">Rakit</a></li><li><a href="#sambungan">Sambungan</a></li><li><a href="#anyaman">Anyaman</a></li><li><a href="#gambar">Gambar kerja</a></li><li><a href="#rab">Biaya</a></li></ul></div></nav>
+  <section class="section k-sec" id="filosofi">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker"><span data-num></span><span class="dim" aria-hidden="true"></span>Filosofi</p>
+        <h2>Gagasan di balik Selonjor</h2>
+        <p class="sec-lede">Di zaman serba cepat, orang butuh tempat untuk melambat. Tempat itu harus bisa dipakai semua usia tanpa rasa sungkan.</p>
+      </header>
+      <div class="phil">
+        <div class="phil-text" data-reveal><p>Selonjor kubuat ulang dari jenis kursi lounge dan ottoman yang sudah dikenal dunia, dengan bahan dan kriya lokal. Rangkanya kayu jati, anyamannya rotan, dan semuanya dirancang supaya bisa dirawat dan diperbaiki.</p><p>Kursi ini punya dua suasana. Dengan dingklik, kamu selonjor dan beristirahat. Tanpa dingklik, kamu duduk tegak dan berbincang. Satu kursi yang ikut berubah mengikuti suasana ruang.</p></div>
+        <ul class="principles" data-stagger><li><h3>Dua suasana</h3><p>Dingklik bisa dipanggil dan disingkirkan. Duduk tegak untuk berbincang, atau selonjor untuk istirahat.</p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></li><li><h3>Bisa dibongkar dan dipasang</h3><p>Sandaran dan palang dipasang dengan baut tanpa lem. Kalau ada bagian yang rusak, cukup bagian itu yang diganti.</p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></li><li><h3>Rangka tertutup dengan satu diagonal</h3><p>Diagonal menahan goyang depan dan belakang, dan bekerja menekan saat kamu bersandar.</p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></li><li><h3>Dua anyaman, dua tugas</h3><p>Cane segi delapan yang berlubang dipakai di dudukan dan sandaran bawah supaya udara mengalir. Kepar yang rapat dipakai di sandaran atas.</p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></li></ul>
+      </div>
+      <figure class="k-sketch" data-reveal><a class="k-sketch-link" href="assets/img/pameran-sketsa-selonjor.webp" target="_blank" rel="noopener" aria-label="Buka sketsa ukuran penuh di tab baru"><img src="assets/img/pameran-sketsa-selonjor.webp" alt="Sketsa spidol Selonjor dengan dingklik. Catatan tulisan tangan menyebut rangka kayu solid, anyaman cane rotan, anyaman kepar kulit rotan, bantal kepala geser, bantal kapuk dan sabut kelapa, baut tanam M6, dan alas felt. Di kanan ada sketsa tampak samping dengan sudut 108 derajat." width="1087" height="684" loading="lazy" decoding="async"></a><figcaption><b>Sketsa awal</b><span>Sketsa spidol sebagai titik awal, dikerjakan untuk tugas Desain Mebel I. Catatan di pinggir gambar sudah menyebut bahan dan sambungan yang kemudian dirinci di gambar kerja. Ukuran final ada di bagian Gambar kerja.</span></figcaption></figure>
+      <aside class="callout k-callout" data-reveal><b>Nama konsep</b><p>Konsepnya kuberi nama Divantara Yutori. Divan adalah tempat duduk percakapan dari tradisi Persia, Turki, dan Inggris. Antara berarti di antara budaya, generasi, dan ritme. Yutori adalah kata Jepang untuk ruang yang lega.</p></aside><aside class="callout k-callout" data-reveal><b>Cek struktur dari gambar kerja</b><p>Perkiraan di lembar GK-A02 untuk pengguna 100 kg. Titik berat orang yang duduk jatuh di dalam tapak kursi 0 sampai 860 mm, jadi kursi tidak terguling ke depan atau belakang. Beban dudukan 1300 N ditahan palang depan dan empat baut M8 di belakang. Tiang sandaran 30 × 40 mm menerima tegangan lentur sekitar 12 MPa pada dorongan 450 N, sedangkan kuat lentur jati sekitar 70 MPa.</p><span class="ev est" title="Estimasi: perkiraan yang belum dicek ke penjual atau pengrajin.">Estimasi</span></aside>
+    </div>
+  </section>
+  <section class="section k-sec" id="suasana">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker"><span data-num></span><span class="dim" aria-hidden="true"></span>Suasana</p>
+        <h2>Kursi di dalam ruang</h2>
+        <p class="sec-lede">Selonjor muncul di semua gambar suasana. Dengan dingklik ia jadi tempat istirahat di pojok baca atau teras.</p>
+      </header>
+      <ul class="sw-grid sw-n6" data-lightbox data-stagger><li class="sw"><a class="sw-btn" href="assets/img/pameran-suasana-teras-tiga-l.webp" data-w="1900" data-h="1061" data-cap="Tiga kursi di teras sore" aria-label="Perbesar gambar: Tiga kursi di teras sore"><img src="assets/img/pameran-suasana-teras-tiga-m.webp" alt="Visualisasi AI. Teras dengan cahaya sore. Selonjor dan dingkliknya di depan, Pinarak di belakang kanannya, dan sisi Srawung di tepi kanan. Semua dudukan berbantal lurik nila." width="1100" height="614" loading="lazy" decoding="async"><span class="sw-cap">Tiga kursi di teras sore</span></a></li><li class="sw"><a class="sw-btn" href="assets/img/pameran-suasana-pojok-siang-l.webp" data-w="1900" data-h="932" data-cap="Pojok baca, siang" aria-label="Perbesar gambar: Pojok baca, siang"><img src="assets/img/pameran-suasana-pojok-siang-m.webp" alt="Visualisasi AI. Pojok membaca dekat pintu kaca. Selonjor dengan dingklik, meja kecil dengan lampu dan buku, rak buku di belakang, dan tanaman dalam pot putih." width="1100" height="540" loading="lazy" decoding="async"><span class="sw-cap">Pojok baca, siang</span></a></li><li class="sw"><a class="sw-btn" href="assets/img/pameran-suasana-pojok-malam-l.webp" data-w="1900" data-h="1061" data-cap="Pojok baca, malam" aria-label="Perbesar gambar: Pojok baca, malam"><img src="assets/img/pameran-suasana-pojok-malam-m.webp" alt="Visualisasi AI. Pojok membaca yang sama pada malam hari. Lampu dinding dan lampu meja menyala." width="1100" height="614" loading="lazy" decoding="async"><span class="sw-cap">Pojok baca, malam</span></a></li><li class="sw"><a class="sw-btn" href="assets/img/pameran-suasana-taman-sore-l.webp" data-w="1900" data-h="1061" data-cap="Teras taman, sore" aria-label="Perbesar gambar: Teras taman, sore"><img src="assets/img/pameran-suasana-taman-sore-m.webp" alt="Visualisasi AI. Teras kayu menghadap taman pada sore hari. Selonjor dengan dingklik di atas karpet anyaman, meja bundar dengan set teh, dan meja kayu berisi kendi di sebelah kiri." width="1100" height="614" loading="lazy" decoding="async"><span class="sw-cap">Teras taman, sore</span></a></li><li class="sw"><a class="sw-btn" href="assets/img/pameran-suasana-taman-jendela-l.webp" data-w="1900" data-h="1061" data-cap="Teras taman, jendela kisi menyala" aria-label="Perbesar gambar: Teras taman, jendela kisi menyala"><img src="assets/img/pameran-suasana-taman-jendela-m.webp" alt="Visualisasi AI. Selonjor dengan dingklik di teras. Jendela kisi kayu di belakangnya menyala hangat, di samping tanaman dalam pot beton dan kendi berisi ranting kering." width="1100" height="614" loading="lazy" decoding="async"><span class="sw-cap">Teras taman, jendela kisi menyala</span></a></li><li class="sw"><a class="sw-btn" href="assets/img/pameran-suasana-taman-siang-l.webp" data-w="1900" data-h="936" data-cap="Teras taman, siang" aria-label="Perbesar gambar: Teras taman, siang"><img src="assets/img/pameran-suasana-taman-siang-m.webp" alt="Visualisasi AI. Teras taman pada siang hari. Selonjor dengan dingklik, meja bundar dengan set teh, meja kayu dengan kendi, dan pagar kayu di belakangnya." width="1100" height="542" loading="lazy" decoding="async"><span class="sw-cap">Teras taman, siang</span></a></li></ul>
+      <p class="sw-note" data-reveal><span class="ev vis" title="Visualisasi AI: gambar suasana dibuat dengan AI mengikuti rancangan, bukan foto kursi jadi.">Visualisasi AI</span> <span>Gambar ini dibuat dengan AI (Gemini) mengikuti rancangan, bukan foto kursi jadi. Bentuk dan detailnya bisa berbeda dari model 3D dan gambar kerja. Ukuran dan bahan yang berlaku ada di halaman tiap kursi.</span></p>
+    </div>
+  </section>
+  <section class="section k-sec" id="material">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker"><span data-num></span><span class="dim" aria-hidden="true"></span>Material</p>
+        <h2>Bahan dan tugasnya</h2>
+        <p class="sec-lede">Tiap bahan punya tugas sendiri. Kotak kecil di tiap kartu adalah ilustrasi tekstur yang dipakai pada model 3D, bukan foto bahannya.</p>
+      </header>
+      <ul class="mats" data-stagger><li class="mat">
+          <div class="mat-sw sw-jati" aria-hidden="true"></div>
+          <div class="mat-body"><h3>Jati kering oven</h3><p class="mat-use">Dipakai di: Seluruh rangka kursi dan dingklik</p><p>Kadar air 12 sampai 14 persen dengan serat lurus searah panjang batang. Kayu kering mengurangi susut dan retak setelah dirakit. Permukaan diberi minyak supaya serat tetap terasa. Bidang lem dilap thinner dulu, karena minyak alami jati melemahkan lem.</p><p class="mat-care"><b>Perawatan.</b> Beri minyak jati tipis setiap beberapa bulan. Lap dengan kain lembap, hindari air menggenang.</p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></div>
+        </li><li class="mat">
+          <div class="mat-sw sw-cane" aria-hidden="true"></div>
+          <div class="mat-body"><h3>Cane lembaran segi delapan</h3><p class="mat-use">Dipakai di: Dudukan, sandaran bawah, dan atas dingklik</p><p>Lembar anyaman dari serat kulit rotan, tebal 3 mm, berlubang segi delapan. Berlubang artinya sejuk dan ringan. Dipasang di alur 5 × 8 mm lalu dikunci rotan pengunci.</p><p class="mat-care"><b>Perawatan.</b> Bersihkan dengan sikat lembut. Kalau kendur, lap dengan air hangat dan biarkan kering di tempat teduh.</p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></div>
+        </li><li class="mat">
+          <div class="mat-sw sw-kepar" aria-hidden="true"></div>
+          <div class="mat-body"><h3>Kulit rotan anyaman kepar</h3><p class="mat-use">Dipakai di: Sandaran atas</p><p>Anyaman pola ajiro dari kulit rotan, rapat dan berarah diagonal. Dipilih untuk bagian punggung atas yang tidak perlu berlubang.</p><p class="mat-care"><b>Perawatan.</b> Sama dengan cane. Hindari sinar matahari langsung berjam-jam supaya warnanya tidak pudar.</p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></div>
+        </li><li class="mat">
+          <div class="mat-sw sw-lurik" aria-hidden="true"></div>
+          <div class="mat-body"><h3>Lurik nila</h3><p class="mat-use">Dipakai di: Bantal dudukan dan bantal kepala</p><p>Kain tenun bergaris khas Jawa yang dicelup nila. Bantal dudukan diisi sabut kelapa berkaret setebal 15 mm dan kapuk 25 mm. Bantal kepala diisi kapuk.</p><p class="mat-care"><b>Perawatan.</b> Sarung bantal sebaiknya dicuci tangan dengan sabun lembut. Nila bisa luntur pada pencucian pertama.</p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></div>
+        </li><li class="mat">
+          <div class="mat-sw sw-felt" aria-hidden="true"></div>
+          <div class="mat-body"><h3>Felt abu</h3><p class="mat-use">Dipakai di: Alas kaki kursi dan dingklik</p><p>Lapis felt setebal 3 mm direkat di bawah alas. Ia melindungi lantai dari goresan dan menambah tinggi kursi 3 mm.</p><p class="mat-care"><b>Perawatan.</b> Ganti kalau sudah tipis atau lepas.</p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></div>
+        </li><li class="mat">
+          <div class="mat-sw sw-besi" aria-hidden="true"></div>
+          <div class="mat-body"><h3>Baut dan mur baja galvanis</h3><p class="mat-use">Dipakai di: Sandaran dan palang</p><p>Baut M8 untuk sandaran, baut M6 dan mur silang Ø10 untuk palang. Kepala baut tenggelam di lubang benam dan ditutup sumbat kayu supaya rapi.</p><p class="mat-care"><b>Perawatan.</b> Kencangkan lagi bila terasa longgar.</p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></div>
+        </li></ul>
+    </div>
+  </section>
+  <section class="section k-sec" id="rakit">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker"><span data-num></span><span class="dim" aria-hidden="true"></span>Rakit</p>
+        <h2>Cara kursi dirakit</h2>
+        <p class="sec-lede">Putar animasinya lalu ikuti urutannya. Bagian yang sedang masuk menyala hangat. Kamu juga bisa menggeser penggeser waktunya sendiri.</p>
+      </header>
+      <div class="asm">
+        <div class="asm-view">
+          <div class="asm-host" id="asm-host"><p class="asm-wait">Animasi dimuat saat bagian ini terlihat.</p></div>
+          <div class="asm-ctrl">
+            <button type="button" class="btn primary small" id="asm-play" aria-pressed="false"><span class="ic-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 5.6v12.8a.6.6 0 0 0 .9.5l10-6.4a.6.6 0 0 0 0-1L8.9 5.1a.6.6 0 0 0-.9.5Z"/></svg></span><span class="ic-pause"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7.5 5h3.2v14H7.5zM13.3 5h3.2v14h-3.2z"/></svg></span><span class="lbl">Putar</span></button>
+            <input type="range" id="asm-range" min="0" max="900" value="0" aria-label="Posisi animasi rakit">
+            <span class="asm-time num" id="asm-time">Langkah 1 dari 9</span>
+          </div>
+          <p class="asm-cap" id="asm-cap" aria-live="polite"></p>
+        </div>
+        <ol class="asm-steps" id="asm-steps"><li class="step" data-step="0"><button type="button" class="step-btn" aria-label="Lompat ke langkah 1: Rangka samping kiri dan kanan"><span class="step-no num">1</span><span class="step-body"><b>Rangka samping kiri dan kanan</b><span class="step-text">Tiang depan dan diagonal turun ke alas lebih dulu. Pen diagonal masuk dari atas. Lalu tiang belakang, lengan, dan pasak bor-tarik. Semua dilem dan diklem 24 jam.</span><span class="step-chips"><span>Lem PVAc D3 atau epoksi</span><span>Klem 24 jam</span></span></span></button></li><li class="step" data-step="1"><button type="button" class="step-btn" aria-label="Lompat ke langkah 2: Bingkai sandaran"><span class="step-no num">2</span><span class="step-body"><b>Bingkai sandaran</b><span class="step-text">Empat rel berpurus 10 × 25 × 25 masuk ke dua tiang sandaran. Lembar cane dan kepar masuk ke alur 5 × 8 mm, lalu dikunci rotan pengunci.</span><span class="step-chips"><span>Purus 10 × 25 × 25</span><span>Alur 5 × 8 mm</span></span></span></button></li><li class="step" data-step="2"><button type="button" class="step-btn" aria-label="Lompat ke langkah 3: Bingkai dudukan"><span class="step-no num">3</span><span class="step-body"><b>Bingkai dudukan</b><span class="step-text">Rel bingkai dudukan disambung purus 8 × 30 × 30. Setelah kering, lembar cane dipasang di alur dan klos penyangga ikut direkat.</span><span class="step-chips"><span>Purus 8 × 30 × 30</span></span></span></button></li><li class="step" data-step="3"><button type="button" class="step-btn" aria-label="Lompat ke langkah 4: Palang dibaut ke rangka samping"><span class="step-no num">4</span><span class="step-body"><b>Palang dibaut ke rangka samping</b><span class="step-text">Palang dudukan depan dan palang alas belakang dibaut ke rangka samping kanan, lalu ke rangka samping kiri. Tanpa lem, jadi bisa dibongkar lagi.</span><span class="step-chips"><span>Baut M6 × 80</span><span>Mur silang Ø10</span><span>Pen Ø8 × 30</span></span></span></button></li><li class="step" data-step="4"><button type="button" class="step-btn" aria-label="Lompat ke langkah 5: Sandaran turun dan dibaut"><span class="step-no num">5</span><span class="step-body"><b>Sandaran turun dan dibaut</b><span class="step-text">Bingkai sandaran dimasukkan dari atas. Empat baut M8, dua di tiap sisi dengan jarak 281 mm, mengunci sandaran ke lengan dan diagonal.</span><span class="step-chips"><span>Baut M8 × 50</span><span>Mur tanam M8</span></span></span></button></li><li class="step" data-step="5"><button type="button" class="step-btn" aria-label="Lompat ke langkah 6: Bingkai dudukan diletakkan"><span class="step-no num">6</span><span class="step-body"><b>Bingkai dudukan diletakkan</b><span class="step-text">Bingkai dudukan duduk di atas palang depan dengan dua pen penuntun dan ditopang klos. Dua sekrup dari bawah klos menahannya.</span><span class="step-chips"><span>Pen penuntun</span><span>Sekrup dari bawah</span></span></span></button></li><li class="step" data-step="6"><button type="button" class="step-btn" aria-label="Lompat ke langkah 7: Bantal dan alas felt"><span class="step-no num">7</span><span class="step-body"><b>Bantal dan alas felt</b><span class="step-text">Bantal dudukan dan bantal kepala dipasang terakhir supaya kainnya tidak kena lem, pernis, atau debu serutan. Alas felt direkat di bawah alas.</span><span class="step-chips"><span>Lurik nila</span><span>Isi sabut dan kapuk</span><span>Felt 3 mm</span></span></span></button></li><li class="step" data-step="7"><button type="button" class="step-btn" aria-label="Lompat ke langkah 8: Dingklik: kaki dan rel"><span class="step-no num">8</span><span class="step-body"><b>Dingklik: kaki dan rel</b><span class="step-text">Empat kaki, rel apron, dan palang bawah dilem dengan purus, lalu diklem sampai kering.</span><span class="step-chips"><span>Rangka jati</span></span></span></button></li><li class="step" data-step="8"><button type="button" class="step-btn" aria-label="Lompat ke langkah 9: Dingklik: bingkai atas dan cane"><span class="step-no num">9</span><span class="step-body"><b>Dingklik: bingkai atas dan cane</b><span class="step-text">Bingkai atas bisa dilepas. Lembar cane segi delapan masuk ke alurnya, lalu alas felt direkat di ujung kaki.</span><span class="step-chips"><span>Cane segi delapan</span><span>Felt</span></span></span></button></li></ol>
+      </div>
+      <p class="k-note" data-reveal><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span> Urutan mengikuti lembar GK-A04 dan GK-A05, lalu dilengkapi dingklik dari model 3D.</p>
+    </div>
+  </section>
+  <section class="section k-sec" id="sambungan">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker"><span data-num></span><span class="dim" aria-hidden="true"></span>Sambungan</p>
+        <h2>Sambungan di dalam kayu</h2>
+        <p class="sec-lede">Pilih satu sambungan, tekan Rakit, lalu nyalakan Lihat dalam untuk melihat bagian yang tersembunyi di dalam kayu.</p>
+      </header>
+      <div class="jnt">
+        <div class="jnt-tabs" role="tablist" aria-label="Pilih sambungan"><button type="button" role="tab" id="jt-s1" data-joint="s1" aria-selected="true" aria-controls="jp-s1" tabindex="0">Tiang depan ke alas</button><button type="button" role="tab" id="jt-s2" data-joint="s2" aria-selected="false" aria-controls="jp-s2" tabindex="-1">Diagonal dan pen</button><button type="button" role="tab" id="jt-s3" data-joint="s3" aria-selected="false" aria-controls="jp-s3" tabindex="-1">Palang bongkar-pasang</button><button type="button" role="tab" id="jt-s4" data-joint="s4" aria-selected="false" aria-controls="jp-s4" tabindex="-1">Sandaran bongkar-pasang</button></div>
+        <div class="jnt-grid">
+          <div class="jnt-view">
+            <div class="jnt-host" id="jnt-host"><p class="asm-wait">Sambungan dimuat saat bagian ini terlihat.</p></div>
+            <div class="jnt-ctrl">
+              <button type="button" class="btn primary small" id="jnt-play" aria-pressed="false"><span class="ic-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 5.6v12.8a.6.6 0 0 0 .9.5l10-6.4a.6.6 0 0 0 0-1L8.9 5.1a.6.6 0 0 0-.9.5Z"/></svg></span><span class="ic-pause"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7.5 5h3.2v14H7.5zM13.3 5h3.2v14h-3.2z"/></svg></span><span class="lbl">Rakit</span></button>
+              <button type="button" class="btn soft small" id="jnt-xray" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12s3.6-6.5 9-6.5S21 12 21 12s-3.6 6.5-9 6.5S3 12 3 12Z"/><circle cx="12" cy="12" r="2.6"/></svg><span>Lihat dalam</span></button>
+              <input type="range" id="jnt-range" min="0" max="100" value="0" aria-label="Posisi animasi sambungan">
+            </div>
+            <p class="asm-cap" id="jnt-cap" aria-live="polite"></p>
+          </div>
+          <div class="jnt-info"><article class="jnt-item" id="jp-s1" role="tabpanel" aria-labelledby="jt-s1" data-joint="s1">
+            <h3>Tiang depan ke alas</h3>
+            <p class="jnt-sum">Purus 10 × 30 × 30 dan pasak bor-tarik Ø8</p>
+            <dl class="spec"><div><dt>Purus</dt><dd>10 × 30 × 30 mm<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Geser dari ujung</dt><dd>15 mm<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Pasak bor-tarik</dt><dd>Ø8 mm<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Lem</dt><dd>PVAc D3 atau epoksi<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div></dl>
+            <div class="prose"><p>Purus adalah lidah di ujung tiang. Tebalnya 10 mm, sepertiga dari tebal kayu 30 mm. Lubangnya dibuat di alas sedalam 30 mm. Lebar purus 30 mm dan digeser 15 mm dari ujung, supaya kayu di ujung alas masih tersisa dan tidak pecah.</p><p>Pasak Ø8 menembus kayu dan purus. Lubang di purus dibor 1,5 mm lebih dekat ke bahu daripada lubang di alas. Saat pasak dipukul masuk, tiang tertarik rapat ke alas. Itu yang disebut bor-tarik.</p><p>Bidang lem jati dilap thinner dulu, karena minyak alami jati melemahkan lem.</p></div>
+            <p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></p>
+          </article><article class="jnt-item" id="jp-s2" role="tabpanel" aria-labelledby="jt-s2" data-joint="s2" hidden>
+            <h3>Diagonal dan pen</h3>
+            <p class="jnt-sum">Tanpa purus, dikunci tiga pen Ø8 × 40</p>
+            <dl class="spec"><div><dt>Pen</dt><dd>3 buah Ø8 × 40 mm<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Titik pen</dt><dd>tiang depan, lengan, alas<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Purus</dt><dd>tidak ada<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div></dl>
+            <div class="prose"><p>Diagonal tidak diberi purus karena tidak bisa dirakit dari dua arah. Ia menumpu rapat di sudut dan dikunci tiga pen Ø8 × 40, satu ke tiang depan, satu ke lengan, dan satu ke alas.</p><p>Pen mendatar di ujung atas menahan beban turun dari baut sandaran.</p></div>
+            <p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></p>
+          </article><article class="jnt-item" id="jp-s3" role="tabpanel" aria-labelledby="jt-s3" data-joint="s3" hidden>
+            <h3>Palang bongkar-pasang</h3>
+            <p class="jnt-sum">Baut M6 × 80, mur silang Ø10, dua pen Ø8 × 30</p>
+            <dl class="spec"><div><dt>Baut</dt><dd>M6 × 80 dengan ring<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Mur silang</dt><dd>Ø10 × 15 mm<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Pen penuntun</dt><dd>2 buah Ø8 × 30 mm<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Lubang benam</dt><dd>Ø16, dalam 8 mm, ditutup sumbat kayu<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div></dl>
+            <div class="prose"><p>Baut masuk dari muka luar rangka, menembus tiang, lalu masuk ke ujung palang dan mengait mur silang. Mur silang adalah silinder berulir yang ditanam melintang di palang, lubangnya dibor dari sisi bawah palang.</p><p>Dua pen Ø8 × 30 di atas dan bawah baut dilem ke palang dan masuk 15 mm ke tiang. Pen ini menjaga palang tidak berputar. Sambungan ini tanpa lem, jadi palang bisa dilepas lagi.</p></div>
+            <p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></p>
+          </article><article class="jnt-item" id="jp-s4" role="tabpanel" aria-labelledby="jt-s4" data-joint="s4" hidden>
+            <h3>Sandaran bongkar-pasang</h3>
+            <p class="jnt-sum">Baut M8 × 50 dan mur tanam M8, dua di tiap sisi</p>
+            <dl class="spec"><div><dt>Baut</dt><dd>M8 × 50 dengan ring<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Mur tanam</dt><dd>M8 × 15, bor Ø11<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Jarak dua baut</dt><dd>281 mm<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div><div><dt>Jumlah</dt><dd>4 baut, 2 di tiap sisi<span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></dd></div></dl>
+            <div class="prose"><p>Tiang sandaran menempel di sisi dalam lengan dan diagonal. Baut M8 menembus lengan atau diagonal lalu masuk ke mur tanam di tiang sandaran. Kepala baut tenggelam di lubang benam Ø18 sedalam 8 mm dan ditutup sumbat kayu.</p><p>Empat baut ini memikul separuh beban dudukan belakang dan dorongan punggung. Karena itu dipakai M8, bukan M6.</p></div>
+            <p><span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></p>
+          </article></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section k-sec" id="anyaman">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker"><span data-num></span><span class="dim" aria-hidden="true"></span>Anyaman</p>
+        <h2>Cara rotan dianyam</h2>
+        <p class="sec-lede">Anyaman di kursi ini dibuat selapis demi selapis. Putar animasinya atau pilih langkah di sebelah kanan.</p>
+      </header>
+      <div class="weave">
+        <div class="jnt-tabs" role="tablist" aria-label="Pilih anyaman"><button type="button" role="tab" id="wt-cane8" data-weave="cane8" aria-selected="true" aria-controls="wp-cane8" tabindex="0">Cane segi delapan</button><button type="button" role="tab" id="wt-kepar" data-weave="kepar" aria-selected="false" aria-controls="wp-kepar" tabindex="-1">Kepar (ajiro)</button></div>
+        <div class="weave-grid">
+          <figure class="weave-view">
+            <canvas id="weave-cv" width="720" height="540" role="img" aria-label="Animasi anyaman rotan"></canvas>
+            <div class="jnt-ctrl">
+              <button type="button" class="btn primary small" id="weave-play" aria-pressed="false"><span class="ic-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 5.6v12.8a.6.6 0 0 0 .9.5l10-6.4a.6.6 0 0 0 0-1L8.9 5.1a.6.6 0 0 0-.9.5Z"/></svg></span><span class="ic-pause"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7.5 5h3.2v14H7.5zM13.3 5h3.2v14h-3.2z"/></svg></span><span class="lbl">Putar</span></button>
+              <input type="range" id="weave-range" min="0" max="100" value="0" aria-label="Posisi animasi anyaman">
+            </div>
+            <figcaption class="asm-cap" id="weave-cap" aria-live="polite"></figcaption>
+          </figure>
+          <div class="jnt-info"><article class="weave-item" id="wp-cane8" role="tabpanel" aria-labelledby="wt-cane8" data-weave="cane8">
+            <h3>Cane segi delapan</h3>
+            <p class="jnt-sum">Lembar anyaman berlubang segi delapan</p>
+            <p class="weave-use"><b>Dipakai di:</b> Dudukan (A11), sandaran bawah (A12), dan atas dingklik (B6)</p>
+            <div class="prose"><p>Cane lembaran dibuat dari serat kulit rotan yang dibelah tipis. Dasarnya serat tegak dan serat mendatar berpasangan yang saling menyilang selang-seling. Lalu serat diagonal lebar dari dua arah berlawanan memotong sudut tiap lubang persegi, sehingga bentuk lubangnya segi delapan.</p><p>Proses pengrajin sebenarnya lebih rinci. Animasi ini menyederhanakan urutan dasarnya.</p></div>
+            <ol class="weave-steps"><li data-w="0"><button type="button">Serat tegak dibentangkan</button></li><li data-w="1"><button type="button">Serat mendatar menyilang selang-seling</button></li><li data-w="2"><button type="button">Serat diagonal dari kiri bawah ke kanan atas</button></li><li data-w="3"><button type="button">Serat diagonal dari arah lawan menutup sudut lubang</button></li></ol>
+            <p><span class="ev ref" title="Referensi: dari rujukan umum dan teknik yang sudah dikenal.">Referensi</span></p>
+          </article><article class="weave-item" id="wp-kepar" role="tabpanel" aria-labelledby="wt-kepar" data-weave="kepar" hidden>
+            <h3>Kepar (ajiro)</h3>
+            <p class="jnt-sum">Anyaman diagonal loncat dua</p>
+            <p class="weave-use"><b>Dipakai di:</b> Sandaran atas (A13)</p>
+            <div class="prose"><p>Pada anyaman kepar, tiap serat naik di atas dua serat lalu turun di bawah dua serat. Loncatannya bergeser satu serat di tiap baris, jadi muncul garis diagonal yang rapat.</p><p>Di tengah sandaran arah diagonalnya dibalik sehingga polanya membentuk panah, seperti pada gambar kerja Selonjor.</p></div>
+            <ol class="weave-steps"><li data-w="0"><button type="button">Serat tegak dibentangkan</button></li><li data-w="1"><button type="button">Serat mendatar naik dua turun dua, bergeser satu serat tiap baris</button></li><li data-w="2"><button type="button">Arah diagonal dibalik di tengah menjadi panah</button></li></ol>
+            <p><span class="ev ref" title="Referensi: dari rujukan umum dan teknik yang sudah dikenal.">Referensi</span></p>
+          </article></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section k-sec" id="gambar">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker"><span data-num></span><span class="dim" aria-hidden="true"></span>Gambar kerja</p>
+        <h2>Gambar kerja dan daftar komponen</h2>
+        <p class="sec-lede">Lembar gambar kerja asli. Perbesar untuk membaca ukuran dan detail sambungannya.</p>
+      </header>
+      <div class="dw"><div class="dw-view">
+          <div class="dw-stage" id="dw-stage" tabindex="0" role="group" aria-label="Lembar gambar kerja. Saat diperbesar, seret untuk menggeser.">
+            <img id="dw-img" src="assets/img/pameran-gk-a01.webp" alt="Lembar GK-A01: Proyeksi ortogonal" width="1985" height="1404" decoding="async">
+          </div>
+          <div class="dw-ctrl">
+            <button type="button" class="hud-btn dark" data-dw="in" aria-label="Perbesar gambar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button>
+            <button type="button" class="hud-btn dark" data-dw="out" aria-label="Perkecil gambar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/></svg></button>
+            <button type="button" class="btn soft small" data-dw="fit">Pas layar</button>
+            <a class="btn soft small" id="dw-open" href="assets/img/pameran-gk-a01.webp" target="_blank" rel="noopener">Buka gambar penuh</a>
+          </div>
+          <p class="dw-cap" id="dw-cap"><b>GK-A01</b> Proyeksi ortogonal, skala 1 : 10. Tampak depan, samping, atas, dan perspektif dengan ukuran kayu jadi.</p>
+        </div>
+        <ul class="dw-thumbs" id="dw-thumbs" data-sheets='[[&quot;assets/img/pameran-gk-a01.webp&quot;, &quot;GK-A01&quot;, &quot;Proyeksi ortogonal&quot;, &quot;1 : 10&quot;, &quot;Tampak depan, samping, atas, dan perspektif dengan ukuran kayu jadi.&quot;], [&quot;assets/img/pameran-gk-a02.webp&quot;, &quot;GK-A02&quot;, &quot;Tampak samping kanan dan letak sambungan&quot;, &quot;1 : 5&quot;, &quot;Enam sambungan bernomor, posisi lubang baut, dan cek struktur.&quot;], [&quot;assets/img/pameran-gk-a04.webp&quot;, &quot;GK-A04&quot;, &quot;Detail sambungan rangka&quot;, &quot;1 : 2&quot;, &quot;Potongan sambungan rangka samping beserta catatan material.&quot;], [&quot;assets/img/pameran-gk-a05.webp&quot;, &quot;GK-A05&quot;, &quot;Detail sambungan bongkar-pasang dan urutan rakit&quot;, &quot;1 : 2&quot;, &quot;Detail baut, mur silang, dan urutan perakitan.&quot;], [&quot;assets/img/pameran-gk-a07.webp&quot;, &quot;GK-A07&quot;, &quot;Daftar komponen&quot;, &quot;tanpa skala&quot;, &quot;Tabel komponen Selonjor dan dingklik dengan ukuran jadi.&quot;]]'><li><button type="button" data-i="0" aria-label="Buka lembar GK-A01: Proyeksi ortogonal" aria-pressed="true"><img src="assets/img/pameran-gk-a01.webp" alt="" width="160" height="113" loading="lazy" decoding="async"><span><b>GK-A01</b>Proyeksi ortogonal</span></button></li><li><button type="button" data-i="1" aria-label="Buka lembar GK-A02: Tampak samping kanan dan letak sambungan" aria-pressed="false"><img src="assets/img/pameran-gk-a02.webp" alt="" width="160" height="113" loading="lazy" decoding="async"><span><b>GK-A02</b>Tampak samping kanan dan letak sambungan</span></button></li><li><button type="button" data-i="2" aria-label="Buka lembar GK-A04: Detail sambungan rangka" aria-pressed="false"><img src="assets/img/pameran-gk-a04.webp" alt="" width="160" height="113" loading="lazy" decoding="async"><span><b>GK-A04</b>Detail sambungan rangka</span></button></li><li><button type="button" data-i="3" aria-label="Buka lembar GK-A05: Detail sambungan bongkar-pasang dan urutan rakit" aria-pressed="false"><img src="assets/img/pameran-gk-a05.webp" alt="" width="160" height="113" loading="lazy" decoding="async"><span><b>GK-A05</b>Detail sambungan bongkar-pasang dan urutan rakit</span></button></li><li><button type="button" data-i="4" aria-label="Buka lembar GK-A07: Daftar komponen" aria-pressed="false"><img src="assets/img/pameran-gk-a07.webp" alt="" width="160" height="113" loading="lazy" decoding="async"><span><b>GK-A07</b>Daftar komponen</span></button></li></ul></div>
+      <p class="k-note">Lembar bergambar ini dari revisi 02 (13 November 2026). Nama dosen dan NIM di kop gambar sengaja ditutup. Model 3D mengikuti revisi 01 (4 November 2026). Revisi 02 menyesuaikan beberapa ukuran kecil, misalnya lebar alas 50 mm (di model 47 mm).</p>
+      <div class="cut" data-reveal>
+        <h3>Daftar komponen</h3>
+        <p class="k-note">Ukuran jadi dalam milimeter, tebal × lebar × panjang. Untuk kayu kasar tambahkan sekitar 5 mm tebal dan 20 mm panjang. <span class="ev ukur" title="Ukur GK: diambil dari lembar gambar kerja.">Ukur GK</span></p>
+        <div class="tbl-wrap"><table class="tbl cut-table"><caption class="sr-only">Daftar komponen Selonjor</caption>
+          <thead><tr><th scope="col">Kode</th><th scope="col">Bagian</th><th scope="col" class="r">Jml</th><th scope="col">Ukuran jadi</th><th scope="col">Bahan</th><th scope="col">Catatan</th></tr></thead>
+          <tbody><tr><th scope="row" class="num">A1</th><td>Alas (runner) rangka samping</td><td class="r num">2</td><td class="num">30 × 50 × 860</td><td>Jati</td><td>Sudut luar R20</td></tr><tr><th scope="row" class="num">A2</th><td>Tiang depan (kaki)</td><td class="r num">2</td><td class="num">30 × 50 × 440</td><td>Jati</td><td>Purus 10 × 30 × 30 di dua ujung</td></tr><tr><th scope="row" class="num">A3</th><td>Lengan</td><td class="r num">2</td><td class="num">30 × 50 × 740</td><td>Jati</td><td>Sudut R20, lubang baut sandaran</td></tr><tr><th scope="row" class="num">A4</th><td>Tiang belakang (miring 15°)</td><td class="r num">2</td><td class="num">30 × 50 × 456</td><td>Jati</td><td>Ujung dipotong serong</td></tr><tr><th scope="row" class="num">A5</th><td>Diagonal</td><td class="r num">2</td><td class="num">30 × 40 × 877</td><td>Jati</td><td>Pen Ø8 × 40 di tiga titik</td></tr><tr><th scope="row" class="num">A6a</th><td>Palang dudukan depan</td><td class="r num">1</td><td class="num">30 × 54 × 600</td><td>Jati</td><td>Baut M6 dan mur silang</td></tr><tr><th scope="row" class="num">A6b</th><td>Palang alas belakang</td><td class="r num">1</td><td class="num">30 × 50 × 600</td><td>Jati</td><td>Baut M6 dan mur silang</td></tr><tr><th scope="row" class="num">A7</th><td>Tiang sandaran</td><td class="r num">2</td><td class="num">30 × 40 × 887</td><td>Jati</td><td>Alur cane dan kepar</td></tr><tr><th scope="row" class="num">A8</th><td>Rel sandaran (bawah, tengah, atas)</td><td class="r num">3</td><td class="num">30 × 40 × 520</td><td>Jati</td><td>Purus ke tiang sandaran</td></tr><tr><th scope="row" class="num">A8b</th><td>Rel pengunci cane</td><td class="r num">1</td><td class="num">30 × 25 × 520</td><td>Jati</td><td>Mengunci cane di alur</td></tr><tr><th scope="row" class="num">A9</th><td>Rel bingkai dudukan (samping, depan, belakang)</td><td class="r num">4</td><td class="num">25 × 45 × 430</td><td>Jati</td><td>Alur cane 5 × 8</td></tr><tr><th scope="row" class="num">A16</th><td>Klos penyangga dudukan</td><td class="r num">1</td><td class="num">20 × 44 × 520</td><td>Jati</td><td>Lem dan sekrup</td></tr><tr><th scope="row" class="num">A11</th><td>Cane lembaran dudukan</td><td class="r num">1</td><td class="num">3 × 340 × 446</td><td>Rotan</td><td>Pola segi delapan</td></tr><tr><th scope="row" class="num">A12</th><td>Cane lembaran sandaran bawah</td><td class="r num">1</td><td class="num">3 × 261 × 536</td><td>Rotan</td><td>Pola segi delapan</td></tr><tr><th scope="row" class="num">A13</th><td>Anyaman kepar sandaran atas</td><td class="r num">1</td><td class="num">3 × 448 × 536</td><td>Kulit rotan</td><td>Pola ajiro</td></tr><tr><th scope="row" class="num">A14</th><td>Bantal dudukan</td><td class="r num">1</td><td class="num">40 × 435 × 516</td><td>Lurik nila</td><td>Isi sabut 15 mm dan kapuk 25 mm</td></tr><tr><th scope="row" class="num">A15</th><td>Bantal kepala geser dan 2 tali</td><td class="r num">1</td><td class="num">90 × 150 × 360</td><td>Lurik nila</td><td>Isi kapuk</td></tr><tr><th scope="row" class="num">A17</th><td>Alas felt</td><td class="r num">4</td><td class="num">3 × 26 × 80</td><td>Felt abu</td><td>Direkat</td></tr><tr><th scope="row" class="num">B1</th><td>Kaki dingklik</td><td class="r num">4</td><td class="num">30 × 30 × 322</td><td>Jati</td><td></td></tr><tr><th scope="row" class="num">B2</th><td>Rel samping apron</td><td class="r num">2</td><td class="num">25 × 50 × 480</td><td>Jati</td><td>Purus ke kaki</td></tr><tr><th scope="row" class="num">B3</th><td>Rel depan dan belakang apron</td><td class="r num">2</td><td class="num">25 × 50 × 360</td><td>Jati</td><td></td></tr><tr><th scope="row" class="num">B4</th><td>Palang bawah dan tengah</td><td class="r num">3</td><td class="num">25 × 30 × 480</td><td>Jati</td><td></td></tr><tr><th scope="row" class="num">B5</th><td>Bingkai atas lepas</td><td class="r num">4</td><td class="num">25 × 45 × 540</td><td>Jati</td><td>Sudut R30, alur cane</td></tr><tr><th scope="row" class="num">B6</th><td>Cane lembaran atas dingklik</td><td class="r num">1</td><td class="num">3 × 346 × 466</td><td>Rotan</td><td>Pola segi delapan</td></tr><tr><th scope="row" class="num">B7</th><td>Alas felt dingklik</td><td class="r num">4</td><td class="num">3 × 24 × 24</td><td>Felt abu</td><td></td></tr></tbody></table></div>
+      </div>
+    </div>
+  </section>
+  <section class="section k-sec" id="rab">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="kicker"><span data-num></span><span class="dim" aria-hidden="true"></span>Biaya</p>
+        <h2>Perkiraan biaya</h2>
+        <p class="sec-lede">Hitungan kasar biaya bahan dan upah untuk satu set. Semua harga satuan adalah estimasi dan bisa kamu ubah langsung di tabel.</p>
+      </header>
+      <div class="rab" id="rab-root" data-slug="selonjor">
+        <div class="rab-main" data-reveal>
+          <div class="tbl-wrap"><table class="tbl rab-table">
+            <caption class="sr-only">Rincian perkiraan biaya Selonjor</caption>
+            <thead><tr><th scope="col">Uraian</th><th scope="col" class="r">Jumlah</th><th scope="col">Satuan</th><th scope="col" class="r">Harga satuan (Rp)</th><th scope="col" class="r">Subtotal</th></tr></thead>
+            <tbody><tr class="grp"><th scope="colgroup" colspan="5">Kayu</th></tr><tr data-line="kayu"><th scope="row">Jati kering oven, volume kasar (tebal + 5 mm, panjang + 20 mm)<small>Ditambah susut potong yang bisa kamu atur</small></th><td class="r num">0,0305</td><td>m³</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="9.000.000" aria-label="Harga satuan Jati kering oven, volume kasar (tebal + 5 mm, panjang + 20 mm)" data-id="kayu"></td><td class="r num sub">Rp 356.850</td></tr><tr class="grp"><th scope="colgroup" colspan="5">Anyaman rotan</th></tr><tr data-line="cane"><th scope="row">Cane lembaran segi delapan<small>Luas dari daftar komponen + 15 persen cadangan</small></th><td class="r num">0,5210</td><td>m²</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="120.000" aria-label="Harga satuan Cane lembaran segi delapan" data-id="cane"></td><td class="r num sub">Rp 62.520</td></tr><tr data-line="kepar"><th scope="row">Kulit rotan anyaman kepar<small>Luas + 15 persen cadangan</small></th><td class="r num">0,2760</td><td>m²</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="150.000" aria-label="Harga satuan Kulit rotan anyaman kepar" data-id="kepar"></td><td class="r num sub">Rp 41.400</td></tr><tr class="grp"><th scope="colgroup" colspan="5">Kain dan isi bantal</th></tr><tr data-line="lurik"><th scope="row">Kain lurik nila<small>Luas permukaan bantal + 20 persen jahitan</small></th><td class="r num">0,8700</td><td>m²</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="95.000" aria-label="Harga satuan Kain lurik nila" data-id="lurik"></td><td class="r num sub">Rp 82.650</td></tr><tr data-line="isi"><th scope="row">Isi bantal (sabut kelapa berkaret dan kapuk)<small>Isi sabut 15 mm dan kapuk 25 mm</small></th><td class="r num">0,0138</td><td>m³</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="1.000.000" aria-label="Harga satuan Isi bantal (sabut kelapa berkaret dan kapuk)" data-id="isi"></td><td class="r num sub">Rp 13.800</td></tr><tr class="grp"><th scope="colgroup" colspan="5">Perlengkapan</th></tr><tr data-line="baut5"><th scope="row">Baut M8 × 50, ring, dan mur tanam M8 (sandaran)</th><td class="r num">4</td><td>set</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="7.000" aria-label="Harga satuan Baut M8 × 50, ring, dan mur tanam M8 (sandaran)" data-id="baut5"></td><td class="r num sub">Rp 28.000</td></tr><tr data-line="murSilang6"><th scope="row">Baut M6 × 80, ring, dan mur silang Ø10 (palang)</th><td class="r num">4</td><td>set</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="13.000" aria-label="Harga satuan Baut M6 × 80, ring, dan mur silang Ø10 (palang)" data-id="murSilang6"></td><td class="r num sub">Rp 52.000</td></tr><tr data-line="pen7"><th scope="row">Pen dan pasak kayu Ø8 (8 pasak, 6 pen diagonal, 8 pen palang)</th><td class="r num">22</td><td>buah</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="500" aria-label="Harga satuan Pen dan pasak kayu Ø8 (8 pasak, 6 pen diagonal, 8 pen palang)" data-id="pen7"></td><td class="r num sub">Rp 11.000</td></tr><tr data-line="sekrup8"><th scope="row">Sekrup 4 × 40 (klos dan bingkai)</th><td class="r num">8</td><td>buah</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="500" aria-label="Harga satuan Sekrup 4 × 40 (klos dan bingkai)" data-id="sekrup8"></td><td class="r num sub">Rp 4.000</td></tr><tr data-line="felt"><th scope="row">Alas felt</th><td class="r num">8</td><td>buah</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="3.000" aria-label="Harga satuan Alas felt" data-id="felt"></td><td class="r num sub">Rp 24.000</td></tr><tr data-line="kecil"><th scope="row">Lem PVAc dan epoksi, amplas, thinner</th><td class="r num">1</td><td>paket</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="75.000" aria-label="Harga satuan Lem PVAc dan epoksi, amplas, thinner" data-id="kecil"></td><td class="r num sub">Rp 75.000</td></tr><tr class="grp"><th scope="colgroup" colspan="5">Finishing</th></tr><tr data-line="finishing"><th scope="row">Minyak finishing untuk seluruh permukaan kayu<small>Luas dari daftar komponen</small></th><td class="r num">3,030</td><td>m²</td><td class="r"><input class="in-price" type="text" inputmode="numeric" value="22.000" aria-label="Harga satuan Minyak finishing untuk seluruh permukaan kayu" data-id="finishing"></td><td class="r num sub">Rp 66.660</td></tr><tr class="grp"><th scope="colgroup" colspan="5">Upah pengrajin</th></tr><tr data-jam="0"><th scope="row">Pekerjaan kayu: potong, serut, purus, rakit, finishing</th><td class="r"><input class="in-jam" type="text" inputmode="numeric" value="30" aria-label="Jam kerja Pekerjaan kayu: potong, serut, purus, rakit, finishing" data-i="0"></td><td>jam</td><td class="r num rate">30.000</td><td class="r num sub">Rp 900.000</td></tr><tr data-jam="1"><th scope="row">Memasang cane dan kepar</th><td class="r"><input class="in-jam" type="text" inputmode="numeric" value="8" aria-label="Jam kerja Memasang cane dan kepar" data-i="1"></td><td>jam</td><td class="r num rate">30.000</td><td class="r num sub">Rp 240.000</td></tr><tr data-jam="2"><th scope="row">Menjahit dan mengisi bantal</th><td class="r"><input class="in-jam" type="text" inputmode="numeric" value="4" aria-label="Jam kerja Menjahit dan mengisi bantal" data-i="2"></td><td>jam</td><td class="r num rate">30.000</td><td class="r num sub">Rp 120.000</td></tr></tbody>
+          </table></div>
+        </div>
+        <aside class="rab-side" data-reveal>
+          <div class="rab-total"><span>Harga perkiraan satu set</span><b class="num" id="rab-total">Rp 2.493.500</b><small id="rab-sub">Bahan Rp 817.880 + upah Rp 1.260.000 + margin 20 persen</small></div>
+          <h3 class="rab-h">Ke mana uangnya pergi</h3>
+          <ul class="rab-bars" id="rab-bars"><li data-k="c1" title="Kayu: Rp 356.850 (14 persen)"><span class="nm">Kayu</span><b class="num" data-v>Rp 356.850</b><span class="trk" aria-hidden="true"><i style="--w:28.32%"></i></span><small class="num" data-p>14%</small></li><li data-k="c2" title="Anyaman rotan: Rp 103.920 (4 persen)"><span class="nm">Anyaman rotan</span><b class="num" data-v>Rp 103.920</b><span class="trk" aria-hidden="true"><i style="--w:8.25%"></i></span><small class="num" data-p>4%</small></li><li data-k="c3" title="Kain dan isi bantal: Rp 96.450 (4 persen)"><span class="nm">Kain dan isi bantal</span><b class="num" data-v>Rp 96.450</b><span class="trk" aria-hidden="true"><i style="--w:7.65%"></i></span><small class="num" data-p>4%</small></li><li data-k="c4" title="Perlengkapan: Rp 194.000 (8 persen)"><span class="nm">Perlengkapan</span><b class="num" data-v>Rp 194.000</b><span class="trk" aria-hidden="true"><i style="--w:15.40%"></i></span><small class="num" data-p>8%</small></li><li data-k="c5" title="Finishing: Rp 66.660 (3 persen)"><span class="nm">Finishing</span><b class="num" data-v>Rp 66.660</b><span class="trk" aria-hidden="true"><i style="--w:5.29%"></i></span><small class="num" data-p>3%</small></li><li data-k="c6" title="Upah pengrajin: Rp 1.260.000 (51 persen)"><span class="nm">Upah pengrajin</span><b class="num" data-v>Rp 1.260.000</b><span class="trk" aria-hidden="true"><i style="--w:100.00%"></i></span><small class="num" data-p>51%</small></li><li data-k="c7" title="Margin dan cadangan: Rp 415.576 (17 persen)"><span class="nm">Margin dan cadangan</span><b class="num" data-v>Rp 415.576</b><span class="trk" aria-hidden="true"><i style="--w:32.98%"></i></span><small class="num" data-p>17%</small></li></ul>
+          <div class="rab-in">
+            <label class="fld"><span>Susut potong kayu</span><span class="fld-in"><input type="text" inputmode="numeric" id="in-waste" value="30" aria-label="Susut potong kayu dalam persen"><i>%</i></span></label>
+            <label class="fld"><span>Upah per jam</span><span class="fld-in"><i>Rp</i><input type="text" inputmode="numeric" id="in-rate" value="30.000" aria-label="Upah per jam dalam rupiah"></span></label>
+            <label class="fld"><span>Margin dan cadangan</span><span class="fld-in"><input type="text" inputmode="numeric" id="in-margin" value="20" aria-label="Margin dalam persen"><i>%</i></span></label>
+            <button type="button" class="btn soft small" id="rab-reset">Kembalikan angka awal</button>
+          </div>
+        </aside>
+      </div>
+      <p class="k-note" data-reveal><span class="ev est" title="Estimasi: perkiraan yang belum dicek ke penjual atau pengrajin.">Estimasi</span> Volume kayu dihitung dari daftar komponen. Harga satuan dan jam kerja adalah perkiraan awal yang belum dicek ke penjual atau pengrajin, jadi ini bukan penawaran harga. Harga bahan berbeda tiap daerah dan musim.</p>
+    </div>
+  </section>
+  <section class="section k-sec k-end">
+    <div class="wrap">
+      <div class="k-navs" data-reveal><a class="k-nav k-nav-prev" href="kursi-srawung.html"><span class="lbl">Kursi sebelumnya</span><b>Srawung</b><span class="sub">Sofa untuk bertemu dan berbincang</span><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6"/></svg></span></a><a class="k-nav k-nav-next" href="kursi-pinarak.html"><span class="lbl">Kursi berikutnya</span><b>Pinarak</b><span class="sub">Kursi yang mempersilakan duduk</span><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg></span></a></div>
+      <p class="k-back" data-reveal><a class="btn soft" href="pameran.html">Kembali ke Pameran</a></p>
+    </div>
+  </section>
+</main>
+
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer" id="kontak">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="./" aria-label="Musholi Rafi, ke beranda">
+          <b>musholi rafi</b>
+          <svg viewBox="0 0 160 16" preserveAspectRatio="none" aria-hidden="true"><path class="swoosh" d="M3 11C40 3 96 2 150 8"/></svg>
+        </a>
+        <p>Mahasiswa Desain Interior ISI Yogyakarta. Menulis tentang desain, berpikir kritis, dan cara belajar yang masuk akal. Desain pakai rasa, jelaskan pakai data.</p>
+        <div class="social-icons" data-social-icons></div>
+      </div>
+      <div class="footer-col">
+        <h3>Jelajahi</h3>
+        <ul>
+          <li><a href="tentang.html">Tentang aku</a></li>
+          <li><a href="cerita.html">Cerita lengkap</a></li>
+          <li><a href="karya.html">Karya dan riset</a></li>
+          <li><a href="tentang.html#ilmu">Denah ilmu</a></li>
+          <li><a href="bimbel.html">Bimbel Discord</a></li>
+          <li><a href="toko.html#maba">Catatan Semester 1</a></li>
+          <li><a href="toko.html#toko">Toko</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Belajar gratis</h3>
+        <ul>
+          <li><a href="belajar.html#belajar-ai">Belajar AI</a></li>
+          <li><a href="belajar.html#belajar-efektif">Belajar efektif</a></li>
+          <li><a href="belajar.html#atur-finansial">Mengatur keuangan</a></li>
+          <li><a href="belajar.html#catatan-singkat">Catatan singkat</a></li>
+          <li><a href="belajar.html#posisi">Lembar rasa dan data</a></li>
+          <li><a href="./#newsletter">Newsletter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Kontak</h3>
+        <div class="contact-list" id="contact-list"></div>
+      </div>
+    </div>
+    <p class="giant" aria-hidden="true">musholi rafi</p>
+    <div class="foot">
+      <span>© <span data-year>2026</span> Musholi Rafi. Dibuat dengan rasa dan data.</span>
+      <nav aria-label="Tautan bawah"><a href="kebijakan-privasi.html">Kebijakan privasi</a><a href="cerita.html">Cerita lengkap</a><a href="sitemap.xml">Peta situs</a></nav>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="to-top" type="button" aria-label="Kembali ke atas">
+  <svg class="ring-svg" viewBox="0 0 52 52" aria-hidden="true"><circle class="tt-bg" cx="26" cy="26" r="23"/><circle class="tt-fg" id="to-top-ring" cx="26" cy="26" r="23" pathLength="1"/></svg>
+  <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
+
+<dialog class="sheet-dialog" id="sheet" aria-labelledby="sheet-title">
+  <div class="sheet-head">
+    <h2 id="sheet-title">Keranjang</h2>
+    <button class="close-btn" type="button" id="sheet-close" aria-label="Tutup">×</button>
+  </div>
+  <div class="sheet-body">
+    <div class="stepper" aria-hidden="true"><span data-s="cart">Keranjang</span><span data-s="form">Data</span><span data-s="pay">Bayar</span></div>
+
+    <div class="sheet-step" data-step="cart">
+      <div id="cart-content"></div>
+    </div>
+
+    <form class="sheet-step" data-step="form" id="order-form" novalidate hidden>
+      <div class="field">
+        <label for="o-name">Nama lengkap</label>
+        <input id="o-name" name="o-name" autocomplete="name" required>
+        <span class="err" id="o-name-err" hidden>Nama belum diisi.</span>
+      </div>
+      <div class="field">
+        <label for="o-wa">Nomor WhatsApp</label>
+        <input id="o-wa" name="o-wa" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx" required>
+        <span class="err" id="o-wa-err" hidden>Nomor belum benar. Contoh yang benar: 081234567890.</span>
+      </div>
+      <div class="field">
+        <label for="o-email">Email <span class="opt">(opsional, untuk kirim file)</span></label>
+        <input id="o-email" name="o-email" type="email" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="o-note">Catatan <span class="opt">(opsional)</span></label>
+        <textarea id="o-note" name="o-note" placeholder="Misal: jadwal bimbel yang kamu mau atau username Discord-mu"></textarea>
+      </div>
+      <div id="form-summary"></div>
+      <button class="btn primary block" type="submit" style="margin-top:14px">Buat pesanan</button>
+      <button class="link-btn" type="button" data-go="cart">Kembali ke keranjang</button>
+    </form>
+
+    <div class="sheet-step" data-step="pay" hidden>
+      <div class="order-id"><span>No. pesanan</span><b id="pay-id"></b></div>
+      <div class="qris-box">
+        <div id="qris-slot"></div>
+        <p class="small-note" id="qris-merchant"></p>
+        <div>
+          <p class="small-note">Ketik nominal ini persis</p>
+          <div class="total-big" id="pay-total"></div>
+        </div>
+        <p class="total-note" id="pay-breakdown"></p>
+        <button class="btn soft small" type="button" id="copy-total">Salin nominal</button>
+      </div>
+      <ol class="pay-steps">
+        <li>Buka aplikasi e-wallet atau m-banking, pilih bayar QRIS.</li>
+        <li>Scan kode di atas dan ketik nominal persis.</li>
+        <li>Simpan tangkapan layar bukti bayar.</li>
+        <li>Tekan tombol di bawah, lalu lampirkan bukti bayar di WhatsApp.</li>
+      </ol>
+      <a class="btn wa block" id="wa-confirm" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.2-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+        Kirim konfirmasi lewat WhatsApp
+      </a>
+      <p class="small-note" id="wa-target"></p>
+      <details>
+        <summary class="small-note" style="cursor:pointer">Lihat isi pesan konfirmasi</summary>
+        <pre class="msg-preview" id="msg-preview" style="margin-top:10px"></pre>
+        <div class="row-actions" style="margin-top:10px"><button class="btn soft small" type="button" id="copy-msg">Salin pesan</button></div>
+      </details>
+      <button class="btn soft block" type="button" id="finish" style="margin-top:8px">Selesai, kosongkan keranjang</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="room-dialog" id="room-dialog" aria-labelledby="room-title">
+  <div class="room-head">
+    <span class="room-no" id="room-no"></span>
+    <button class="close-btn" type="button" id="room-close" aria-label="Tutup">×</button>
+  </div>
+  <h2 id="room-title"></h2>
+  <div id="room-body"></div>
+  <div class="room-nav"><button class="btn soft small" type="button" data-room-step="-1">Ruang sebelumnya</button><button class="btn soft small" type="button" data-room-step="1">Ruang berikutnya</button></div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

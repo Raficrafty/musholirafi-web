@@ -33,6 +33,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..800,0..100&family=Martian+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pameran-pintu.css">
 <script src="assets/js/data.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </head>
@@ -102,6 +103,25 @@
         <p class="sec-lede">Gambar kerja, mebel, dan modul yang pernah kubuat. Semua kumulai dari nol, dan sebagian modulnya bisa kamu dapatkan di Lynk.</p>
       </header>
 
+      <nav class="subnav" aria-label="Isi halaman karya" data-reveal>
+        <a href="karya.html" aria-current="page">Karya dan riset</a>
+        <a href="pameran.html">Pameran <span class="subnav-n">3 kursi</span></a>
+      </nav>
+
+      <section class="pintu-pameran" aria-labelledby="pp-judul" data-reveal>
+        <div class="pp-copy">
+          <span class="pp-chip">Masih rancangan</span>
+          <h2 class="pp-title" id="pp-judul">Pameran tiga kursi</h2>
+          <p class="pp-text">Selonjor, Pinarak, dan Srawung, tiga kursi rotan untuk ruang tamu. Putar kursinya dalam 3D, lihat cara menyambung dan menganyamnya, buka gambar kerja dan biayanya, lalu bayangkan kursinya di dalam ruang.</p>
+          <a class="btn primary pp-cta" href="pameran.html">Masuk ke pameran</a>
+        </div>
+        <ul class="pp-art">
+          <li><a href="kursi-selonjor.html"><img src="assets/img/pameran-selonjor.webp" alt="" width="1200" height="900" loading="lazy" decoding="async"><b class="pp-name">Selonjor</b><span class="pp-type">Kursi santai dengan dingklik</span></a></li>
+          <li><a href="kursi-pinarak.html"><img src="assets/img/pameran-pinarak.webp" alt="" width="1200" height="900" loading="lazy" decoding="async"><b class="pp-name">Pinarak</b><span class="pp-type">Kursi tamu</span></a></li>
+          <li><a href="kursi-srawung.html"><img src="assets/img/pameran-srawung.webp" alt="" width="1200" height="900" loading="lazy" decoding="async"><b class="pp-name">Srawung</b><span class="pp-type">Sofa dengan ottoman</span></a></li>
+        </ul>
+      </section>
+
       <article class="feature">
         <figure class="feature-media" data-reveal="scale">
           <div class="frame res-show" id="res-show" role="group" aria-roledescription="slideshow" aria-label="Gambar proyek residensial"></div>
@@ -124,28 +144,6 @@
           </div>
         </div>
       </article>
-
-      <section class="pameran" id="pameran" aria-labelledby="pameran-judul">
-        <header class="sec-head" data-reveal>
-          <p class="kicker"><span class="dim" aria-hidden="true"></span>Pameran</p>
-          <h2 id="pameran-judul">Pameran karya</h2>
-          <p class="sec-lede">Karya kuliah yang bisa kamu jelajahi langsung dari layar, lewat HP maupun laptop. Pilih semesternya.</p>
-        </header>
-        <article class="pm-card" data-reveal="scale">
-          <figure class="pm-card-media">
-            <img src="assets/img/auranda-tur-cover.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Deck kayu dengan kursi dan meja di depan ruang tamu rumah AURANDA, terlihat dari atas pada sore hari.">
-          </figure>
-          <div class="pm-card-body">
-            <p class="eyebrow">Desain Interior Residensial 2 · 2026</p>
-            <h3>AURANDA, rumah yang bisa dijelajahi</h3>
-            <p>Jalan dari ruang ke ruang seperti di Street View, lihat denah kecil di pojok layar, baca keterangan tiap ruang, dan ukur perabotnya. Bisa dibuka dari HP dengan scan kode QR.</p>
-            <ul class="tags"><li>Tur 3D</li><li>Denah interaktif</li><li>Bisa scan QR</li></ul>
-            <div class="pm-actions">
-              <a class="btn primary shine" href="pameran-semester-3.html">Semester 3</a>
-            </div>
-          </div>
-        </article>
-      </section>
 
       <div class="works" id="works"></div>
       <aside class="callout svc-callout" data-reveal>

@@ -17,21 +17,16 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 
 ## Struktur repo
 - Website dibagi per halaman (sejak November 2026, setelah masukan teman bahwa satu halaman panjang terlalu melelahkan di HP). Fondasi utamanya ruang belajar mahasiswa. Toko, bimbel, dan karya adalah pendukung.
-  - `index.html`: beranda pendek. Pembuka, edisi musim, kartu pintu ke tiap halaman (`#mulai`), dan newsletter. Di bawah kartu pintu ada dua pintu lebar (`.door-wide`): Materi premium (`.prem-door`, ke `materi-premium.html`) lalu Jasa pembuatan website.
+  - `index.html`: beranda pendek. Pembuka, edisi musim, kartu pintu ke tiap halaman (`#mulai`), dan newsletter.
   - `belajar.html`: bantuan per topik (`#bantu`), belajar gratis (`#belajar`), dan lembar rasa dan data (`#posisi`).
   - `karya.html`: karya dan riset. `bimbel.html`: bimbel Discord dan testimoni.
   - `jasa-website.html`: jasa pembuatan website (paket Santai, Reguler, Kilat, kegunaan, contoh, FAQ). Harga ditulis langsung di HTML, bukan di data.js. Tidak masuk menu utama, ditautkan dari pintu lebar di beranda (`.door-wide`) dan ajakan di bawah karya. Gambar contoh `assets/img/jasa-contoh-beranda.webp` adalah tangkapan layar beranda, perbarui kalau beranda berubah banyak.
-  - `materi-premium.html`: pintu ke semua materi premium (sekarang hanya Bahasa Inggris yang tersedia, mata kuliah lain tampil "Sedang kusiapkan" dengan tombol Kabari aku lewat `data-wa`). Teksnya ditulis langsung di HTML.
-  - `belajar-inggris.html`: paket Bahasa Inggris (preview gratis, harga, cara bayar, pembuka kode). Isi berbayar tersimpan terenkripsi di `assets/data/inggris.enc.json` dan dibuka `assets/js/inggris.js` lewat kode akses; tema materi mengikuti tombol tema website. Produknya `inggris-tense-uts` di data.js punya isian `page`.
   - `toko.html`: toko (`#toko`), Catatan Semester 1 (`#maba`), buku, cara pesan, dan FAQ.
   - `tentang.html`: cerita singkat, kolase, galeri cerita foto, sedang dikerjakan, denah ilmu, dan alat kerja.
-  - `pameran-semester-3.html`: halaman Pameran Semester 3 (kartu karya AURANDA, cara menjelajah, kode QR). Dibuka dari tombol "Semester 3" di blok `#pameran` pada `karya.html`. Memakai header, footer, keranjang, dan dialog yang sama seperti halaman lain. Angka di kartunya (8 titik pandang, 14 ruang, 10 gambar render) ditulis langsung di HTML, perbarui kalau isi tur berubah.
-  - `tur-auranda.html`: tur 3D rumah AURANDA (Street View dari render, denah mini di kanan atas, kartu keterangan ruang, alat ukur). Ini halaman aplikasi layar penuh, jadi SATU-SATUNYA halaman yang sengaja tidak memakai header, footer, keranjang, dan dialog situs. Script kecil di `<head>`, token warna dan font dari `style.css`, serta aturan tampilan HP tetap berlaku. Tidak menyimpan apa pun di browser dan tidak memanggil server lain.
-    - `assets/js/tur.js`: mesin tur (foto dengan geser dan zoom, panorama 360 derajat lewat WebGL, denah SVG, ukur). `assets/css/tur.css`: gayanya. Dua-duanya tidak perlu diedit untuk menambah isi.
-    - `assets/js/tur-data.js`: isi tur yang aman diedit tangan (titik pandang, keterangan ruang, lingkaran pindah, penanda ukuran). Petunjuk menambah foto dan panorama ada di komentar paling atas file itu dan di PANDUAN.md bagian 13.
-    - `assets/js/tur-model.js`: bentuk denah (dinding, pintu, jendela, perabot) hasil ekspor otomatis dari model SketchUp. Jangan diedit tangan, minta Claude membuatnya ulang kalau model berubah.
-    - `assets/img/tur/`: render (lebar 2400 px, plus versi kecil berakhiran `-s.webp`). `assets/img/qr-tur-auranda.svg` dan `.png`: kode QR ke tur. `auranda-tur-cover.webp`: sampul di halaman pameran. `auranda-tur-og.jpg`: gambar bagikan (1200 × 630).
-    - Nama keluarga dan alamat klien AURANDA tidak boleh muncul di situs, tur, data, atau repo publik ini.
+  - Pameran tiga kursi (sejak 28 November 2026): `pameran.html` (galeri), `kursi-selonjor.html`, `kursi-pinarak.html`, `kursi-srawung.html`. Dibuka dari tab "Pameran" dan kartu pintu di atas `karya.html`. Keempat halaman ini DIBUAT oleh `tools/pameran/gen_site.py` dari isi di `tools/pameran/chairs.py`. Ubah isinya di `chairs.py`, lalu jalankan `python3 tools/pameran/gen_site.py` dari akar repo. Jangan mengedit HTML hasilnya langsung, karena tertimpa. Header, footer, dan dialog diambil dari `karya.html`, jadi kalau itu berubah jalankan ulang generatornya. Cara lengkap ada di `tools/pameran/README.md`.
+  - Gaya pameran: `assets/css/pameran.css` (galeri dan halaman kursi) dan `assets/css/pameran-pintu.css` (tab dan kartu pintu, hanya dimuat `karya.html`). Kode: `assets/js/pameran-3d.js` (penampil 3D, three.js r149 lokal di `assets/vendor/three.min.js`), `pameran-sambungan.js` (animasi sambungan), `pameran.js` (bab, rakit, anyaman, gambar kerja, biaya), `pameran-suasana.js` (penampil gambar suasana), `pameran-data.js` (dibuat generator). Model 3D di `assets/model/*.json`, tekstur di `assets/tekstur/`, keduanya berasal dari ZIP SketchUp.
+  - Gambar pameran: `pameran-gk-*.webp` dari lembar gambar kerja asli. `pameran-tampak-*.webp` dibuat dari model 3D dan BUKAN gambar kerja resmi, jadi diberi label begitu. `pameran-suasana-*` adalah visualisasi AI (Gemini) dan selalu berlabel "Visualisasi AI". `pameran-sketsa-selonjor.webp` sudah dipotong supaya kolom judul (NIM dan catatan dosen) tidak tampil. Jangan menaruh nama dosen, NIM, atau wajah pemilik di halaman pameran.
+  - Halaman pameran dipilih lewat `<main data-chair="slug">`. Warna dan font tetap lewat token (`--st-*` untuk panggung malam, `--k-*` per kursi, `--vis-*` untuk chip Visualisasi AI), tetap ada versi terang dan gelap.
   - Header, footer, keranjang, dan dialog sama di semua halaman. Kalau mengubahnya, ubah di semua halaman.
   - Menu memakai tautan halaman dengan `aria-current="page"` di halaman yang sedang dibuka.
   - Tautan `#bagian` dari `data.js` yang bagiannya ada di halaman lain dialihkan oleh `PAGE_OF` di `main.js`. Bagian baru yang dirujuk dari halaman lain ditambahkan juga di sana.
@@ -39,7 +34,6 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 - `cerita.html`: cerita lengkap. `kebijakan-privasi.html`, `404.html`, `maintenance.html` (tidak diindeks, tidak masuk sitemap).
 - `assets/files/`: file gratis yang bisa langsung diunduh (misal `lembar-tujuan-3-bulan.pdf`).
 - `assets/css/style.css`: semua gaya. Token warna di `:root`, versi gelap di `@media (prefers-color-scheme:dark)` dan `:root[data-theme="dark"]`.
-- `assets/css/premium.css`: gaya kecil untuk pintu Materi premium (`.prem-door`, ikon permata beranimasi). Ditautkan setelah style.css di halaman yang memakai pintu itu (sekarang belajar.html dan index.html). Dasarnya kartu `.help`, jadi warna dan mode gelap ikut situs.
 - `assets/js/data.js`: SEMUA isi yang sering berubah (produk, harga, diskon, edisi musim, event, bimbel, kontak, FAQ, testimoni). Ubah data di sini, jangan menulis ulang HTML.
 - `assets/js/main.js`: mesin website (animasi scroll, edisi musim, partikel, diskon, toko, keranjang, checkout, lembar rasa dan data, slideshow residensial, denah ilmu yang bisa dibuka, grafik, buku yang terbuka saat di-scroll). Semua fitur dicek dulu keberadaan elemennya, jadi aman dipakai di halaman turunan.
 - `assets/img/`: maskot, gambar kerja residensial, ikon, `og-image.png` (1200 × 630).
@@ -80,7 +74,7 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 - Jangan pernah menaruh API key, password, token, atau server key payment gateway di repo ini. Isi `index.html` bisa dilihat siapa saja lewat browser.
 
 ## Penyimpanan di browser
-`mr-theme`, `mr-cart`, `mr-cat`, `mr-last-order` (localStorage), `mr-season-preview`, `mr-draft-hidden` (sessionStorage). Kalau menambah kunci baru, perbarui juga tabel di `kebijakan-privasi.html`. Tur 3D (`tur-auranda.html`) tidak memakai kunci apa pun.
+`mr-theme`, `mr-cart`, `mr-cat`, `mr-last-order` (localStorage), `mr-season-preview`, `mr-draft-hidden` (sessionStorage). Kalau menambah kunci baru, perbarui juga tabel di `kebijakan-privasi.html`.
 
 ## Deploy
 - Alamat aktif sekarang: https://musholirafi.my.id (domain dari DomaiNesia, dibeli November 2026, perpanjangan sekitar Rp35.000 per tahun belum PPN, perpanjang sebelum habis). Disajikan GitHub Pages dari repo `Raficrafty/musholirafi-web`, branch `main`, folder root. File `CNAME` berisi nama domain dan wajib tetap ada. DNS di DomaiNesia: empat A record `@` ke 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, dan CNAME `www` ke `raficrafty.github.io`. Pindah dari Netlify karena kuota gratis Netlify hanya sekitar 20 update per bulan. GitHub Pages tidak membatasi jumlah update. Alamat `*.workers.dev` diblokir sebagian besar internet Indonesia, jadi jangan dipakai. Kalau domain berganti lagi, ganti semua `https://musholirafi.my.id` (canonical, og, JSON-LD, sitemap, robots, CNAME, _redirects, `domain` dan `url` di data.js).
@@ -105,7 +99,6 @@ File ini dibaca otomatis oleh Claude Code setiap kali sesi dibuka di repo ini. D
 - Uji alur: tambah produk, isi data, muncul nominal plus kode unik, tautan WhatsApp berisi pesan yang benar.
 - Uji `?edisi=hujan`, `?edisi=salju`, dan `?edisi=idulfitri`.
 - Animasi harus tetap penuh walaupun "reduce motion" di perangkat menyala.
-- Kalau menyentuh tur 3D: buka `tur-auranda.html` di 1280, 390, dan 360 px (terang dan gelap), coba pindah ruang, siang dan malam, denah besar, dan ukur jarak. Tidak boleh ada error di console atau scroll ke samping.
 - Tulis ringkasan perubahan dengan bahasa sederhana untuk pemilik.
 
 ## Rencana berikutnya
